@@ -1,56 +1,229 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Ayuda Pro</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Ayuda Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
-
 <body>
 
-<h1>Web Ayuda Pro</h1>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div>
+        <h1>Web Ayuda Pro</h1>
+        <p>Generador de webs base para negocios locales</p>
+      </div>
+      <div class="mini-steps">
+        <span>1. Rellena</span>
+        <span>2. Genera</span>
+        <span>3. Revisa</span>
+        <span>4. Descarga</span>
+      </div>
+    </div>
+  </header>
 
-<div class="container">
+  <main class="container app-grid">
 
-<div class="form">
+    <section class="panel form-panel">
+      <h2>Datos del negocio</h2>
 
-<input id="nombre" placeholder="Nombre negocio">
-<input id="sector" placeholder="Sector">
-<input id="ciudad" placeholder="Ciudad">
-<input id="telefono" placeholder="Teléfono">
+      <div class="field">
+        <label for="nombre">Nombre del negocio</label>
+        <input type="text" id="nombre" placeholder="Ej. Peluquería Paqui" />
+      </div>
 
-<input id="serv1" placeholder="Servicio 1">
-<input id="serv2" placeholder="Servicio 2">
-<input id="serv3" placeholder="Servicio 3">
-<input id="serv4" placeholder="Servicio 4">
+      <div class="field two-cols">
+        <div>
+          <label for="sector">Sector</label>
+          <input type="text" id="sector" placeholder="Ej. peluquería unisex" />
+        </div>
+        <div>
+          <label for="ciudad">Ciudad</label>
+          <input type="text" id="ciudad" placeholder="Ej. Murcia" />
+        </div>
+      </div>
 
-<button onclick="generarWeb()">GENERAR WEB</button>
-<button onclick="nuevoNegocio()">NUEVO CLIENTE</button>
+      <div class="field two-cols">
+        <div>
+          <label for="telefono">Teléfono / WhatsApp</label>
+          <input type="text" id="telefono" placeholder="Ej. 34639111111" />
+        </div>
+        <div>
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" placeholder="Ej. Calle Mayor 12, Murcia" />
+        </div>
+      </div>
 
-</div>
+      <div class="field">
+        <label for="descripcion">Descripción corta</label>
+        <textarea id="descripcion" placeholder="Ej. Negocio local especializado en..."></textarea>
+      </div>
 
-<div class="output">
+      <div class="field">
+        <label for="sobreNosotros">Sobre nosotros</label>
+        <textarea id="sobreNosotros" placeholder="Ej. Llevamos años ofreciendo atención cercana, trato directo y servicio cuidado para cada cliente."></textarea>
+      </div>
 
-<h3>SEO</h3>
-<textarea id="seoOutput"></textarea>
+      <h3>Servicios o productos</h3>
 
-<h3>HTML</h3>
-<textarea id="htmlOutput"></textarea>
+      <div class="field two-cols">
+        <div><input type="text" id="serv1" placeholder="Servicio 1" /></div>
+        <div><input type="text" id="serv2" placeholder="Servicio 2" /></div>
+      </div>
 
-<h3>CSS</h3>
-<textarea id="cssOutput"></textarea>
+      <div class="field two-cols">
+        <div><input type="text" id="serv3" placeholder="Servicio 3" /></div>
+        <div><input type="text" id="serv4" placeholder="Servicio 4" /></div>
+      </div>
 
-</div>
+      <h3>Reseñas</h3>
 
-<div class="preview">
-<h3>Vista previa</h3>
-<iframe id="previewFrame"></iframe>
-</div>
+      <div class="field">
+        <label for="resena1">Reseña 1</label>
+        <textarea id="resena1" placeholder="Muy buen trato y resultado. Recomendable."></textarea>
+      </div>
+      <div class="field">
+        <label for="resena2">Reseña 2</label>
+        <textarea id="resena2" placeholder="Atención rápida, profesional y todo muy claro."></textarea>
+      </div>
+      <div class="field">
+        <label for="resena3">Reseña 3</label>
+        <textarea id="resena3" placeholder="Trabajo limpio y experiencia muy buena."></textarea>
+      </div>
 
-</div>
+      <h3>Zonas</h3>
 
-<script src="script.js"></script>
+      <div class="field">
+        <label for="zonas">Zonas de trabajo</label>
+        <textarea id="zonas" placeholder="Murcia, Alcantarilla, Molina de Segura, Cartagena"></textarea>
+      </div>
 
+      <h3>Diseño</h3>
+
+      <div class="field three-cols">
+        <div>
+          <label for="plantilla">Plantilla</label>
+          <select id="plantilla">
+            <option value="profesional">Profesional</option>
+            <option value="tradicional">Tradicional</option>
+            <option value="premium">Premium</option>
+            <option value="moderno">Moderno</option>
+          </select>
+        </div>
+        <div>
+          <label for="tipoWeb">Tipo de web</label>
+          <select id="tipoWeb">
+            <option value="completa">Web completa</option>
+            <option value="landing">Landing rápida</option>
+          </select>
+        </div>
+        <div>
+          <label for="color">Color principal</label>
+          <input type="color" id="color" value="#25d366" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="ctaTexto">Texto del botón principal</label>
+        <input type="text" id="ctaTexto" placeholder="Ej. Pide información por WhatsApp" value="Hablar por WhatsApp" />
+      </div>
+
+      <div class="field">
+        <label for="mensajeWhatsapp">Mensaje automático de WhatsApp</label>
+        <input type="text" id="mensajeWhatsapp" placeholder="Hola, he visto vuestra web y quiero información." value="Hola, he visto vuestra web y quiero información." />
+      </div>
+
+      <h3>Imágenes</h3>
+
+      <div class="field four-cols">
+        <div>
+          <label for="img1">Imagen 1</label>
+          <input type="file" id="img1" accept="image/*" onchange="mostrarPreview()" />
+        </div>
+        <div>
+          <label for="img2">Imagen 2</label>
+          <input type="file" id="img2" accept="image/*" onchange="mostrarPreview()" />
+        </div>
+        <div>
+          <label for="img3">Imagen 3</label>
+          <input type="file" id="img3" accept="image/*" onchange="mostrarPreview()" />
+        </div>
+        <div>
+          <label for="img4">Imagen 4</label>
+          <input type="file" id="img4" accept="image/*" onchange="mostrarPreview()" />
+        </div>
+      </div>
+
+      <div id="preview" class="local-preview"></div>
+
+      <div class="actions">
+        <button type="button" class="btn-primary" onclick="generarWeb()">Generar web</button>
+        <button type="button" class="btn-secondary" onclick="nuevoNegocio()">Nuevo cliente</button>
+      </div>
+    </section>
+
+    <section class="panel output-panel">
+      <h2>Resultado</h2>
+
+      <div class="preview-actions">
+        <button type="button" onclick="generarWeb()">Actualizar preview</button>
+        <button type="button" onclick="copiarTexto('seoOutput')">Copiar SEO</button>
+        <button type="button" onclick="copiarTexto('htmlOutput')">Copiar HTML</button>
+        <button type="button" onclick="copiarTexto('cssOutput')">Copiar CSS</button>
+      </div>
+
+      <div class="iframe-wrap">
+        <iframe id="previewFrame"></iframe>
+      </div>
+
+      <div class="output-box">
+        <div class="output-head">
+          <h3>SEO básico</h3>
+          <button type="button" onclick="copiarTexto('seoOutput')">Copiar</button>
+        </div>
+        <textarea id="seoOutput" readonly></textarea>
+      </div>
+
+      <div class="output-box">
+        <div class="output-head">
+          <h3>index.html</h3>
+          <div class="head-actions">
+            <button type="button" onclick="copiarTexto('htmlOutput')">Copiar</button>
+            <button type="button" onclick="descargarHTML()">Descargar</button>
+          </div>
+        </div>
+        <textarea id="htmlOutput" readonly></textarea>
+      </div>
+
+      <div class="output-box">
+        <div class="output-head">
+          <h3>style.css</h3>
+          <div class="head-actions">
+            <button type="button" onclick="copiarTexto('cssOutput')">Copiar</button>
+            <button type="button" onclick="descargarCSS()">Descargar</button>
+          </div>
+        </div>
+        <textarea id="cssOutput" readonly></textarea>
+      </div>
+
+      <div class="output-box">
+        <div class="output-head">
+          <h3>Notas rápidas</h3>
+          <button type="button" onclick="copiarTexto('notesOutput')">Copiar</button>
+        </div>
+        <textarea id="notesOutput" readonly></textarea>
+      </div>
+
+      <div class="download-row">
+        <button type="button" class="btn-primary" onclick="descargarZIP()">Descargar ZIP</button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
