@@ -5,11 +5,8 @@ const DEFAULTS = {
   telefono: "",
   direccion: "",
   descripcion: "",
+  queHacemos: "",
   sobreNosotros: "",
-  serv1: "",
-  serv2: "",
-  serv3: "",
-  serv4: "",
   resena1: "",
   resena2: "",
   resena3: "",
@@ -18,7 +15,8 @@ const DEFAULTS = {
   tipoWeb: "completa",
   color: "#25d366",
   ctaTexto: "Hablar por WhatsApp",
-  mensajeWhatsapp: "Hola, he visto vuestra web y quiero información."
+  mensajeWhatsapp: "Hola, he visto vuestra web y quiero información.",
+  mostrarMapa: "si"
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,9 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const colorInput = document.getElementById("color");
-  if (colorInput) {
-    colorInput.addEventListener("input", actualizarColor);
-  }
+  if (colorInput) colorInput.addEventListener("input", actualizarColor);
 });
 
 function actualizarColor() {
@@ -65,6 +61,10 @@ function escaparHTML(texto = "") {
     .replace(/"/g, "&quot;");
 }
 
+function capitalize(texto = "") {
+  return texto ? texto.charAt(0).toUpperCase() + texto.slice(1) : "";
+}
+
 function obtenerDatos() {
   return {
     nombre: document.getElementById("nombre").value.trim(),
@@ -73,11 +73,8 @@ function obtenerDatos() {
     telefono: document.getElementById("telefono").value.trim(),
     direccion: document.getElementById("direccion").value.trim(),
     descripcion: document.getElementById("descripcion").value.trim(),
+    queHacemos: document.getElementById("queHacemos").value.trim(),
     sobreNosotros: document.getElementById("sobreNosotros").value.trim(),
-    serv1: document.getElementById("serv1").value.trim(),
-    serv2: document.getElementById("serv2").value.trim(),
-    serv3: document.getElementById("serv3").value.trim(),
-    serv4: document.getElementById("serv4").value.trim(),
     resena1: document.getElementById("resena1").value.trim(),
     resena2: document.getElementById("resena2").value.trim(),
     resena3: document.getElementById("resena3").value.trim(),
@@ -86,107 +83,74 @@ function obtenerDatos() {
     tipoWeb: document.getElementById("tipoWeb").value,
     color: document.getElementById("color").value,
     ctaTexto: document.getElementById("ctaTexto").value.trim(),
-    mensajeWhatsapp: document.getElementById("mensajeWhatsapp").value.trim()
+    mensajeWhatsapp: document.getElementById("mensajeWhatsapp").value.trim(),
+    mostrarMapa: document.getElementById("mostrarMapa").value
   };
 }
 
 function guardarDatos() {
-  const datos = obtenerDatos();
-  localStorage.setItem("webAyudaDatos", JSON.stringify(datos));
+  localStorage.setItem("webAyudaDatos", JSON.stringify(obtenerDatos()));
 }
 
 function cargarDatosGuardados() {
   const guardado = localStorage.getItem("webAyudaDatos");
   if (!guardado) return;
-
   try {
     const datos = JSON.parse(guardado);
     Object.keys(DEFAULTS).forEach((key) => {
       const el = document.getElementById(key);
-      if (el && datos[key] !== undefined) {
-        el.value = datos[key];
-      }
+      if (el && datos[key] !== undefined) el.value = datos[key];
     });
-  } catch (e) {
-    console.error("No se pudieron cargar los datos guardados");
-  }
+  } catch (e) {}
 }
 
 function mostrarPreview() {
   const preview = document.getElementById("preview");
   preview.innerHTML = "";
-
   ["img1", "img2", "img3", "img4"].forEach((id) => {
     const input = document.getElementById(id);
     if (input.files && input.files[0]) {
       const img = document.createElement("img");
       img.src = URL.createObjectURL(input.files[0]);
-      img.alt = id;
       preview.appendChild(img);
     }
   });
 }
 
-function obtenerNombreArchivo(id, nombreDefecto) {
+function obtenerNombreArchivo(id, fallback) {
   const input = document.getElementById(id);
-  if (input && input.files && input.files[0]) {
-    return input.files[0].name;
-  }
-  return nombreDefecto;
+  if (input.files && input.files[0]) return input.files[0].name;
+  return fallback;
 }
 
-function construirColores(plantilla, color) {
-  let fondo = "#111111";
-  let fondo2 = "#1b1b1b";
-  let fondoClaro = "#f7f7f7";
-  let texto = "#222222";
-  let blanco = "#ffffff";
-  let linea = "#e5e5e5";
-
-  if (plantilla === "tradicional") {
-    fondo = "#2f241d";
-    fondo2 = "#46362b";
-    fondoClaro = "#f8f3eb";
-  }
-
-  if (plantilla === "premium") {
-    fondo = "#0f0f12";
-    fondo2 = "#191a1f";
-    fondoClaro = "#f4f4f6";
-  }
-
-  if (plantilla === "moderno") {
-    fondo = "#0f1722";
-    fondo2 = "#172232";
-    fondoClaro = "#f3f7fb";
-  }
-
-  return { fondo, fondo2, fondoClaro, texto, blanco, linea, color };
-}
-
-function textoPorPlantilla(plantilla) {
-  if (plantilla === "tradicional") {
-    return {
-      tagline: "Cercanía, experiencia y trato directo.",
-      enfoque: "Imagen cercana y más clásica para negocio local."
-    };
-  }
-  if (plantilla === "premium") {
-    return {
-      tagline: "Calidad, imagen cuidada y presencia premium.",
-      enfoque: "Diseño más elegante y percepción de mayor valor."
-    };
-  }
-  if (plantilla === "moderno") {
-    return {
-      tagline: "Diseño limpio, actual y orientado a conversión.",
-      enfoque: "Imagen visual más actual y directa."
-    };
-  }
-  return {
-    tagline: "Profesionalidad, claridad y atención rápida.",
-    enfoque: "Plantilla equilibrada para la mayoría de negocios."
+function construirTema(plantilla, color) {
+  const temas = {
+    profesional: { dark: "#111111", dark2: "#1b1b1b", light: "#f7f7f7" },
+    tradicional: { dark: "#2f241d", dark2: "#46362b", light: "#f8f3eb" },
+    premium: { dark: "#0f0f12", dark2: "#191a1f", light: "#f4f4f6" },
+    moderno: { dark: "#0f1722", dark2: "#172232", light: "#f3f7fb" },
+    local: { dark: "#24303a", dark2: "#32414d", light: "#f5f8fa" }
   };
+  const tema = temas[plantilla] || temas.profesional;
+  return { ...tema, accent: color, white: "#ffffff", text: "#222222", line: "#e5e5e5" };
+}
+
+function textoPlantilla(plantilla) {
+  const textos = {
+    profesional: ["Profesionalidad, claridad y atención rápida.", "Plantilla equilibrada para casi cualquier negocio."],
+    tradicional: ["Cercanía, experiencia y trato directo.", "Imagen más clásica y cercana para negocio local."],
+    premium: ["Calidad, imagen cuidada y percepción premium.", "Diseño más elegante y con más valor visual."],
+    moderno: ["Diseño limpio, actual y orientado a conversión.", "Imagen visual actual y directa."],
+    local: ["Negocio de barrio, confianza y trato humano.", "Ideal para tienda física o comercio local."]
+  };
+  return textos[plantilla] || textos.profesional;
+}
+
+function parseLista(texto) {
+  return (texto || "")
+    .split(/\n|,/)
+    .map(x => x.trim())
+    .filter(Boolean);
 }
 
 function generarWeb() {
@@ -203,38 +167,45 @@ function generarWeb() {
   const mensajeEncoded = encodeURIComponent(d.mensajeWhatsapp || "Hola, he visto vuestra web y quiero información.");
   const whatsappURL = `https://wa.me/${telefonoLimpio}?text=${mensajeEncoded}`;
 
-  const img1 = `imagen/${obtenerNombreArchivo("img1", "portada.jpg")}`;
-  const img2 = `imagen/${obtenerNombreArchivo("img2", "galeria1.jpg")}`;
-  const img3 = `imagen/${obtenerNombreArchivo("img3", "galeria2.jpg")}`;
-  const img4 = `imagen/${obtenerNombreArchivo("img4", "galeria3.jpg")}`;
+  const slugBase = `${slugify(d.nombre)}-${slugify(d.ciudad)}` || "web-local";
+  const img1Name = obtenerNombreArchivo("img1", `${slugBase}-1.jpg`);
+  const img2Name = obtenerNombreArchivo("img2", `${slugBase}-2.jpg`);
+  const img3Name = obtenerNombreArchivo("img3", `${slugBase}-3.jpg`);
+  const img4Name = obtenerNombreArchivo("img4", `${slugBase}-4.jpg`);
 
-  const servicios = [d.serv1, d.serv2, d.serv3, d.serv4].filter(Boolean);
-  const zonasLista = (d.zonas || d.ciudad).split(",").map(z => z.trim()).filter(Boolean);
+  const img1 = `imagen/${img1Name}`;
+  const img2 = `imagen/${img2Name}`;
+  const img3 = `imagen/${img3Name}`;
+  const img4 = `imagen/${img4Name}`;
+
+  const items = parseLista(d.queHacemos);
+  const zonas = parseLista(d.zonas || d.ciudad);
   const resenas = [d.resena1, d.resena2, d.resena3].filter(Boolean);
 
   const tituloSEO = `${d.nombre} | ${d.sector} en ${d.ciudad}`;
-  const descripcionSEO = `${d.nombre}, especialistas en ${d.sector} en ${d.ciudad}. ${servicios.join(", ")}. Contacta por WhatsApp y pide información.`;
+  const descripcionSEO = `${d.nombre}, especialistas en ${d.sector} en ${d.ciudad}. ${items.join(", ")}. Contacta por WhatsApp y pide información.`;
   const h1 = `${capitalize(d.sector)} en ${d.ciudad}`;
   const slug = `${slugify(d.sector)}-${slugify(d.ciudad)}`;
 
-  const plantillaTexto = textoPorPlantilla(d.plantilla);
+  const [tagline, enfoque] = textoPlantilla(d.plantilla);
+  const tema = construirTema(d.plantilla, d.color);
 
-  const heroTexto = d.descripcion || `${d.nombre} ofrece ${servicios.join(", ")} en ${d.ciudad}, con atención cercana y contacto directo por WhatsApp.`;
-  const sobreTexto = d.sobreNosotros || `${d.nombre} es un negocio local especializado en ${d.sector} en ${d.ciudad}. Apostamos por el trato cercano, la claridad y una atención cuidada para cada cliente.`;
+  const heroTexto = d.descripcion || `${d.nombre} ofrece ${items.join(", ")} en ${d.ciudad}, con atención cercana y contacto directo por WhatsApp.`;
+  const sobreTexto = d.sobreNosotros || `${d.nombre} es un negocio local especializado en ${d.sector} en ${d.ciudad}, con enfoque cercano, claro y profesional.`;
 
-  const cardsHTML = servicios.map((serv) => `
+  const itemsHTML = items.map(item => `
         <article class="card">
-          <h3>${escaparHTML(serv)}</h3>
-          <p>Servicio orientado a clientes que buscan ${escaparHTML(serv)} en ${escaparHTML(d.ciudad)} con atención cercana y profesional.</p>
+          <h3>${escaparHTML(item)}</h3>
+          <p>Atención pensada para clientes que buscan ${escaparHTML(item)} en ${escaparHTML(d.ciudad)}.</p>
         </article>
   `).join("");
 
-  const zonasHTML = zonasLista.map((zona) => `<li>${escaparHTML(zona)}</li>`).join("");
+  const zonasHTML = zonas.map(z => `<li>${escaparHTML(z)}</li>`).join("");
 
   const resenasHTML = (resenas.length ? resenas : [
-    "Muy buena atención y resultado final. Recomendable.",
+    "Muy buena atención y resultado final.",
     "Trato profesional y proceso muy fácil.",
-    "Negocio serio, cercano y con buena experiencia."
+    "Negocio serio y recomendable."
   ]).map((r, i) => `
         <article class="review-card">
           <div class="stars">★★★★★</div>
@@ -243,59 +214,59 @@ function generarWeb() {
         </article>
   `).join("");
 
-  const faqHTML = `
-      <div class="faq-item">
-        <h3>¿Dónde está ${escaparHTML(d.nombre)}?</h3>
-        <p>${escaparHTML(d.direccion || d.ciudad)}.</p>
-      </div>
-      <div class="faq-item">
-        <h3>¿Qué servicios o productos ofrecéis?</h3>
-        <p>${escaparHTML(servicios.join(", "))}.</p>
-      </div>
-      <div class="faq-item">
-        <h3>¿Cómo contacto rápido?</h3>
-        <p>Puedes escribir directamente por WhatsApp al ${escaparHTML(d.telefono)}.</p>
-      </div>
-  `;
-
-  const seccionReviews = `
-    <section class="reviews">
+  const mapaHTML = d.mostrarMapa === "si" ? `
+    <section class="map-section">
       <div class="container">
-        <h2>Opiniones de clientes</h2>
-        <div class="reviews-grid">
-          ${resenasHTML}
+        <h2>Dónde estamos</h2>
+        <div class="map-box">
+          <div class="map-pin">📍</div>
+          <div>
+            <strong>${escaparHTML(d.nombre)}</strong>
+            <p>${escaparHTML(d.direccion || d.ciudad)}</p>
+            <a class="btn btn-small" target="_blank" rel="noopener" href="https://www.google.com/maps/search/${encodeURIComponent((d.nombre + ' ' + (d.direccion || d.ciudad)).trim())}">Ver en Google Maps</a>
+          </div>
         </div>
       </div>
     </section>
-  `;
+  ` : "";
 
-  const seccionFAQ = `
+  const bloqueExtra = d.tipoWeb === "completa" ? `
+    <section class="reviews">
+      <div class="container">
+        <h2>Opiniones de clientes</h2>
+        <div class="reviews-grid">${resenasHTML}</div>
+      </div>
+    </section>
+
+    <section class="zones">
+      <div class="container">
+        <h2>Zonas de trabajo</h2>
+        <ul class="zones-list">${zonasHTML}</ul>
+      </div>
+    </section>
+
+    ${mapaHTML}
+
     <section class="faq">
       <div class="container">
         <h2>Preguntas frecuentes</h2>
         <div class="faq-list">
-          ${faqHTML}
+          <div class="faq-item">
+            <h3>¿Dónde está ${escaparHTML(d.nombre)}?</h3>
+            <p>${escaparHTML(d.direccion || d.ciudad)}.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Qué hacéis?</h3>
+            <p>${escaparHTML(items.join(", "))}.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Cómo contacto rápido?</h3>
+            <p>Puedes escribir directamente por WhatsApp al ${escaparHTML(d.telefono)}.</p>
+          </div>
         </div>
       </div>
     </section>
-  `;
-
-  const seccionZonas = `
-    <section class="zones">
-      <div class="container">
-        <h2>Zonas de trabajo</h2>
-        <ul class="zones-list">
-          ${zonasHTML}
-        </ul>
-      </div>
-    </section>
-  `;
-
-  const bloqueExtraCompleta = d.tipoWeb === "completa" ? `
-    ${seccionReviews}
-    ${seccionZonas}
-    ${seccionFAQ}
-  ` : "";
+  ` : mapaHTML;
 
   const htmlGenerado = `<!DOCTYPE html>
 <html lang="es">
@@ -311,7 +282,7 @@ function generarWeb() {
   <header class="site-header">
     <div class="container nav">
       <div class="logo">${escaparHTML(d.nombre)}</div>
-      <a class="btn btn-outline" href="${whatsappURL}" target="_blank" rel="noopener">${escaparHTML(d.ctaTexto || "WhatsApp")}</a>
+      <a class="btn btn-outline" href="${whatsappURL}" target="_blank" rel="noopener">${escaparHTML(d.ctaTexto)}</a>
     </div>
   </header>
 
@@ -323,8 +294,8 @@ function generarWeb() {
       <h1>${escaparHTML(h1)}</h1>
       <p>${escaparHTML(heroTexto)}</p>
       <div class="hero-actions">
-        <a class="btn" href="${whatsappURL}" target="_blank" rel="noopener">${escaparHTML(d.ctaTexto || "Hablar por WhatsApp")}</a>
-        <a class="btn btn-light" href="#servicios">Ver más</a>
+        <a class="btn" href="${whatsappURL}" target="_blank" rel="noopener">${escaparHTML(d.ctaTexto)}</a>
+        <a class="btn btn-light" href="#que-hacemos">Ver más</a>
       </div>
     </div>
   </section>
@@ -336,9 +307,9 @@ function generarWeb() {
         <p>${escaparHTML(sobreTexto)}</p>
       </div>
       <div class="intro-card">
-        <strong>${escaparHTML(plantillaTexto.tagline)}</strong>
+        <strong>${escaparHTML(tagline)}</strong>
         <ul>
-          <li>${escaparHTML(plantillaTexto.enfoque)}</li>
+          <li>${escaparHTML(enfoque)}</li>
           <li>Atención en ${escaparHTML(d.ciudad)} y alrededores.</li>
           <li>Contacto directo por WhatsApp.</li>
         </ul>
@@ -346,11 +317,11 @@ function generarWeb() {
     </div>
   </section>
 
-  <section id="servicios" class="services">
+  <section id="que-hacemos" class="services">
     <div class="container">
-      <h2>Qué ofrecemos</h2>
+      <h2>Qué hacemos</h2>
       <div class="cards">
-        ${cardsHTML}
+        ${itemsHTML}
       </div>
     </div>
   </section>
@@ -367,7 +338,7 @@ function generarWeb() {
     </div>
   </section>
 
-  ${bloqueExtraCompleta}
+  ${bloqueExtra}
 
   <section class="cta">
     <div class="container cta-box">
@@ -375,7 +346,7 @@ function generarWeb() {
         <h2>Contacta con ${escaparHTML(d.nombre)}</h2>
         <p>Si buscas ${escaparHTML(d.sector)} en ${escaparHTML(d.ciudad)}, escríbenos y te respondemos por WhatsApp.</p>
       </div>
-      <a class="btn btn-big" href="${whatsappURL}" target="_blank" rel="noopener">${escaparHTML(d.ctaTexto || "Enviar WhatsApp")}</a>
+      <a class="btn btn-big" href="${whatsappURL}" target="_blank" rel="noopener">${escaparHTML(d.ctaTexto)}</a>
     </div>
   </section>
 
@@ -395,21 +366,19 @@ function generarWeb() {
 </body>
 </html>`;
 
-  const colores = construirColores(d.plantilla, d.color);
-
   const cssGenerado = `* {
   box-sizing: border-box;
 }
 
 :root {
-  --dark: ${colores.fondo};
-  --dark-2: ${colores.fondo2};
-  --light: ${colores.fondoClaro};
-  --white: ${colores.blanco};
-  --text: ${colores.texto};
+  --dark: ${tema.dark};
+  --dark-2: ${tema.dark2};
+  --light: ${tema.light};
+  --white: ${tema.white};
+  --text: ${tema.text};
   --muted: #666666;
-  --line: ${colores.linea};
-  --accent: ${colores.color};
+  --line: ${tema.line};
+  --accent: ${tema.accent};
   --radius: 18px;
   --shadow: 0 10px 30px rgba(0,0,0,.12);
 }
@@ -490,6 +459,10 @@ a {
   color: var(--dark);
 }
 
+.btn-small {
+  padding: 10px 16px;
+}
+
 .btn-big {
   padding: 16px 28px;
 }
@@ -559,7 +532,8 @@ a {
 .reviews,
 .zones,
 .faq,
-.cta {
+.cta,
+.map-section {
   padding: 72px 0;
 }
 
@@ -593,7 +567,8 @@ a {
 .reviews h2,
 .zones h2,
 .faq h2,
-.intro h2 {
+.intro h2,
+.map-section h2 {
   margin-top: 0;
   font-size: clamp(1.8rem, 3vw, 2.6rem);
 }
@@ -615,12 +590,6 @@ a {
   border-radius: var(--radius);
   padding: 22px;
   box-shadow: var(--shadow);
-}
-
-.card h3,
-.review-card h3,
-.faq-item h3 {
-  margin-top: 0;
 }
 
 .stars {
@@ -658,6 +627,20 @@ a {
   margin-top: 24px;
 }
 
+.map-box {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--light);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.map-pin {
+  font-size: 2rem;
+}
+
 .cta-box {
   display: flex;
   justify-content: space-between;
@@ -667,11 +650,6 @@ a {
   background: var(--dark);
   color: var(--white);
   border-radius: 24px;
-}
-
-.cta-box h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
 }
 
 .site-footer {
@@ -695,7 +673,8 @@ a {
     grid-template-columns: 1fr 1fr;
   }
 
-  .cta-box {
+  .cta-box,
+  .map-box {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -724,7 +703,8 @@ a {
   .reviews,
   .zones,
   .faq,
-  .cta {
+  .cta,
+  .map-section {
     padding: 54px 0;
   }
 
@@ -764,26 +744,25 @@ SLUG SUGERIDO:
 ${slug}
 
 NOMBRES SEO PARA IMÁGENES:
-1. ${slug}-1.jpg
-2. ${slug}-2.jpg
-3. ${slug}-3.jpg
-4. ${slug}-4.jpg
+1. ${img1Name}
+2. ${img2Name}
+3. ${img3Name}
+4. ${img4Name}
 
 WHATSAPP:
 ${whatsappURL}`;
 
   const notesTexto = `PENDIENTES:
-- Revisar que el teléfono sea correcto
-- Subir fotos reales dentro de la carpeta /imagen/
-- Confirmar dirección exacta
-- Ajustar textos finales si hace falta
-- Revisar que GitHub tenga:
+- Revisar teléfono y dirección
+- Subir fotos reales a la carpeta /imagen/
+- Confirmar textos finales
+- Archivos del proyecto final:
   index.html
   style.css
-  imagen/portada.jpg
-  imagen/galeria1.jpg
-  imagen/galeria2.jpg
-  imagen/galeria3.jpg`;
+  imagen/${img1Name}
+  imagen/${img2Name}
+  imagen/${img3Name}
+  imagen/${img4Name}`;
 
   document.getElementById("seoOutput").value = seoTexto;
   document.getElementById("htmlOutput").value = htmlGenerado;
@@ -801,7 +780,7 @@ function copiarTexto(id) {
 }
 
 function descargarArchivo(nombre, contenido, tipo = "text/plain;charset=utf-8") {
-  const blob = new Blob([contenido], { type: tipo });
+  const blob = contenido instanceof Blob ? contenido : new Blob([contenido], { type });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -814,30 +793,23 @@ function descargarArchivo(nombre, contenido, tipo = "text/plain;charset=utf-8") 
 
 function descargarHTML() {
   const contenido = document.getElementById("htmlOutput").value;
-  if (!contenido) {
-    alert("Primero genera la web.");
-    return;
-  }
+  if (!contenido) return alert("Primero genera la web.");
   descargarArchivo("index.html", contenido, "text/html;charset=utf-8");
 }
 
 function descargarCSS() {
   const contenido = document.getElementById("cssOutput").value;
-  if (!contenido) {
-    alert("Primero genera la web.");
-    return;
-  }
+  if (!contenido) return alert("Primero genera la web.");
   descargarArchivo("style.css", contenido, "text/css;charset=utf-8");
 }
 
 async function descargarZIP() {
   const html = document.getElementById("htmlOutput").value;
   const css = document.getElementById("cssOutput").value;
+  if (!html || !css) return alert("Primero genera la web.");
 
-  if (!html || !css) {
-    alert("Primero genera la web.");
-    return;
-  }
+  const d = obtenerDatos();
+  const slugBase = `${slugify(d.nombre)}-${slugify(d.ciudad)}` || "web-local";
 
   const zip = new JSZip();
   zip.file("index.html", html);
@@ -845,23 +817,36 @@ async function descargarZIP() {
 
   const imgFolder = zip.folder("imagen");
   const imageInputs = [
-    { id: "img1", fallback: "portada.jpg" },
-    { id: "img2", fallback: "galeria1.jpg" },
-    { id: "img3", fallback: "galeria2.jpg" },
-    { id: "img4", fallback: "galeria3.jpg" }
+    { id: "img1", fallback: `${slugBase}-1.jpg` },
+    { id: "img2", fallback: `${slugBase}-2.jpg` },
+    { id: "img3", fallback: `${slugBase}-3.jpg` },
+    { id: "img4", fallback: `${slugBase}-4.jpg` }
   ];
 
   for (const item of imageInputs) {
     const input = document.getElementById(item.id);
     if (input.files && input.files[0]) {
-      imgFolder.file(input.files[0].name, input.files[0]);
+      const extension = input.files[0].name.split(".").pop();
+      const seoName = item.fallback.replace(/\.[^.]+$/, `.${extension}`);
+      imgFolder.file(seoName, input.files[0]);
     } else {
       imgFolder.file(item.fallback, "Sube aquí tu imagen real");
     }
   }
 
   const blob = await zip.generateAsync({ type: "blob" });
-  descargarArchivo("web-generada.zip", blob, "application/zip");
+  descargarArchivo(`${slugBase}.zip`, blob, "application/zip");
+}
+
+function verDemo() {
+  const html = document.getElementById("htmlOutput").value;
+  const css = document.getElementById("cssOutput").value;
+  if (!html || !css) return alert("Primero genera la web.");
+
+  const ventana = window.open("", "_blank");
+  ventana.document.open();
+  ventana.document.write(html.replace("</head>", `<style>${css}</style></head>`));
+  ventana.document.close();
 }
 
 function nuevoNegocio() {
@@ -880,33 +865,21 @@ function nuevoNegocio() {
   document.getElementById("htmlOutput").value = "";
   document.getElementById("cssOutput").value = "";
   document.getElementById("notesOutput").value = "";
-
   document.getElementById("previewFrame").srcdoc = `
-    <html>
-      <body style="font-family:Arial,sans-serif;padding:20px">
-        <h3>Vista previa limpia</h3>
-        <p>Rellena los datos y pulsa generar web.</p>
-      </body>
-    </html>
+    <html><body style="font-family:Arial,sans-serif;padding:20px">
+      <h3>Vista previa limpia</h3>
+      <p>Rellena los datos y pulsa generar web.</p>
+    </body></html>
   `;
-
   localStorage.removeItem("webAyudaDatos");
   actualizarColor();
-  alert("Listo para nuevo cliente.");
 }
 
 function generarPreviewInicial() {
   document.getElementById("previewFrame").srcdoc = `
-    <html>
-      <body style="font-family:Arial,sans-serif;padding:20px">
-        <h3>Vista previa</h3>
-        <p>Rellena los campos y pulsa generar web.</p>
-      </body>
-    </html>
+    <html><body style="font-family:Arial,sans-serif;padding:20px">
+      <h3>Vista previa</h3>
+      <p>Rellena los campos y pulsa generar web.</p>
+    </body></html>
   `;
-}
-
-function capitalize(texto = "") {
-  if (!texto) return "";
-  return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
