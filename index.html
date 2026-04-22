@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Ayuda | Generador de webs locales</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
+  <header class="topbar">
+    <div class="container">
+      <h1>Web Ayuda</h1>
+      <p>Generador gratuito de webs base para negocios locales</p>
+    </div>
+  </header>
+
+  <main class="container app-grid">
+
+    <section class="panel form-panel">
+      <h2>Datos del negocio</h2>
+
+      <div class="field">
+        <label for="nombre">Nombre del negocio</label>
+        <input type="text" id="nombre" placeholder="Ej. Quitapellejos" />
+      </div>
+
+      <div class="field">
+        <label for="sector">Sector</label>
+        <input type="text" id="sector" placeholder="Ej. tienda de encurtidos" />
+      </div>
+
+      <div class="field">
+        <label for="ciudad">Ciudad</label>
+        <input type="text" id="ciudad" placeholder="Ej. Murcia" />
+      </div>
+
+      <div class="field">
+        <label for="telefono">Teléfono / WhatsApp</label>
+        <input type="text" id="telefono" placeholder="Ej. 34639111111" />
+      </div>
+
+      <div class="field">
+        <label for="direccion">Dirección</label>
+        <input type="text" id="direccion" placeholder="Ej. Calle Mayor 12, Murcia" />
+      </div>
+
+      <div class="field">
+        <label for="descripcion">Descripción corta</label>
+        <textarea id="descripcion" placeholder="Ej. Especialistas en aceitunas, encurtidos, salazones y productos tradicionales."></textarea>
+      </div>
+
+      <h3>Servicios / productos</h3>
+
+      <div class="field">
+        <label for="serv1">Servicio o producto 1</label>
+        <input type="text" id="serv1" placeholder="Ej. Aceitunas y encurtidos" />
+      </div>
+
+      <div class="field">
+        <label for="serv2">Servicio o producto 2</label>
+        <input type="text" id="serv2" placeholder="Ej. Salazones" />
+      </div>
+
+      <div class="field">
+        <label for="serv3">Servicio o producto 3</label>
+        <input type="text" id="serv3" placeholder="Ej. Conservas" />
+      </div>
+
+      <div class="field">
+        <label for="serv4">Servicio o producto 4</label>
+        <input type="text" id="serv4" placeholder="Ej. Productos gourmet" />
+      </div>
+
+      <h3>Imágenes</h3>
+
+      <div class="field">
+        <label for="img1">Imagen 1</label>
+        <input type="text" id="img1" placeholder="Ej. imagen/portada.jpg" />
+      </div>
+
+      <div class="field">
+        <label for="img2">Imagen 2</label>
+        <input type="text" id="img2" placeholder="Ej. imagen/galeria1.jpg" />
+      </div>
+
+      <div class="field">
+        <label for="img3">Imagen 3</label>
+        <input type="text" id="img3" placeholder="Ej. imagen/galeria2.jpg" />
+      </div>
+
+      <div class="field">
+        <label for="img4">Imagen 4</label>
+        <input type="text" id="img4" placeholder="Ej. imagen/galeria3.jpg" />
+      </div>
+
+      <h3>Diseño</h3>
+
+      <div class="field">
+        <label for="color">Color principal</label>
+        <input type="text" id="color" placeholder="Ej. #8b5e3c" value="#8b5e3c" />
+      </div>
+
+      <div class="field">
+        <label for="estilo">Estilo</label>
+        <select id="estilo">
+          <option value="profesional">Profesional</option>
+          <option value="tradicional">Tradicional</option>
+          <option value="premium">Premium</option>
+          <option value="moderno">Moderno</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button id="btnGenerar" onclick="generarWeb()">Generar web</button>
+      </div>
+    </section>
+
+    <section class="panel output-panel">
+      <h2>Salida generada</h2>
+
+      <div class="output-box">
+        <div class="output-head">
+          <h3>SEO básico</h3>
+          <button onclick="copiarTexto('seoOutput')">Copiar</button>
+        </div>
+        <textarea id="seoOutput" readonly></textarea>
+      </div>
+
+      <div class="output-box">
+        <div class="output-head">
+          <h3>index.html</h3>
+          <button onclick="copiarTexto('htmlOutput')">Copiar</button>
+        </div>
+        <textarea id="htmlOutput" readonly></textarea>
+      </div>
+
+      <div class="output-box">
+        <div class="output-head">
+          <h3>style.css</h3>
+          <button onclick="copiarTexto('cssOutput')">Copiar</button>
+        </div>
+        <textarea id="cssOutput" readonly></textarea>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
