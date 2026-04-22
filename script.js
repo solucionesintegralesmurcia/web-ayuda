@@ -361,3 +361,45 @@ window.addEventListener("DOMContentLoaded", () => {
   aplicarDemoSiVacio();
   generarWeb();
 });
+function resetear(){
+
+  // limpiar inputs y textareas
+  document.querySelectorAll("input, textarea").forEach(el => {
+    if(el.type !== "file"){
+      el.value = "";
+    }
+  });
+
+  // limpiar selects
+  document.querySelectorAll("select").forEach(el => {
+    el.selectedIndex = 0;
+  });
+
+  // limpiar resultados
+  document.getElementById("htmlOutput").value = "";
+  document.getElementById("cssOutput").value = "";
+  document.getElementById("seoOutput").value = "";
+
+  // limpiar preview
+  let preview = document.getElementById("preview");
+  if(preview){
+    preview.innerHTML = "";
+  }
+
+  // limpiar iframe preview (si tienes)
+  let iframe = document.getElementById("previewFrame");
+  if(iframe){
+    iframe.srcdoc = "";
+  }
+
+  // limpiar archivos (input file)
+  ["img1","img2","img3","img4"].forEach(id=>{
+    let input = document.getElementById(id);
+    if(input) input.value = "";
+  });
+
+  // limpiar localStorage si lo usas
+  localStorage.clear();
+
+  alert("Listo para nuevo negocio 🚀");
+}
