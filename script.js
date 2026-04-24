@@ -11,8 +11,10 @@ function limpiarTexto(texto) {
 function generarWeb() {
   const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
   const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
+  const direccion = document.getElementById("direccion").value.trim() || `${ciudad}`;
   const telefono = document.getElementById("telefono").value.trim() || "600000000";
   const whatsapp = document.getElementById("whatsapp").value.trim() || telefono;
+
   const servicios = document.getElementById("servicios").value
     .split(",")
     .map(s => s.trim())
@@ -25,6 +27,7 @@ function generarWeb() {
   ];
 
   const slug = limpiarTexto(`${negocio}-${ciudad}`);
+  const direccionMapa = encodeURIComponent(direccion + " " + ciudad);
 
   const serviciosCards = serviciosFinales.map(servicio => `
     <article class="service-card">
@@ -34,12 +37,11 @@ function generarWeb() {
     </article>
   `).join("");
 
-  const serviciosLista = serviciosFinales.map(servicio => `<li>${servicio}</li>`).join("");
-
   cssGenerado = `
 :root {
   --primary: #0f766e;
   --primary-dark: #115e59;
+  --green: #22c55e;
   --dark: #111827;
   --text: #1f2937;
   --muted: #6b7280;
@@ -51,6 +53,10 @@ function generarWeb() {
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -84,7 +90,7 @@ a {
 }
 
 .logo {
-  font-weight: 800;
+  font-weight: 900;
   color: var(--dark);
   font-size: 20px;
 }
@@ -97,13 +103,13 @@ a {
 
 .nav a {
   color: var(--text);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .hero {
   background: linear-gradient(135deg, #111827, #0f766e);
   color: white;
-  padding: 80px 0;
+  padding: 86px 0;
 }
 
 .hero-grid {
@@ -166,14 +172,20 @@ a {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 14px 22px;
+  padding: 15px 24px;
   border-radius: 999px;
-  font-weight: 800;
+  font-weight: 900;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
 }
 
 .btn-whatsapp {
-  background: #22c55e;
+  background: var(--green);
   color: white;
+  box-shadow: 0 12px 28px rgba(34,197,94,0.35);
 }
 
 .btn-call {
@@ -187,7 +199,7 @@ a {
 }
 
 .section {
-  padding: 70px 0;
+  padding: 72px 0;
 }
 
 .section-soft {
@@ -229,14 +241,37 @@ a {
 
 .link-card {
   color: var(--primary-dark);
-  font-weight: 800;
+  font-weight: 900;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.location-box {
+  background: white;
+  padding: 28px;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.map {
+  width: 100%;
+  min-height: 360px;
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .cta {
   background: var(--dark);
   color: white;
   text-align: center;
-  padding: 70px 20px;
+  padding: 72px 20px;
 }
 
 .cta h2 {
@@ -251,13 +286,46 @@ a {
   text-align: center;
 }
 
+.floating-whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 88px;
+  background: var(--green);
+  color: white;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-weight: 900;
+  box-shadow: 0 14px 32px rgba(34,197,94,0.42);
+  z-index: 998;
+}
+
+.back-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: var(--dark);
+  color: white;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-weight: 900;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.25);
+  z-index: 998;
+}
+
 .mobile-bar {
   display: none;
 }
 
 @media (max-width: 800px) {
   .hero-grid,
-  .grid-3 {
+  .grid-3,
+  .location-grid {
     grid-template-columns: 1fr;
   }
 
@@ -266,7 +334,7 @@ a {
   }
 
   .hero {
-    padding: 54px 0;
+    padding: 56px 0;
   }
 
   .section {
@@ -279,6 +347,11 @@ a {
 
   .btn {
     width: 100%;
+  }
+
+  .floating-whatsapp,
+  .back-top {
+    display: none;
   }
 
   .mobile-bar {
@@ -295,11 +368,11 @@ a {
     text-align: center;
     padding: 14px 8px;
     color: white;
-    font-weight: 800;
+    font-weight: 900;
   }
 
   .mobile-whatsapp {
-    background: #22c55e;
+    background: var(--green);
   }
 
   .mobile-call {
@@ -309,12 +382,16 @@ a {
   body {
     padding-bottom: 58px;
   }
+
+  .map {
+    min-height: 280px;
+  }
 }
 `;
 
   const indexHTML = `
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="top">
 <head>
   <meta charset="UTF-8">
   <title>${negocio} en ${ciudad} | Presupuesto rápido</title>
@@ -328,8 +405,9 @@ a {
   <div class="container header-inner">
     <div class="logo">${negocio}</div>
     <nav class="nav">
-      <a href="index.html">Inicio</a>
-      <a href="servicios.html">Servicios</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="servicios.html">Ver servicios</a>
       <a href="tel:${telefono}">Llamar</a>
     </nav>
   </div>
@@ -360,7 +438,7 @@ a {
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="servicios">
   <div class="container">
     <div class="section-title">
       <h2>Servicios principales</h2>
@@ -377,27 +455,48 @@ a {
   <div class="container">
     <div class="section-title">
       <h2>Por qué elegirnos</h2>
-      <p>Una web sencilla debe responder rápido a tres preguntas: qué haces, dónde trabajas y cómo contactar.</p>
+      <p>Atención directa, explicación clara y contacto rápido para facilitar el presupuesto.</p>
     </div>
 
     <div class="grid-3">
       <div class="trust-card">
         <h3>Contacto directo</h3>
-        <p>Sin formularios complicados. WhatsApp y llamada visibles para facilitar el contacto.</p>
+        <p>WhatsApp y llamada visibles para que el cliente no tenga que buscar cómo contactar.</p>
       </div>
       <div class="trust-card">
-        <h3>Claridad desde el primer momento</h3>
-        <p>Explicamos los servicios de forma sencilla para que el cliente entienda rápido.</p>
+        <h3>Claridad desde el inicio</h3>
+        <p>Explicamos los servicios de forma sencilla y sin tecnicismos innecesarios.</p>
       </div>
       <div class="trust-card">
-        <h3>Orientado a conseguir clientes</h3>
-        <p>Diseño pensado para conversión local, no solo para verse bonito.</p>
+        <h3>Orientado a clientes locales</h3>
+        <p>Web pensada para usuarios que buscan servicios cerca y quieren una solución rápida.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="ubicacion">
+  <div class="container location-grid">
+    <div class="location-box">
+      <h2>Ubicación</h2>
+      <p><strong>Dirección:</strong><br>${direccion}</p>
+      <p>Atendemos en ${ciudad} y alrededores.</p>
+
+      <div class="btn-row">
+        <a class="btn btn-whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
+        <a class="btn btn-call" href="tel:${telefono}">Llamar</a>
+      </div>
+    </div>
+
+    <iframe
+      class="map"
+      src="https://www.google.com/maps?q=${direccionMapa}&output=embed"
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+<section class="section section-soft">
   <div class="container">
     <div class="section-title">
       <h2>Preguntas frecuentes</h2>
@@ -437,79 +536,8 @@ a {
   </div>
 </footer>
 
-<div class="mobile-bar">
-  <a class="mobile-whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
-  <a class="mobile-call" href="tel:${telefono}">Llamar</a>
-</div>
-
-</body>
-</html>
-`;
-
-  const serviciosHTML = `
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Servicios de ${negocio} en ${ciudad}</title>
-  <meta name="description" content="Servicios de ${negocio} en ${ciudad}: ${serviciosFinales.join(", ")}. Contacto rápido por WhatsApp.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header class="header">
-  <div class="container header-inner">
-    <div class="logo">${negocio}</div>
-    <nav class="nav">
-      <a href="index.html">Inicio</a>
-      <a href="servicios.html">Servicios</a>
-      <a href="tel:${telefono}">Llamar</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="container">
-    <span class="badge">Servicios en ${ciudad}</span>
-    <h1>Servicios de ${negocio} en ${ciudad}</h1>
-    <p>Consulta nuestros servicios principales y contacta por WhatsApp para pedir información.</p>
-    <div class="btn-row">
-      <a class="btn btn-whatsapp" href="https://wa.me/34${whatsapp}">Pedir presupuesto</a>
-      <a class="btn btn-light" href="index.html">Volver al inicio</a>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-title">
-      <h2>Qué podemos hacer por ti</h2>
-      <p>Estos son los servicios principales disponibles.</p>
-    </div>
-
-    <div class="grid-3">
-      ${serviciosCards}
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="container">
-    <h2>Solicita información sin compromiso</h2>
-    <p>Cuéntanos qué necesitas y te atendemos directamente.</p>
-    <div class="btn-row" style="justify-content:center;">
-      <a class="btn btn-whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
-      <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <p>${negocio} en ${ciudad} · Tel. ${telefono}</p>
-  </div>
-</footer>
+<a class="floating-whatsapp" href="https://wa.me/34${whatsapp}" aria-label="WhatsApp">WA</a>
+<a class="back-top" href="#top" aria-label="Subir arriba">↑</a>
 
 <div class="mobile-bar">
   <a class="mobile-whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
@@ -519,6 +547,11 @@ a {
 </body>
 </html>
 `;
+
+  const serviciosHTML = indexHTML
+    .replace(`<title>${negocio} en ${ciudad} | Presupuesto rápido</title>`, `<title>Servicios de ${negocio} en ${ciudad}</title>`)
+    .replace(`<h1>${negocio} en ${ciudad}</h1>`, `<h1>Servicios de ${negocio} en ${ciudad}</h1>`)
+    .replace(`Servicio profesional, atención directa y presupuesto rápido. Cuéntanos qué necesitas y te orientamos sin compromiso.`, `Consulta los servicios principales de ${negocio} en ${ciudad} y solicita información por WhatsApp.`);
 
   window.indexFile = indexHTML;
   window.serviciosFile = serviciosHTML;
