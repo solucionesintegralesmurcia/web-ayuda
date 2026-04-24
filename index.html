@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Generador de Webs</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Generador PRO de Webs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
-  <h1>Generador de Webs Locales</h1>
+<div class="app">
 
-  <input id="negocio" placeholder="Tipo de negocio (ej: Aire acondicionado)">
-  <input id="ciudad" placeholder="Ciudad (ej: Murcia)">
-  <input id="telefono" placeholder="Teléfono">
-  <input id="whatsapp" placeholder="WhatsApp (sin +34)">
-  <input id="servicios" placeholder="Servicios separados por coma">
+  <div class="panel">
+    <h2>Generador de Webs</h2>
 
-  <button onclick="generarWeb()">Generar Web</button>
+    <input id="negocio" placeholder="Negocio (ej: Aire acondicionado)">
+    <input id="ciudad" placeholder="Ciudad">
+    <input id="telefono" placeholder="Teléfono">
+    <input id="whatsapp" placeholder="WhatsApp">
+    <input id="servicios" placeholder="Servicios separados por coma">
 
-  <textarea id="resultado" placeholder="Aquí aparecerá el código"></textarea>
+    <select id="plantilla">
+      <option value="oscuro">Diseño oscuro</option>
+      <option value="claro">Diseño claro</option>
+    </select>
 
-  <button onclick="descargar()">Descargar HTML</button>
+    <button onclick="generarWeb()">Generar</button>
+    <button onclick="descargar()">Descargar</button>
+
+  </div>
+
+  <div class="preview">
+    <iframe id="frame"></iframe>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
