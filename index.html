@@ -13,23 +13,38 @@
 <div class="app">
 
   <div class="panel">
-    <h2>Generador de Webs</h2>
+    <h2>Generador PRO de Webs</h2>
 
-    <input id="negocio" placeholder="Negocio (ej: Aire acondicionado)">
-<input id="ciudad" placeholder="Ciudad">
-<input id="direccion" placeholder="Dirección (ej: Calle Mayor 12, Murcia)">
-<input id="telefono" placeholder="Teléfono">
-<input id="whatsapp" placeholder="WhatsApp">
-<input id="servicios" placeholder="Servicios separados por coma">
-
-    <select id="plantilla">
-      <option value="oscuro">Diseño oscuro</option>
-      <option value="claro">Diseño claro</option>
+    <select id="sector">
+      <option value="generico">Sector genérico</option>
+      <option value="peluqueria">Peluquería</option>
+      <option value="aire">Aire acondicionado</option>
+      <option value="cerrajeria">Cerrajería / Metalistería</option>
+      <option value="jardineria">Jardinería</option>
+      <option value="electricista">Electricista</option>
+      <option value="reformas">Reformas</option>
+      <option value="restaurante">Restaurante</option>
     </select>
 
-    <button onclick="generarWeb()">Generar</button>
-    <button onclick="descargar()">Descargar</button>
+    <input id="negocio" placeholder="Nombre del negocio">
+    <input id="ciudad" placeholder="Ciudad">
+    <input id="direccion" placeholder="Dirección">
+    <input id="telefono" placeholder="Teléfono">
+    <input id="whatsapp" placeholder="WhatsApp">
 
+    <input id="servicios" placeholder="Servicios separados por coma">
+
+    <input id="colorPrincipal" placeholder="Color principal HEX ej: #0f766e">
+    <input id="colorSecundario" placeholder="Color secundario HEX ej: #111827">
+
+    <input id="tituloSeo" placeholder="Título SEO personalizado">
+    <input id="descripcionSeo" placeholder="Descripción SEO personalizada">
+    <input id="keyword" placeholder="Palabra clave principal">
+
+    <button onclick="generarWeb()">Generar web</button>
+    <button onclick="descargar()">Descargar ZIP</button>
+    <button onclick="nuevoProyecto()">Nuevo proyecto</button>
+    <button onclick="copiarMensajeCliente()">Copiar mensaje cliente</button>
   </div>
 
   <div class="preview">
@@ -40,4 +55,5 @@
 
 <script src="script.js"></script>
 </body>
+</html>
 </html>
