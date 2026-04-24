@@ -1,4 +1,48 @@
 let cssGenerado = "";
+let mensajeCliente = "";
+
+const sectores = {
+  generico: {
+    texto: "Servicio profesional, atención directa y presupuesto rápido.",
+    color: "#0f766e",
+    secundario: "#111827"
+  },
+  peluqueria: {
+    texto: "Cortes, coloración y tratamientos capilares con atención cercana.",
+    color: "#be185d",
+    secundario: "#831843"
+  },
+  aire: {
+    texto: "Instalación, mantenimiento y reparación de aire acondicionado.",
+    color: "#0284c7",
+    secundario: "#0f172a"
+  },
+  cerrajeria: {
+    texto: "Fabricación e instalación de puertas, rejas y trabajos metálicos.",
+    color: "#374151",
+    secundario: "#111827"
+  },
+  jardineria: {
+    texto: "Mantenimiento de jardines, podas y cuidado de espacios exteriores.",
+    color: "#15803d",
+    secundario: "#14532d"
+  },
+  electricista: {
+    texto: "Instalaciones eléctricas, averías y soluciones para viviendas y negocios.",
+    color: "#ca8a04",
+    secundario: "#422006"
+  },
+  reformas: {
+    texto: "Reformas, mejoras y trabajos profesionales para viviendas y locales.",
+    color: "#b45309",
+    secundario: "#1f2937"
+  },
+  restaurante: {
+    texto: "Comida, reservas y atención cercana para disfrutar sin complicaciones.",
+    color: "#dc2626",
+    secundario: "#7f1d1d"
+  }
+};
 
 function limpiarTexto(texto) {
   return texto
@@ -9,11 +53,21 @@ function limpiarTexto(texto) {
 }
 
 function generarWeb() {
+  const sector = document.getElementById("sector").value;
+  const datosSector = sectores[sector] || sectores.generico;
+
   const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
   const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
-  const direccion = document.getElementById("direccion").value.trim() || `${ciudad}`;
+  const direccion = document.getElementById("direccion").value.trim() || ciudad;
   const telefono = document.getElementById("telefono").value.trim() || "600000000";
   const whatsapp = document.getElementById("whatsapp").value.trim() || telefono;
+
+  const colorPrincipal = document.getElementById("colorPrincipal").value.trim() || datosSector.color;
+  const colorSecundario = document.getElementById("colorSecundario").value.trim() || datosSector.secundario;
+
+  const keyword = document.getElementById("keyword").value.trim() || `${negocio} en ${ciudad}`;
+  const tituloSeo = document.getElementById("tituloSeo").value.trim() || `${negocio} en ${ciudad} | Presupuesto rápido`;
+  const descripcionSeo = document.getElementById("descripcionSeo").value.trim() || `${negocio} en ${ciudad}. Atención directa, presupuesto rápido y contacto por WhatsApp.`;
 
   const servicios = document.getElementById("servicios").value
     .split(",")
@@ -29,18 +83,21 @@ function generarWeb() {
   const slug = limpiarTexto(`${negocio}-${ciudad}`);
   const direccionMapa = encodeURIComponent(direccion + " " + ciudad);
 
-  const serviciosCards = serviciosFinales.map(servicio => `
-    <article class="service-card">
-      <h3>${servicio}</h3>
-      <p>Servicio de ${servicio.toLowerCase()} en ${ciudad}, con atención cercana, explicación clara y presupuesto adaptado a cada caso.</p>
-      <a href="https://wa.me/34${whatsapp}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(servicio)}%20en%20${encodeURIComponent(ciudad)}" class="link-card">Pedir presupuesto</a>
-    </article>
-  `).join("");
+  const serviciosCards = serviciosFinales.map(servicio => {
+    const slugServicio = limpiarTexto(servicio);
+    return `
+      <article class="service-card">
+        <h3>${servicio}</h3>
+        <p>Servicio de ${servicio.toLowerCase()} en ${ciudad}, con atención directa, explicación clara y presupuesto adaptado.</p>
+        <a href="${slugServicio}.html" class="link-card">Ver servicio</a>
+      </article>
+    `;
+  }).join("");
 
   cssGenerado = `
 :root {
-  --primary: #0f766e;
-  --primary-dark: #115e59;
+  --primary: ${colorPrincipal};
+  --primary-dark: ${colorSecundario};
   --green: #22c55e;
   --dark: #111827;
   --text: #1f2937;
@@ -51,13 +108,9 @@ function generarWeb() {
   --shadow: 0 18px 40px rgba(0,0,0,0.12);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -67,9 +120,7 @@ body {
   line-height: 1.6;
 }
 
-a {
-  text-decoration: none;
-}
+a { text-decoration: none; }
 
 .container {
   width: min(1120px, 92%);
@@ -107,7 +158,7 @@ a {
 }
 
 .hero {
-  background: linear-gradient(135deg, #111827, #0f766e);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   color: white;
   padding: 86px 0;
 }
@@ -149,18 +200,6 @@ a {
   box-shadow: var(--shadow);
 }
 
-.hero-box h2 {
-  margin-top: 0;
-}
-
-.check-list {
-  padding-left: 20px;
-}
-
-.check-list li {
-  margin-bottom: 8px;
-}
-
 .btn-row {
   display: flex;
   gap: 12px;
@@ -178,9 +217,7 @@ a {
   transition: 0.2s ease;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-}
+.btn:hover { transform: translateY(-2px); }
 
 .btn-whatsapp {
   background: var(--green);
@@ -225,7 +262,8 @@ a {
 
 .service-card,
 .trust-card,
-.faq-card {
+.faq-card,
+.location-box {
   background: white;
   padding: 26px;
   border-radius: var(--radius);
@@ -240,7 +278,7 @@ a {
 }
 
 .link-card {
-  color: var(--primary-dark);
+  color: var(--primary);
   font-weight: 900;
 }
 
@@ -249,14 +287,6 @@ a {
   grid-template-columns: 0.8fr 1.2fr;
   gap: 28px;
   align-items: stretch;
-}
-
-.location-box {
-  background: white;
-  padding: 28px;
-  border-radius: var(--radius);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
-  border: 1px solid #e5e7eb;
 }
 
 .map {
@@ -272,11 +302,6 @@ a {
   color: white;
   text-align: center;
   padding: 72px 20px;
-}
-
-.cta h2 {
-  font-size: clamp(28px, 4vw, 44px);
-  margin: 0 0 12px;
 }
 
 .footer {
@@ -318,9 +343,7 @@ a {
   z-index: 998;
 }
 
-.mobile-bar {
-  display: none;
-}
+.mobile-bar { display: none; }
 
 @media (max-width: 800px) {
   .hero-grid,
@@ -329,25 +352,15 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .nav {
-    display: none;
-  }
+  .nav { display: none; }
 
-  .hero {
-    padding: 56px 0;
-  }
+  .hero { padding: 56px 0; }
 
-  .section {
-    padding: 48px 0;
-  }
+  .section { padding: 48px 0; }
 
-  .btn-row {
-    flex-direction: column;
-  }
+  .btn-row { flex-direction: column; }
 
-  .btn {
-    width: 100%;
-  }
+  .btn { width: 100%; }
 
   .floating-whatsapp,
   .back-top {
@@ -371,32 +384,25 @@ a {
     font-weight: 900;
   }
 
-  .mobile-whatsapp {
-    background: var(--green);
-  }
+  .mobile-whatsapp { background: var(--green); }
 
-  .mobile-call {
-    background: #111827;
-  }
+  .mobile-call { background: #111827; }
 
-  body {
-    padding-bottom: 58px;
-  }
+  body { padding-bottom: 58px; }
 
-  .map {
-    min-height: 280px;
-  }
+  .map { min-height: 280px; }
 }
 `;
 
-  const indexHTML = `
+  const layoutBase = (titulo, descripcion, h1, intro, contenidoServicios) => `
 <!DOCTYPE html>
 <html lang="es" id="top">
 <head>
   <meta charset="UTF-8">
-  <title>${negocio} en ${ciudad} | Presupuesto rápido</title>
-  <meta name="description" content="${negocio} en ${ciudad}. Atención rápida, presupuesto sin compromiso y contacto directo por WhatsApp.">
+  <title>${titulo}</title>
+  <meta name="description" content="${descripcion}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="${keyword}">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -405,9 +411,9 @@ a {
   <div class="container header-inner">
     <div class="logo">${negocio}</div>
     <nav class="nav">
-      <a href="#servicios">Servicios</a>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
       <a href="#ubicacion">Ubicación</a>
-      <a href="servicios.html">Ver servicios</a>
       <a href="tel:${telefono}">Llamar</a>
     </nav>
   </div>
@@ -417,8 +423,8 @@ a {
   <div class="container hero-grid">
     <div>
       <span class="badge">${negocio} · ${ciudad}</span>
-      <h1>${negocio} en ${ciudad}</h1>
-      <p>Servicio profesional, atención directa y presupuesto rápido. Cuéntanos qué necesitas y te orientamos sin compromiso.</p>
+      <h1>${h1}</h1>
+      <p>${intro}</p>
 
       <div class="btn-row">
         <a class="btn btn-whatsapp" href="https://wa.me/34${whatsapp}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(negocio)}%20en%20${encodeURIComponent(ciudad)}">Pedir presupuesto por WhatsApp</a>
@@ -429,7 +435,7 @@ a {
     <div class="hero-box">
       <h2>Atención rápida</h2>
       <p>Envía fotos o explica tu caso por WhatsApp y te damos una primera orientación.</p>
-      <ul class="check-list">
+      <ul>
         <li>Presupuesto sin compromiso</li>
         <li>Trato directo</li>
         <li>Servicio en ${ciudad} y alrededores</li>
@@ -446,7 +452,7 @@ a {
     </div>
 
     <div class="grid-3">
-      ${serviciosCards}
+      ${contenidoServicios}
     </div>
   </div>
 </section>
@@ -488,34 +494,7 @@ a {
       </div>
     </div>
 
-    <iframe
-      class="map"
-      src="https://www.google.com/maps?q=${direccionMapa}&output=embed"
-      loading="lazy">
-    </iframe>
-  </div>
-</section>
-
-<section class="section section-soft">
-  <div class="container">
-    <div class="section-title">
-      <h2>Preguntas frecuentes</h2>
-    </div>
-
-    <div class="grid-3">
-      <div class="faq-card">
-        <h3>¿Dais presupuesto?</h3>
-        <p>Sí, puedes contactar por WhatsApp y explicar qué necesitas.</p>
-      </div>
-      <div class="faq-card">
-        <h3>¿Trabajáis en ${ciudad}?</h3>
-        <p>Sí, ofrecemos servicio en ${ciudad} y zonas cercanas.</p>
-      </div>
-      <div class="faq-card">
-        <h3>¿Puedo llamar directamente?</h3>
-        <p>Sí, puedes llamar al ${telefono} para una atención más rápida.</p>
-      </div>
-    </div>
+    <iframe class="map" src="https://www.google.com/maps?q=${direccionMapa}&output=embed" loading="lazy"></iframe>
   </div>
 </section>
 
@@ -548,14 +527,84 @@ a {
 </html>
 `;
 
-  const serviciosHTML = indexHTML
-    .replace(`<title>${negocio} en ${ciudad} | Presupuesto rápido</title>`, `<title>Servicios de ${negocio} en ${ciudad}</title>`)
-    .replace(`<h1>${negocio} en ${ciudad}</h1>`, `<h1>Servicios de ${negocio} en ${ciudad}</h1>`)
-    .replace(`Servicio profesional, atención directa y presupuesto rápido. Cuéntanos qué necesitas y te orientamos sin compromiso.`, `Consulta los servicios principales de ${negocio} en ${ciudad} y solicita información por WhatsApp.`);
+  const indexHTML = layoutBase(
+    tituloSeo,
+    descripcionSeo,
+    `${negocio} en ${ciudad}`,
+    datosSector.texto,
+    serviciosCards
+  );
+
+  const serviciosHTML = layoutBase(
+    `Servicios de ${negocio} en ${ciudad}`,
+    `Servicios de ${negocio} en ${ciudad}: ${serviciosFinales.join(", ")}.`,
+    `Servicios de ${negocio} en ${ciudad}`,
+    `Consulta los servicios principales de ${negocio} en ${ciudad} y solicita información por WhatsApp.`,
+    serviciosCards
+  );
+
+  const paginasServicios = serviciosFinales.map(servicio => {
+    const slugServicio = limpiarTexto(servicio);
+    const htmlServicio = layoutBase(
+      `${servicio} en ${ciudad} | ${negocio}`,
+      `${servicio} en ${ciudad}. Contacta con ${negocio} para pedir información o presupuesto.`,
+      `${servicio} en ${ciudad}`,
+      `Servicio de ${servicio.toLowerCase()} en ${ciudad}, con atención directa y presupuesto sin compromiso.`,
+      `
+      <article class="service-card">
+        <h3>${servicio}</h3>
+        <p>Si necesitas ${servicio.toLowerCase()} en ${ciudad}, contacta por WhatsApp y te orientamos de forma rápida.</p>
+        <a class="link-card" href="https://wa.me/34${whatsapp}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(servicio)}%20en%20${encodeURIComponent(ciudad)}">Solicitar información</a>
+      </article>
+      `
+    );
+
+    return {
+      nombre: `${slugServicio}.html`,
+      contenido: htmlServicio
+    };
+  });
+
+  const readme = `
+INSTRUCCIONES DE USO
+
+1. Descomprime este ZIP.
+2. Sube todos los archivos a GitHub:
+   - index.html
+   - servicios.html
+   - style.css
+   - páginas de cada servicio
+3. Activa GitHub Pages:
+   Settings > Pages > Deploy from branch > main > root
+4. La web estará disponible en:
+   https://tuusuario.github.io/nombre-del-repositorio/
+
+ARCHIVOS GENERADOS:
+- index.html: página principal
+- servicios.html: página general de servicios
+- style.css: diseño de la web
+- páginas individuales por servicio: mejor para SEO local
+
+DATOS DEL PROYECTO:
+Negocio: ${negocio}
+Ciudad: ${ciudad}
+Dirección: ${direccion}
+Teléfono: ${telefono}
+WhatsApp: ${whatsapp}
+Keyword principal: ${keyword}
+`;
+
+  mensajeCliente = `Hola, te dejo una primera versión de la web para que puedas revisarla.
+
+Está preparada con una estructura clara, botones de WhatsApp y llamada, sección de servicios, ubicación con mapa y páginas individuales para cada servicio.
+
+Revísala y dime si quieres que ajustemos algún texto, servicio, teléfono, dirección o color antes de dejarla definitiva.`;
 
   window.indexFile = indexHTML;
   window.serviciosFile = serviciosHTML;
   window.cssFile = cssGenerado;
+  window.paginasServicios = paginasServicios;
+  window.readmeFile = readme;
   window.zipName = `${slug}.zip`;
 
   document.getElementById("frame").srcdoc = indexHTML;
@@ -577,11 +626,35 @@ function descargar() {
   zip.file("index.html", window.indexFile);
   zip.file("servicios.html", window.serviciosFile);
   zip.file("style.css", window.cssFile);
+  zip.file("README.txt", window.readmeFile);
+
+  window.paginasServicios.forEach(pagina => {
+    zip.file(pagina.nombre, pagina.contenido);
+  });
 
   zip.generateAsync({ type: "blob" }).then(function(content) {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(content);
     a.download = window.zipName || "web-generada.zip";
     a.click();
+  });
+}
+
+function nuevoProyecto() {
+  document.querySelectorAll("input").forEach(input => input.value = "");
+  document.getElementById("sector").value = "generico";
+  document.getElementById("frame").srcdoc = "";
+  window.indexFile = null;
+  alert("Nuevo proyecto listo");
+}
+
+function copiarMensajeCliente() {
+  if (!mensajeCliente) {
+    alert("Primero genera una web");
+    return;
+  }
+
+  navigator.clipboard.writeText(mensajeCliente).then(() => {
+    alert("Mensaje copiado");
   });
 }
