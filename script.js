@@ -6,7 +6,12 @@ function generarWeb() {
   let whatsapp = document.getElementById("whatsapp").value;
   let servicios = document.getElementById("servicios").value.split(",");
 
-  let listaServicios = servicios.map(s => `<li>${s}</li>`).join("");
+  let listaServicios = servicios.map(s => `
+    <div class="card">
+      <h3>${s}</h3>
+      <p>Servicio profesional de ${s} en ${ciudad}. Calidad, rapidez y buen precio.</p>
+    </div>
+  `).join("");
 
   let html = `
 <!DOCTYPE html>
@@ -15,21 +20,104 @@ function generarWeb() {
 <meta charset="UTF-8">
 <title>${negocio} en ${ciudad}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+}
+
+.hero {
+  background:#111;
+  color:#fff;
+  padding:60px 20px;
+  text-align:center;
+}
+
+.hero h1 {
+  font-size:28px;
+}
+
+.btn {
+  display:inline-block;
+  margin:10px;
+  padding:15px 20px;
+  text-decoration:none;
+  color:white;
+  border-radius:5px;
+}
+
+.whatsapp {
+  background:green;
+}
+
+.llamar {
+  background:black;
+}
+
+.section {
+  padding:40px 20px;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+}
+
+.card {
+  border:1px solid #ddd;
+  padding:20px;
+  border-radius:10px;
+}
+
+.footer {
+  background:#111;
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+</style>
+
 </head>
 
-<body style="font-family: Arial; padding:20px;">
+<body>
 
-<h1>${negocio} en ${ciudad}</h1>
-<p>Servicio profesional de ${negocio.toLowerCase()} en ${ciudad}. Contacta ahora.</p>
+<div class="hero">
+  <h1>${negocio} en ${ciudad}</h1>
+  <p>Soluciones rápidas, profesionales y sin complicaciones.</p>
 
-<h2>Servicios</h2>
-<ul>
-${listaServicios}
-</ul>
+  <a class="btn whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
+  <a class="btn llamar" href="tel:${telefono}">Llamar</a>
+</div>
 
-<a href="https://wa.me/34${whatsapp}" style="display:block; margin:20px 0; padding:15px; background:green; color:white; text-align:center;">WhatsApp</a>
+<div class="section">
+  <h2>Servicios</h2>
+  <div class="grid">
+    ${listaServicios}
+  </div>
+</div>
 
-<a href="tel:${telefono}" style="display:block; padding:15px; background:black; color:white; text-align:center;">Llamar</a>
+<div class="section">
+  <h2>¿Por qué elegirnos?</h2>
+  <ul>
+    <li>Atención rápida</li>
+    <li>Presupuesto sin compromiso</li>
+    <li>Profesionales con experiencia</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Contacta ahora</h2>
+  <p>Envíanos un WhatsApp o llámanos y te damos solución.</p>
+
+  <a class="btn whatsapp" href="https://wa.me/34${whatsapp}">Enviar WhatsApp</a>
+  <a class="btn llamar" href="tel:${telefono}">Llamar ahora</a>
+</div>
+
+<div class="footer">
+  <p>${negocio} en ${ciudad}</p>
+</div>
 
 </body>
 </html>
