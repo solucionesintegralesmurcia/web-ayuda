@@ -5,132 +5,88 @@ function generarWeb() {
   let telefono = document.getElementById("telefono").value;
   let whatsapp = document.getElementById("whatsapp").value;
   let servicios = document.getElementById("servicios").value.split(",");
+  let plantilla = document.getElementById("plantilla").value;
 
-  let listaServicios = servicios.map(s => `
-    <div class="card">
-      <h3>${s}</h3>
-      <p>Servicio profesional de ${s} en ${ciudad}. Calidad, rapidez y buen precio.</p>
-    </div>
-  `).join("");
+  let listaServicios = servicios.map(s => `<li>${s}</li>`).join("");
 
-  let html = `
+  // INDEX
+  let index = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>${negocio} en ${ciudad}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  margin:0;
-  font-family: Arial;
-}
-
-.hero {
-  background:#111;
-  color:#fff;
-  padding:60px 20px;
-  text-align:center;
-}
-
-.hero h1 {
-  font-size:28px;
-}
-
-.btn {
-  display:inline-block;
-  margin:10px;
-  padding:15px 20px;
-  text-decoration:none;
-  color:white;
-  border-radius:5px;
-}
-
-.whatsapp {
-  background:green;
-}
-
-.llamar {
-  background:black;
-}
-
-.section {
-  padding:40px 20px;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:1fr;
-  gap:20px;
-}
-
-.card {
-  border:1px solid #ddd;
-  padding:20px;
-  border-radius:10px;
-}
-
-.footer {
-  background:#111;
-  color:#fff;
-  padding:20px;
-  text-align:center;
-}
-</style>
+<title>${negocio} en ${ciudad}</title>
+<meta name="description" content="Servicio profesional de ${negocio} en ${ciudad}. Contacta ahora por WhatsApp.">
 
 </head>
 
-<body>
+<body style="font-family:Arial;padding:20px;">
 
-<div class="hero">
-  <h1>${negocio} en ${ciudad}</h1>
-  <p>Soluciones rápidas, profesionales y sin complicaciones.</p>
+<h1>${negocio} en ${ciudad}</h1>
 
-  <a class="btn whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
-  <a class="btn llamar" href="tel:${telefono}">Llamar</a>
-</div>
+<p>Servicio rápido y profesional. Contacta sin compromiso.</p>
 
-<div class="section">
-  <h2>Servicios</h2>
-  <div class="grid">
-    ${listaServicios}
-  </div>
-</div>
+<a href="https://wa.me/34${whatsapp}">WhatsApp</a>
+<a href="tel:${telefono}">Llamar</a>
 
-<div class="section">
-  <h2>¿Por qué elegirnos?</h2>
-  <ul>
-    <li>Atención rápida</li>
-    <li>Presupuesto sin compromiso</li>
-    <li>Profesionales con experiencia</li>
-  </ul>
-</div>
+<h2>Servicios</h2>
+<ul>
+${listaServicios}
+</ul>
 
-<div class="section">
-  <h2>Contacta ahora</h2>
-  <p>Envíanos un WhatsApp o llámanos y te damos solución.</p>
-
-  <a class="btn whatsapp" href="https://wa.me/34${whatsapp}">Enviar WhatsApp</a>
-  <a class="btn llamar" href="tel:${telefono}">Llamar ahora</a>
-</div>
-
-<div class="footer">
-  <p>${negocio} en ${ciudad}</p>
-</div>
+<a href="servicios.html">Ver servicios</a>
 
 </body>
 </html>
 `;
 
-  document.getElementById("resultado").value = html;
+  // SERVICIOS
+  let serviciosHTML = servicios.map(s => `
+<h2>${s} en ${ciudad}</h2>
+<p>Ofrecemos ${s} en ${ciudad} con calidad y rapidez.</p>
+<a href="https://wa.me/34${whatsapp}">Solicitar ${s}</a>
+`).join("");
+
+  let serviciosPage = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Servicios de ${negocio} en ${ciudad}</title>
+<meta name="description" content="Servicios de ${negocio} en ${ciudad}. Presupuesto rápido por WhatsApp.">
+</head>
+
+<body style="font-family:Arial;padding:20px;">
+
+<h1>Servicios de ${negocio}</h1>
+
+${serviciosHTML}
+
+<a href="index.html">Volver</a>
+
+</body>
+</html>
+`;
+
+  window.indexFile = index;
+  window.serviciosFile = serviciosPage;
+
+  document.getElementById("frame").srcdoc = index;
 }
 
 function descargar() {
-  let contenido = document.getElementById("resultado").value;
-  let blob = new Blob([contenido], { type: "text/html" });
-  let a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "index.html";
-  a.click();
+
+  let zip = new JSZip();
+
+  zip.file("index.html", window.indexFile);
+  zip.file("servicios.html", window.serviciosFile);
+
+  zip.generateAsync({type:"blob"}).then(function(content) {
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(content);
+    a.download = "web.zip";
+    a.click();
+  });
 }
