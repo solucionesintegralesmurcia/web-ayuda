@@ -2,46 +2,23 @@ let cssGenerado = "";
 let mensajeCliente = "";
 
 const sectores = {
-  generico: {
-    texto: "Servicio profesional, atención directa y presupuesto rápido.",
-    color: "#0f766e",
-    secundario: "#111827"
-  },
-  peluqueria: {
-    texto: "Cortes, coloración y tratamientos capilares con atención cercana.",
-    color: "#be185d",
-    secundario: "#831843"
-  },
-  aire: {
-    texto: "Instalación, mantenimiento y reparación de aire acondicionado.",
-    color: "#0284c7",
-    secundario: "#0f172a"
-  },
-  cerrajeria: {
-    texto: "Fabricación e instalación de puertas, rejas y trabajos metálicos.",
-    color: "#374151",
-    secundario: "#111827"
-  },
-  jardineria: {
-    texto: "Mantenimiento de jardines, podas y cuidado de espacios exteriores.",
-    color: "#15803d",
-    secundario: "#14532d"
-  },
-  electricista: {
-    texto: "Instalaciones eléctricas, averías y soluciones para viviendas y negocios.",
-    color: "#ca8a04",
-    secundario: "#422006"
-  },
-  reformas: {
-    texto: "Reformas, mejoras y trabajos profesionales para viviendas y locales.",
-    color: "#b45309",
-    secundario: "#1f2937"
-  },
-  restaurante: {
-    texto: "Comida, reservas y atención cercana para disfrutar sin complicaciones.",
-    color: "#dc2626",
-    secundario: "#7f1d1d"
-  }
+  generico: "Servicio profesional, atención directa y presupuesto rápido.",
+  peluqueria: "Cortes, coloración y tratamientos capilares con atención cercana.",
+  aire: "Instalación, mantenimiento y reparación de aire acondicionado.",
+  cerrajeria: "Fabricación e instalación de puertas, rejas y trabajos metálicos.",
+  jardineria: "Mantenimiento de jardines, podas y cuidado de espacios exteriores.",
+  electricista: "Instalaciones eléctricas, averías y soluciones para viviendas y negocios.",
+  reformas: "Reformas, mejoras y trabajos profesionales para viviendas y locales.",
+  restaurante: "Comida, reservas y atención cercana para disfrutar sin complicaciones."
+};
+
+const paletas = {
+  verde: ["#0f766e", "#115e59"],
+  azul: ["#0284c7", "#0f172a"],
+  negro: ["#111827", "#030712"],
+  rojo: ["#dc2626", "#7f1d1d"],
+  rosa: ["#be185d", "#831843"],
+  dorado: ["#b45309", "#1f2937"]
 };
 
 function limpiarTexto(texto) {
@@ -54,16 +31,15 @@ function limpiarTexto(texto) {
 
 function generarWeb() {
   const sector = document.getElementById("sector").value;
-  const datosSector = sectores[sector] || sectores.generico;
+  const plantilla = document.getElementById("plantilla").value;
+  const paleta = document.getElementById("paleta").value;
 
   const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
   const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
   const direccion = document.getElementById("direccion").value.trim() || ciudad;
   const telefono = document.getElementById("telefono").value.trim() || "600000000";
   const whatsapp = document.getElementById("whatsapp").value.trim() || telefono;
-
-  const colorPrincipal = document.getElementById("colorPrincipal").value.trim() || datosSector.color;
-  const colorSecundario = document.getElementById("colorSecundario").value.trim() || datosSector.secundario;
+  const usuarioGithub = document.getElementById("usuarioGithub").value.trim() || "tuusuario";
 
   const keyword = document.getElementById("keyword").value.trim() || `${negocio} en ${ciudad}`;
   const tituloSeo = document.getElementById("tituloSeo").value.trim() || `${negocio} en ${ciudad} | Presupuesto rápido`;
@@ -81,7 +57,12 @@ function generarWeb() {
   ];
 
   const slug = limpiarTexto(`${negocio}-${ciudad}`);
+  const urlWeb = `https://${usuarioGithub}.github.io/${slug}/`;
   const direccionMapa = encodeURIComponent(direccion + " " + ciudad);
+
+  const colores = paletas[paleta];
+  const colorPrincipal = colores[0];
+  const colorSecundario = colores[1];
 
   const serviciosCards = serviciosFinales.map(servicio => {
     const slugServicio = limpiarTexto(servicio);
@@ -93,6 +74,8 @@ function generarWeb() {
       </article>
     `;
   }).join("");
+
+  const plantillaClase = `template-${plantilla}`;
 
   cssGenerado = `
 :root {
@@ -345,6 +328,57 @@ a { text-decoration: none; }
 
 .mobile-bar { display: none; }
 
+/* PLANTILLAS DIFERENTES */
+
+.template-impacto .hero {
+  padding: 105px 0;
+  background: linear-gradient(135deg, #020617, var(--primary));
+}
+
+.template-impacto .hero h1 {
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.template-impacto .btn {
+  border-radius: 14px;
+  font-size: 17px;
+}
+
+.template-premium body,
+body.template-premium {
+  background: #f8fafc;
+}
+
+.template-premium .hero {
+  background: #111827;
+}
+
+.template-premium .service-card,
+.template-premium .trust-card,
+.template-premium .location-box {
+  border-radius: 30px;
+}
+
+.template-simple .hero {
+  background: var(--primary);
+  padding: 60px 0;
+}
+
+.template-simple .hero-grid {
+  grid-template-columns: 1fr;
+}
+
+.template-simple .hero-box {
+  display: none;
+}
+
+.template-simple .service-card,
+.template-simple .trust-card,
+.template-simple .location-box {
+  box-shadow: none;
+}
+
 @media (max-width: 800px) {
   .hero-grid,
   .grid-3,
@@ -405,7 +439,7 @@ a { text-decoration: none; }
   <meta name="keywords" content="${keyword}">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="${plantillaClase}">
 
 <header class="header">
   <div class="container header-inner">
@@ -531,7 +565,7 @@ a { text-decoration: none; }
     tituloSeo,
     descripcionSeo,
     `${negocio} en ${ciudad}`,
-    datosSector.texto,
+    sectores[sector],
     serviciosCards
   );
 
@@ -569,21 +603,20 @@ a { text-decoration: none; }
 INSTRUCCIONES DE USO
 
 1. Descomprime este ZIP.
-2. Sube todos los archivos a GitHub:
+2. Crea un repositorio en GitHub con este nombre:
+   ${slug}
+
+3. Sube todos los archivos:
    - index.html
    - servicios.html
    - style.css
    - páginas de cada servicio
-3. Activa GitHub Pages:
-   Settings > Pages > Deploy from branch > main > root
-4. La web estará disponible en:
-   https://tuusuario.github.io/nombre-del-repositorio/
 
-ARCHIVOS GENERADOS:
-- index.html: página principal
-- servicios.html: página general de servicios
-- style.css: diseño de la web
-- páginas individuales por servicio: mejor para SEO local
+4. Activa GitHub Pages:
+   Settings > Pages > Deploy from branch > main > root
+
+5. URL prevista:
+   ${urlWeb}
 
 DATOS DEL PROYECTO:
 Negocio: ${negocio}
@@ -594,11 +627,13 @@ WhatsApp: ${whatsapp}
 Keyword principal: ${keyword}
 `;
 
-  mensajeCliente = `Hola, te dejo una primera versión de la web para que puedas revisarla.
+  mensajeCliente = `Hola, te dejo una primera versión de la web para que puedas revisarla:
 
-Está preparada con una estructura clara, botones de WhatsApp y llamada, sección de servicios, ubicación con mapa y páginas individuales para cada servicio.
+${urlWeb}
 
-Revísala y dime si quieres que ajustemos algún texto, servicio, teléfono, dirección o color antes de dejarla definitiva.`;
+Está preparada con estructura clara, botones de WhatsApp y llamada, sección de servicios, ubicación con mapa y páginas individuales para cada servicio.
+
+Revísala y dime si quieres cambiar textos, servicios, teléfono, dirección, colores o cualquier detalle antes de dejarla definitiva.`;
 
   window.indexFile = indexHTML;
   window.serviciosFile = serviciosHTML;
@@ -608,11 +643,11 @@ Revísala y dime si quieres que ajustemos algún texto, servicio, teléfono, dir
   window.zipName = `${slug}.zip`;
 
   const previewHTML = indexHTML.replace(
-  '<link rel="stylesheet" href="style.css">',
-  `<style>${cssGenerado}</style>`
-);
+    '<link rel="stylesheet" href="style.css">',
+    `<style>${cssGenerado}</style>`
+  );
 
-document.getElementById("frame").srcdoc = previewHTML;
+  document.getElementById("frame").srcdoc = previewHTML;
 }
 
 function descargar() {
@@ -648,8 +683,11 @@ function descargar() {
 function nuevoProyecto() {
   document.querySelectorAll("input").forEach(input => input.value = "");
   document.getElementById("sector").value = "generico";
+  document.getElementById("plantilla").value = "profesional";
+  document.getElementById("paleta").value = "verde";
   document.getElementById("frame").srcdoc = "";
   window.indexFile = null;
+  mensajeCliente = "";
   alert("Nuevo proyecto listo");
 }
 
