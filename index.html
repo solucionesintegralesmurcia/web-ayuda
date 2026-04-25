@@ -1,60 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Generador PRO de Webs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<meta charset="UTF-8">
+<title>Generador PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 </head>
 
 <body>
 
 <div class="app">
 
-  <div class="panel">
-    <h2>Generador PRO</h2>
+<div class="panel">
 
-    <select id="sector">
-      <option value="peluqueria">Peluquería</option>
-      <option value="aire">Aire acondicionado</option>
-      <option value="cerrajeria">Cerrajería</option>
-      <option value="jardineria">Jardinería</option>
-      <option value="electricista">Electricista</option>
-      <option value="reformas">Reformas</option>
-      <option value="restaurante">Restaurante</option>
-      <option value="dentista">Clínica dental</option>
-      <option value="limpieza">Limpieza</option>
-      <option value="piscinas">Piscinas</option>
-      <option value="abogado">Abogado</option>
-    </select>
+<h2>Generador PRO</h2>
 
-    <select id="plantilla">
-      <option value="impacto">Impacto</option>
-      <option value="premium">Premium</option>
-      <option value="simple">Simple</option>
-    </select>
+<select id="sector">
+<option value="peluqueria">Peluquería</option>
+<option value="aire">Aire acondicionado</option>
+<option value="cerrajeria">Cerrajería</option>
+<option value="jardineria">Jardinería</option>
+<option value="electricista">Electricista</option>
+<option value="reformas">Reformas</option>
+<option value="restaurante">Restaurante</option>
+</select>
 
-    <input id="negocio" placeholder="Nombre del negocio">
-    <input id="ciudad" placeholder="Ciudad">
-    <input id="telefono" placeholder="Teléfono">
-    <input id="whatsapp" placeholder="WhatsApp">
+<select id="plantilla">
+<option value="impacto">Impacto</option>
+<option value="premium">Premium</option>
+<option value="simple">Simple</option>
+</select>
 
-    <textarea id="servicios" placeholder="Servicios"></textarea>
+<input id="negocio" placeholder="Nombre negocio">
+<input id="ciudad" placeholder="Ciudad">
+<input id="telefono" placeholder="Teléfono">
+<input id="whatsapp" placeholder="WhatsApp">
 
-    <button onclick="rellenarAutomatico()">Auto completar</button>
-    <button onclick="generarWeb()">Generar web</button>
-    <button onclick="descargar()">Descargar ZIP</button>
+<textarea id="servicios" placeholder="Servicios"></textarea>
 
-  </div>
+<button onclick="rellenarAutomatico()">Auto completar</button>
+<button onclick="generarWeb()">Generar web</button>
+<button onclick="descargar()">Descargar ZIP</button>
 
-  <div class="preview">
-    <iframe id="frame"></iframe>
-  </div>
+</div>
+
+<div class="preview">
+<iframe id="frame"></iframe>
+</div>
 
 </div>
 
 <script src="script.js"></script>
 </body>
-</html>
 </html>
