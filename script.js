@@ -2,14 +2,78 @@ let cssGenerado = "";
 let mensajeCliente = "";
 
 const sectores = {
-  generico: "Servicio profesional, atención directa y presupuesto rápido.",
-  peluqueria: "Cortes, coloración y tratamientos capilares con atención cercana.",
-  aire: "Instalación, mantenimiento y reparación de aire acondicionado.",
-  cerrajeria: "Fabricación e instalación de puertas, rejas y trabajos metálicos.",
-  jardineria: "Mantenimiento de jardines, podas y cuidado de espacios exteriores.",
-  electricista: "Instalaciones eléctricas, averías y soluciones para viviendas y negocios.",
-  reformas: "Reformas, mejoras y trabajos profesionales para viviendas y locales.",
-  restaurante: "Comida, reservas y atención cercana para disfrutar sin complicaciones."
+  generico: {
+    intro: "Servicio profesional, atención directa y presupuesto rápido.",
+    servicios: "Servicio principal, Presupuesto sin compromiso, Atención personalizada",
+    keyword: "servicio local en Murcia",
+    paleta: "verde"
+  },
+  peluqueria: {
+    intro: "Cortes, coloración y tratamientos capilares con atención cercana.",
+    servicios: "Corte de pelo mujer, Corte de pelo hombre, Mechas balayage, Tinte profesional, Peinados para eventos, Tratamientos capilares",
+    keyword: "peluquería en Murcia",
+    paleta: "rosa"
+  },
+  aire: {
+    intro: "Instalación, mantenimiento y reparación de aire acondicionado.",
+    servicios: "Instalación de aire acondicionado, Mantenimiento de aire acondicionado, Reparación de aire acondicionado, Conductos de climatización, Carga de gas, Limpieza de filtros",
+    keyword: "aire acondicionado en Murcia",
+    paleta: "azul"
+  },
+  cerrajeria: {
+    intro: "Fabricación e instalación de puertas, rejas y trabajos metálicos.",
+    servicios: "Puertas metálicas, Rejas a medida, Cerramientos metálicos, Barandillas, Ventanas de aluminio, Estructuras metálicas",
+    keyword: "cerrajería en Murcia",
+    paleta: "negro"
+  },
+  jardineria: {
+    intro: "Mantenimiento de jardines, podas y cuidado de espacios exteriores.",
+    servicios: "Mantenimiento de jardines, Poda de árboles, Limpieza de parcelas, Césped artificial, Sistemas de riego, Mantenimiento de piscinas",
+    keyword: "jardinería en Murcia",
+    paleta: "verde"
+  },
+  electricista: {
+    intro: "Instalaciones eléctricas, averías y soluciones para viviendas y negocios.",
+    servicios: "Instalaciones eléctricas, Reparación de averías, Cuadros eléctricos, Iluminación LED, Certificados eléctricos, Cargadores para coche eléctrico",
+    keyword: "electricista en Murcia",
+    paleta: "dorado"
+  },
+  reformas: {
+    intro: "Reformas, mejoras y trabajos profesionales para viviendas y locales.",
+    servicios: "Reformas integrales, Reformas de baños, Reformas de cocinas, Pintura, Albañilería, Pladur",
+    keyword: "reformas en Murcia",
+    paleta: "dorado"
+  },
+  restaurante: {
+    intro: "Comida, reservas y atención cercana para disfrutar sin complicaciones.",
+    servicios: "Hamburguesas, Montaditos, Bocadillos, Tapas, Menú diario, Reservas",
+    keyword: "restaurante en Murcia",
+    paleta: "rojo"
+  },
+  dentista: {
+    intro: "Tratamientos dentales con atención profesional, cercana y de confianza.",
+    servicios: "Implantes dentales, Ortodoncia, Limpieza dental, Estética dental, Blanqueamiento dental, Revisión dental",
+    keyword: "dentista en Murcia",
+    paleta: "azul"
+  },
+  limpieza: {
+    intro: "Servicios de limpieza profesional para viviendas, oficinas y comunidades.",
+    servicios: "Limpieza de oficinas, Limpieza de comunidades, Limpieza de viviendas, Limpieza fin de obra, Cristales, Mantenimiento de limpieza",
+    keyword: "empresa de limpieza en Murcia",
+    paleta: "azul"
+  },
+  piscinas: {
+    intro: "Mantenimiento, limpieza y puesta a punto de piscinas.",
+    servicios: "Mantenimiento de piscinas, Limpieza de piscinas, Control de cloro y PH, Puesta a punto, Reparaciones básicas, Limpieza de filtros",
+    keyword: "mantenimiento de piscinas en Murcia",
+    paleta: "azul"
+  },
+  abogado: {
+    intro: "Asesoramiento legal claro, profesional y adaptado a cada caso.",
+    servicios: "Derecho civil, Derecho laboral, Derecho de familia, Reclamaciones, Contratos, Asesoramiento legal",
+    keyword: "abogado en Murcia",
+    paleta: "negro"
+  }
 };
 
 const paletas = {
@@ -34,20 +98,16 @@ function generarWeb() {
   const plantilla = document.getElementById("plantilla").value;
   const paleta = document.getElementById("paleta").value;
 
+  const datosSector = sectores[sector] || sectores.generico;
+
   const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
   const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
-  const direccion = document.getElementById("direccion").value.trim() || ciudad;
-  const telefono = document.getElementById("telefono").value.trim() || "600000000";
+  const direccion = document.getElementById("direccion").value.trim() || `Calle principal, ${ciudad}`;
+  const telefono = document.getElementById("telefono").value.trim() || "600123456";
   const whatsapp = document.getElementById("whatsapp").value.trim() || telefono;
   const usuarioGithub = document.getElementById("usuarioGithub").value.trim() || "tuusuario";
 
-  const mensajeBase = encodeURIComponent(`Hola, quiero información sobre ${negocio} en ${ciudad}`);
-  const mensajeFotos = encodeURIComponent(`Hola, te envío fotos para que me des presupuesto de ${negocio} en ${ciudad}`);
-
-  const linkWhats = `https://wa.me/34${whatsapp}?text=${mensajeBase}`;
-  const linkFotos = `https://wa.me/34${whatsapp}?text=${mensajeFotos}`;
-
-  const keyword = document.getElementById("keyword").value.trim() || `${negocio} en ${ciudad}`;
+  const keyword = document.getElementById("keyword").value.trim() || datosSector.keyword.replace("Murcia", ciudad);
   const tituloSeo = document.getElementById("tituloSeo").value.trim() || `${negocio} en ${ciudad} | Presupuesto rápido`;
   const descripcionSeo = document.getElementById("descripcionSeo").value.trim() || `${negocio} en ${ciudad}. Atención directa, presupuesto rápido y contacto por WhatsApp.`;
 
@@ -56,21 +116,23 @@ function generarWeb() {
     .map(s => s.trim())
     .filter(s => s.length > 0);
 
-  const serviciosFinales = servicios.length ? servicios : [
-    "Servicio principal",
-    "Presupuesto sin compromiso",
-    "Atención personalizada"
-  ];
+  const serviciosFinales = servicios.length ? servicios : datosSector.servicios.split(",").map(s => s.trim());
 
   const slug = limpiarTexto(`${negocio}-${ciudad}`);
   const urlWeb = `https://${usuarioGithub}.github.io/${slug}/`;
-  const direccionMapa = encodeURIComponent(direccion + " " + ciudad);
+  const direccionMapa = encodeURIComponent(`${direccion} ${ciudad}`);
 
-  const colores = paletas[paleta] || paletas.verde;
+  const colores = paletas[paleta] || paletas[datosSector.paleta] || paletas.verde;
   const colorPrincipal = colores[0];
   const colorSecundario = colores[1];
 
   const plantillaClase = `template-${plantilla}`;
+
+  const mensajeBase = encodeURIComponent(`Hola, quiero información sobre ${negocio} en ${ciudad}`);
+  const mensajeFotos = encodeURIComponent(`Hola, te envío fotos para que me des presupuesto de ${negocio} en ${ciudad}`);
+
+  const linkWhats = `https://wa.me/34${whatsapp}?text=${mensajeBase}`;
+  const linkFotos = `https://wa.me/34${whatsapp}?text=${mensajeFotos}`;
 
   const serviciosCards = serviciosFinales.map(servicio => {
     const slugServicio = limpiarTexto(`${servicio}-${ciudad}`);
@@ -81,9 +143,11 @@ function generarWeb() {
       <article class="service-card">
         <h3>${servicio}</h3>
         <p>Servicio de ${servicio.toLowerCase()} en ${ciudad}, con atención directa, explicación clara y presupuesto adaptado.</p>
-        <a href="${slugServicio}.html" class="link-card">Ver servicio</a>
-        <br><br>
-        <a href="${linkServicio}" class="link-card">Pedir presupuesto</a>
+
+        <div class="service-actions">
+          <a href="${slugServicio}.html" class="link-card">Ver página del servicio</a>
+          <a href="${linkServicio}" class="link-card whatsapp-link">Pedir presupuesto</a>
+        </div>
       </article>
     `;
   }).join("");
@@ -194,6 +258,10 @@ a { text-decoration: none; }
   box-shadow: var(--shadow);
 }
 
+.hero-box h2 {
+  margin-top: 0;
+}
+
 .btn-row {
   display: flex;
   gap: 12px;
@@ -276,6 +344,25 @@ a { text-decoration: none; }
   font-weight: 900;
 }
 
+.service-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.service-actions .link-card {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--soft);
+}
+
+.service-actions .whatsapp-link {
+  background: var(--green);
+  color: white;
+}
+
 .location-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -296,6 +383,11 @@ a { text-decoration: none; }
   color: white;
   text-align: center;
   padding: 72px 20px;
+}
+
+.cta h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  margin: 0 0 12px;
 }
 
 .footer {
@@ -339,10 +431,10 @@ a { text-decoration: none; }
 
 .mobile-bar { display: none; }
 
-/* PLANTILLAS DIFERENTES */
+/* PLANTILLA IMPACTO */
 
 .template-impacto .hero {
-  padding: 105px 0;
+  padding: 110px 0;
   background: linear-gradient(135deg, #020617, var(--primary));
 }
 
@@ -356,6 +448,8 @@ a { text-decoration: none; }
   font-size: 17px;
 }
 
+/* PLANTILLA PREMIUM */
+
 body.template-premium {
   background: #f8fafc;
 }
@@ -364,11 +458,19 @@ body.template-premium {
   background: #111827;
 }
 
+.template-premium .hero h1 {
+  font-family: Georgia, serif;
+  letter-spacing: -1px;
+}
+
 .template-premium .service-card,
 .template-premium .trust-card,
-.template-premium .location-box {
+.template-premium .location-box,
+.template-premium .hero-box {
   border-radius: 30px;
 }
+
+/* PLANTILLA SIMPLE */
 
 .template-simple .hero {
   background: var(--primary);
@@ -387,6 +489,21 @@ body.template-premium {
 .template-simple .trust-card,
 .template-simple .location-box {
   box-shadow: none;
+}
+
+/* PLANTILLA LOCAL DIRECTO */
+
+.template-local .hero {
+  padding: 64px 0;
+}
+
+.template-local .badge {
+  background: var(--green);
+  border: none;
+}
+
+.template-local .btn {
+  width: auto;
 }
 
 @media (max-width: 800px) {
@@ -578,7 +695,7 @@ body.template-premium {
     tituloSeo,
     descripcionSeo,
     `${negocio} en ${ciudad}`,
-    sectores[sector] || sectores.generico,
+    datosSector.intro,
     serviciosCards
   );
 
@@ -604,7 +721,10 @@ body.template-premium {
       <article class="service-card">
         <h3>${servicio}</h3>
         <p>Si necesitas ${servicio.toLowerCase()} en ${ciudad}, contacta por WhatsApp y te orientamos de forma rápida.</p>
-        <a class="link-card" href="${linkServicio}">Solicitar información</a>
+        <div class="service-actions">
+          <a class="link-card whatsapp-link" href="${linkServicio}">Solicitar información</a>
+          <a class="link-card" href="index.html">Volver al inicio</a>
+        </div>
       </article>
       `
     );
@@ -641,6 +761,8 @@ Dirección: ${direccion}
 Teléfono: ${telefono}
 WhatsApp: ${whatsapp}
 Keyword principal: ${keyword}
+Plantilla: ${plantilla}
+Paleta: ${paleta}
 `;
 
   mensajeCliente = `Hola, te dejo una primera versión de la web para que puedas revisarla:
@@ -699,12 +821,17 @@ function descargar() {
 function nuevoProyecto() {
   document.querySelectorAll("input").forEach(input => input.value = "");
 
-  if (document.getElementById("sector")) document.getElementById("sector").value = "generico";
-  if (document.getElementById("plantilla")) document.getElementById("plantilla").value = "profesional";
-  if (document.getElementById("paleta")) document.getElementById("paleta").value = "verde";
-
+  document.getElementById("sector").value = "generico";
+  document.getElementById("plantilla").value = "profesional";
+  document.getElementById("paleta").value = "verde";
   document.getElementById("frame").srcdoc = "";
+
   window.indexFile = null;
+  window.serviciosFile = null;
+  window.cssFile = null;
+  window.paginasServicios = null;
+  window.readmeFile = null;
+
   mensajeCliente = "";
 
   alert("Nuevo proyecto listo");
@@ -723,70 +850,27 @@ function copiarMensajeCliente() {
 
 function rellenarAutomatico() {
   const sector = document.getElementById("sector").value;
+  const datosSector = sectores[sector] || sectores.generico;
 
-  const plantillasRapidas = {
-    peluqueria: {
-      servicios: "Corte de pelo mujer, Corte de pelo hombre, Mechas balayage, Tinte profesional, Peinados para eventos, Tratamientos capilares",
-      keyword: "peluquería en Murcia"
-    },
-    aire: {
-      servicios: "Instalación de aire acondicionado, Mantenimiento de aire acondicionado, Reparación de aire acondicionado, Conductos de climatización, Carga de gas, Limpieza de filtros",
-      keyword: "aire acondicionado en Murcia"
-    },
-    cerrajeria: {
-      servicios: "Puertas metálicas, Rejas a medida, Cerramientos metálicos, Barandillas, Ventanas de aluminio, Estructuras metálicas",
-      keyword: "cerrajería en Murcia"
-    },
-    jardineria: {
-      servicios: "Mantenimiento de jardines, Poda de árboles, Limpieza de parcelas, Césped artificial, Sistemas de riego, Mantenimiento de piscinas",
-      keyword: "jardinería en Murcia"
-    },
-    electricista: {
-      servicios: "Instalaciones eléctricas, Reparación de averías, Cuadros eléctricos, Iluminación LED, Certificados eléctricos, Cargadores para coche eléctrico",
-      keyword: "electricista en Murcia"
-    },
-    reformas: {
-      servicios: "Reformas integrales, Reformas de baños, Reformas de cocinas, Pintura, Albañilería, Pladur",
-      keyword: "reformas en Murcia"
-    },
-    restaurante: {
-      servicios: "Hamburguesas, Montaditos, Bocadillos, Tapas, Menú diario, Reservas",
-      keyword: "restaurante en Murcia"
-    },
-    generico: {
-      servicios: "Servicio principal, Presupuesto sin compromiso, Atención personalizada",
-      keyword: "servicio local en Murcia"
-    }
-  };
+  const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
+  const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
 
-  const datos = plantillasRapidas[sector] || plantillasRapidas.generico;
+  document.getElementById("servicios").value = datosSector.servicios;
+  document.getElementById("keyword").value = datosSector.keyword.replace("Murcia", ciudad);
+  document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
+  document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
 
-  const negocio = document.getElementById("negocio")?.value || "Negocio local";
-  const ciudad = document.getElementById("ciudad")?.value || "Murcia";
-
-  document.getElementById("servicios").value = datos.servicios;
-
-  if (document.getElementById("keyword")) {
-    document.getElementById("keyword").value = datos.keyword.replace("Murcia", ciudad);
-  }
-
-  if (document.getElementById("tituloSeo")) {
-    document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
-  }
-
-  if (document.getElementById("descripcionSeo")) {
-    document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
-  }
-
-  if (document.getElementById("direccion")) {
+  if (!document.getElementById("direccion").value.trim()) {
     document.getElementById("direccion").value = `Calle principal, ${ciudad}`;
   }
 
-  if (document.getElementById("telefono")) {
+  if (!document.getElementById("telefono").value.trim()) {
     document.getElementById("telefono").value = "600123456";
   }
 
-  if (document.getElementById("whatsapp")) {
+  if (!document.getElementById("whatsapp").value.trim()) {
     document.getElementById("whatsapp").value = "600123456";
   }
+
+  document.getElementById("paleta").value = datosSector.paleta || "verde";
 }
