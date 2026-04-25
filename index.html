@@ -68,6 +68,31 @@
     <button onclick="nuevoProyecto()">Nuevo proyecto</button>
     <button onclick="copiarMensajeCliente()">Copiar mensaje cliente</button>
     <hr class="panel-separator">
+    <hr class="panel-separator">
+
+<h3>Preparar fotos de esta web</h3>
+
+<select id="sectorFotos">
+  <option value="generico">Genérico</option>
+  <option value="peluqueria">Peluquería</option>
+  <option value="aire">Aire acondicionado</option>
+  <option value="cerrajeria">Cerrajería</option>
+  <option value="jardineria">Jardinería</option>
+  <option value="electricista">Electricista</option>
+  <option value="reformas">Reformas</option>
+  <option value="restaurante">Restaurante</option>
+  <option value="dentista">Dentista</option>
+  <option value="limpieza">Limpieza</option>
+  <option value="piscinas">Piscinas</option>
+  <option value="abogado">Abogado</option>
+</select>
+
+<input id="fotosWeb" type="file" multiple accept="image/*">
+
+<div id="tablaFotos"></div>
+
+<button onclick="generarTablaFotos()">Preparar fotos</button>
+<button onclick="descargarZipFotos()">Descargar img.zip</button>
 
 <h3>Preparar imágenes</h3>
 
