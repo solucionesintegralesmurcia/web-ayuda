@@ -1246,3 +1246,57 @@ function rellenarAutomatico() {
 
   document.getElementById("paleta").value = datosSector.paleta || "verde";
 }
+function descargarImagenRenombrada() {
+  const tipo = document.getElementById("tipoImagen").value;
+  const archivo = document.getElementById("archivoImagen").files[0];
+
+  if (!archivo) {
+    alert("Primero sube una imagen");
+    return;
+  }
+
+  let nombreFinal = "";
+
+  if (tipo === "sector") {
+    const sector = document.getElementById("sectorImagen").value;
+    nombreFinal = `${sector}.jpg`;
+  } else {
+    const nombreServicio = document.getElementById("nombreServicioImagen").value.trim();
+
+    if (!nombreServicio) {
+      alert("Escribe el nombre del servicio");
+      return;
+    }
+
+    nombreFinal = `${limpiarTexto(nombreServicio)}.jpg`;
+  }
+
+  const lector = new FileReader();
+
+  lector.onload = function(e) {
+    const img = new Image();
+
+    img.onload = function() {
+      const canvas = document.createElement("canvas");
+      const maxWidth = 1600;
+      const escala = Math.min(1, maxWidth / img.width);
+
+      canvas.width = img.width * escala;
+      canvas.height = img.height * escala;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(function(blob) {
+        const enlace = document.createElement("a");
+        enlace.href = URL.createObjectURL(blob);
+        enlace.download = nombreFinal;
+        enlace.click();
+      }, "image/jpeg", 0.88);
+    };
+
+    img.src = e.target.result;
+  };
+
+  lector.readAsDataURL(archivo);
+}
