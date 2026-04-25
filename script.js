@@ -533,8 +533,17 @@ body.template-premium {
       <p>Atendemos en ${ciudad} y alrededores.</p>
 
       <div class="btn-row">
-        <a class="btn btn-whatsapp" href="${linkWhats}">WhatsApp</a>
-        <a class="btn btn-call" href="tel:${telefono}">Llamar</a>
+        <a class="btn btn-whatsapp" href="${linkWhats}">
+Pedir presupuesto por WhatsApp
+</a>
+
+<a class="btn btn-call" href="${linkFotos}">
+Enviar fotos por WhatsApp
+</a>
+
+<a class="btn btn-light" href="tel:${telefono}">
+Llamar ahora
+</a>
       </div>
     </div>
 
