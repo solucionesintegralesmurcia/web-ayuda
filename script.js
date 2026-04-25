@@ -1,61 +1,50 @@
 const sectores = {
-  peluqueria: {
-    servicios: "Corte de pelo mujer, Corte de pelo hombre, Mechas, Tinte, Peinados, Tratamientos",
-    keyword: "peluquería en"
-  },
   aire: {
     servicios: "Instalación aire acondicionado, Mantenimiento, Reparación, Conductos, Carga de gas",
+    texto: "Instalación, mantenimiento y reparación de aire acondicionado.",
     keyword: "aire acondicionado en"
   },
   cerrajeria: {
-    servicios: "Puertas metálicas, Rejas, Cerramientos, Barandillas, Ventanas",
+    servicios: "Puertas metálicas, Rejas, Cerramientos, Barandillas",
+    texto: "Fabricación e instalación de trabajos metálicos.",
     keyword: "cerrajería en"
   },
+  peluqueria: {
+    servicios: "Corte, Mechas, Tinte, Peinados",
+    texto: "Servicios profesionales de peluquería.",
+    keyword: "peluquería en"
+  },
   jardineria: {
-    servicios: "Mantenimiento de jardines, Podas, Césped, Riego, Limpieza parcelas",
+    servicios: "Podas, Mantenimiento jardines, Césped, Riego",
+    texto: "Cuidado y mantenimiento de jardines.",
     keyword: "jardinería en"
   },
   electricista: {
-    servicios: "Instalaciones eléctricas, Averías, Cuadros eléctricos, Iluminación",
+    servicios: "Instalaciones eléctricas, Averías, Cuadros eléctricos",
+    texto: "Servicios eléctricos para viviendas y negocios.",
     keyword: "electricista en"
   },
   reformas: {
-    servicios: "Reformas integrales, Baños, Cocinas, Pintura, Albañilería",
+    servicios: "Reformas integrales, Baños, Cocinas",
+    texto: "Reformas completas para viviendas.",
     keyword: "reformas en"
   },
   restaurante: {
-    servicios: "Hamburguesas, Tapas, Menú diario, Bocadillos",
+    servicios: "Hamburguesas, Tapas, Menú",
+    texto: "Comida y reservas.",
     keyword: "restaurante en"
-  },
-  dentista: {
-    servicios: "Implantes, Ortodoncia, Limpieza dental, Blanqueamiento",
-    keyword: "dentista en"
-  },
-  limpieza: {
-    servicios: "Limpieza casas, Oficinas, Comunidades, Cristales",
-    keyword: "empresa de limpieza en"
-  },
-  piscinas: {
-    servicios: "Mantenimiento piscinas, Limpieza, Cloro y PH",
-    keyword: "piscinas en"
-  },
-  abogado: {
-    servicios: "Derecho civil, Laboral, Familia, Asesoramiento",
-    keyword: "abogado en"
   }
 };
 
-function rellenarAutomatico() {
+function rellenarAutomatico(){
   const sector = document.getElementById("sector").value;
-  const ciudad = document.getElementById("ciudad").value || "Murcia";
-  const negocio = document.getElementById("negocio").value || "Negocio";
-
   const data = sectores[sector];
 
   document.getElementById("servicios").value = data.servicios;
 }
 
-function generarWeb() {
+function generarWeb(){
+
   const sector = document.getElementById("sector").value;
   const negocio = document.getElementById("negocio").value || "Negocio";
   const ciudad = document.getElementById("ciudad").value || "Murcia";
@@ -64,38 +53,93 @@ function generarWeb() {
 
   const data = sectores[sector];
 
-  const servicios = document.getElementById("servicios").value
-    .split(",")
-    .map(s => `<li>${s}</li>`)
-    .join("");
+  const serviciosArray = document.getElementById("servicios").value.split(",");
 
-  const titulo = `${negocio} en ${ciudad}`;
-  const descripcion = `${negocio} en ${ciudad}. Servicio profesional con contacto directo por WhatsApp.`;
+  const serviciosHTML = serviciosArray.map(s => `
+  <div class="card">
+  <h3>${s}</h3>
+  <p>Servicio de ${s} en ${ciudad}</p>
+  </div>
+  `).join("");
 
-  const linkWhats = `https://wa.me/34${whatsapp}?text=Hola quiero información`;
+  const keyword = data.keyword + " " + ciudad;
+
+  const linkWhats = `https://wa.me/34${whatsapp}?text=Hola quiero info`;
 
   const html = `
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${titulo}</title>
-<meta name="description" content="${descripcion}">
+<title>${negocio} en ${ciudad}</title>
+<meta name="description" content="${data.texto} en ${ciudad}">
+<meta name="keywords" content="${keyword}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body{font-family:sans-serif;text-align:center;padding:40px}
-.btn{display:block;margin:10px auto;padding:15px;background:black;color:white}
+
+body{margin:0;font-family:Arial;background:#f3f4f6}
+
+.hero{
+background:#111827;
+color:white;
+padding:60px;
+text-align:center;
+}
+
+.btn{
+display:inline-block;
+margin:10px;
+padding:14px 24px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.btn-wa{background:#22c55e;color:white}
+.btn-call{background:#111;color:white}
+
+.section{
+padding:40px;
+max-width:900px;
+margin:auto;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="hero">
 <h1>${negocio}</h1>
 <p>${ciudad}</p>
 
-<ul>${servicios}</ul>
+<a class="btn btn-wa" href="${linkWhats}">WhatsApp</a>
+<a class="btn btn-call" href="tel:${telefono}">Llamar</a>
+</div>
 
-<a class="btn" href="${linkWhats}">WhatsApp</a>
-<a class="btn" href="tel:${telefono}">Llamar</a>
+<div class="section">
+<h2>Servicios</h2>
+<div class="grid">
+${serviciosHTML}
+</div>
+</div>
+
+<div class="section">
+<h2>Ubicación</h2>
+<iframe src="https://www.google.com/maps?q=${ciudad}&output=embed" width="100%" height="300"></iframe>
+</div>
 
 </body>
 </html>
@@ -105,11 +149,11 @@ body{font-family:sans-serif;text-align:center;padding:40px}
   document.getElementById("frame").srcdoc = html;
 }
 
-function descargar() {
+function descargar(){
   const zip = new JSZip();
   zip.file("index.html", window.indexFile);
 
-  zip.generateAsync({type:"blob"}).then(content => {
+  zip.generateAsync({type:"blob"}).then(content=>{
     const a = document.createElement("a");
     a.href = URL.createObjectURL(content);
     a.download = "web.zip";
