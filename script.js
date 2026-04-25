@@ -7,30 +7,12 @@ const sectores = {
     keyword: "servicio local en Murcia",
     paleta: "verde",
     servicios: [
-      {
-        titulo: "Servicio principal",
-        descripcion: "Servicio adaptado a las necesidades del cliente, con atención directa y explicación clara desde el primer contacto."
-      },
-      {
-        titulo: "Presupuesto sin compromiso",
-        descripcion: "Analizamos cada caso y ofrecemos una orientación clara para que el cliente sepa qué necesita antes de decidir."
-      },
-      {
-        titulo: "Atención personalizada",
-        descripcion: "Trato cercano y directo para resolver dudas, ajustar detalles y facilitar el proceso de contratación."
-      },
-      {
-        titulo: "Servicio local",
-        descripcion: "Atención en la zona con respuesta rápida y comunicación sencilla por teléfono o WhatsApp."
-      },
-      {
-        titulo: "Soluciones a medida",
-        descripcion: "Cada trabajo se adapta al tipo de cliente, necesidad, presupuesto y objetivo concreto."
-      },
-      {
-        titulo: "Contacto rápido",
-        descripcion: "El cliente puede llamar o escribir por WhatsApp para recibir información sin complicaciones."
-      }
+      { titulo: "Servicio principal", descripcion: "Servicio adaptado a las necesidades del cliente, con atención directa y explicación clara desde el primer contacto." },
+      { titulo: "Presupuesto sin compromiso", descripcion: "Analizamos cada caso y ofrecemos una orientación clara para que el cliente sepa qué necesita antes de decidir." },
+      { titulo: "Atención personalizada", descripcion: "Trato cercano y directo para resolver dudas, ajustar detalles y facilitar el proceso de contratación." },
+      { titulo: "Servicio local", descripcion: "Atención en la zona con respuesta rápida y comunicación sencilla por teléfono o WhatsApp." },
+      { titulo: "Soluciones a medida", descripcion: "Cada trabajo se adapta al tipo de cliente, necesidad, presupuesto y objetivo concreto." },
+      { titulo: "Contacto rápido", descripcion: "El cliente puede llamar o escribir por WhatsApp para recibir información sin complicaciones." }
     ]
   },
 
@@ -39,30 +21,12 @@ const sectores = {
     keyword: "peluquería en Murcia",
     paleta: "rosa",
     servicios: [
-      {
-        titulo: "Corte de pelo mujer",
-        descripcion: "Cortes actuales y personalizados según el estilo, tipo de cabello y acabado que busca cada clienta."
-      },
-      {
-        titulo: "Corte de pelo hombre",
-        descripcion: "Corte masculino práctico, limpio y adaptado al estilo personal, con atención rápida y cercana."
-      },
-      {
-        titulo: "Mechas balayage",
-        descripcion: "Mechas con acabado natural para aportar luz, movimiento y un resultado elegante al cabello."
-      },
-      {
-        titulo: "Tinte profesional",
-        descripcion: "Coloración profesional para cubrir canas, renovar el tono o conseguir un cambio de imagen cuidado."
-      },
-      {
-        titulo: "Peinados para eventos",
-        descripcion: "Peinados para bodas, comuniones, celebraciones y ocasiones especiales con acabado duradero."
-      },
-      {
-        titulo: "Tratamientos capilares",
-        descripcion: "Tratamientos para hidratar, reparar y mejorar el aspecto del cabello según su estado y necesidad."
-      }
+      { titulo: "Corte de pelo mujer", descripcion: "Cortes actuales y personalizados según el estilo, tipo de cabello y acabado que busca cada clienta." },
+      { titulo: "Corte de pelo hombre", descripcion: "Corte masculino práctico, limpio y adaptado al estilo personal, con atención rápida y cercana." },
+      { titulo: "Mechas balayage", descripcion: "Mechas con acabado natural para aportar luz, movimiento y un resultado elegante al cabello." },
+      { titulo: "Tinte profesional", descripcion: "Coloración profesional para cubrir canas, renovar el tono o conseguir un cambio de imagen cuidado." },
+      { titulo: "Peinados para eventos", descripcion: "Peinados para bodas, comuniones, celebraciones y ocasiones especiales con acabado duradero." },
+      { titulo: "Tratamientos capilares", descripcion: "Tratamientos para hidratar, reparar y mejorar el aspecto del cabello según su estado y necesidad." }
     ]
   },
 
@@ -71,30 +35,12 @@ const sectores = {
     keyword: "aire acondicionado en Murcia",
     paleta: "azul",
     servicios: [
-      {
-        titulo: "Instalación de aire acondicionado",
-        descripcion: "Instalación de equipos de aire acondicionado en viviendas, locales y negocios con asesoramiento claro."
-      },
-      {
-        titulo: "Mantenimiento de aire acondicionado",
-        descripcion: "Revisión y mantenimiento para mejorar el rendimiento, evitar averías y alargar la vida del equipo."
-      },
-      {
-        titulo: "Reparación de aire acondicionado",
-        descripcion: "Diagnóstico de averías y reparación de equipos que no enfrían, hacen ruido o presentan fallos de funcionamiento."
-      },
-      {
-        titulo: "Conductos de climatización",
-        descripcion: "Instalación y revisión de sistemas de climatización por conductos para viviendas y locales."
-      },
-      {
-        titulo: "Carga de gas",
-        descripcion: "Revisión de presión y carga de gas cuando el equipo ha perdido rendimiento o no enfría correctamente."
-      },
-      {
-        titulo: "Limpieza de filtros",
-        descripcion: "Limpieza y revisión básica para mejorar la calidad del aire y el funcionamiento del sistema."
-      }
+      { titulo: "Instalación de aire acondicionado", descripcion: "Instalación de equipos de aire acondicionado en viviendas, locales y negocios con asesoramiento claro." },
+      { titulo: "Mantenimiento de aire acondicionado", descripcion: "Revisión y mantenimiento para mejorar el rendimiento, evitar averías y alargar la vida del equipo." },
+      { titulo: "Reparación de aire acondicionado", descripcion: "Diagnóstico de averías y reparación de equipos que no enfrían, hacen ruido o presentan fallos de funcionamiento." },
+      { titulo: "Conductos de climatización", descripcion: "Instalación y revisión de sistemas de climatización por conductos para viviendas y locales." },
+      { titulo: "Carga de gas", descripcion: "Revisión de presión y carga de gas cuando el equipo ha perdido rendimiento o no enfría correctamente." },
+      { titulo: "Limpieza de filtros", descripcion: "Limpieza y revisión básica para mejorar la calidad del aire y el funcionamiento del sistema." }
     ]
   },
 
@@ -103,30 +49,12 @@ const sectores = {
     keyword: "cerrajería en Murcia",
     paleta: "negro",
     servicios: [
-      {
-        titulo: "Puertas metálicas",
-        descripcion: "Fabricación e instalación de puertas metálicas a medida para viviendas, parcelas, cocheras y negocios."
-      },
-      {
-        titulo: "Rejas a medida",
-        descripcion: "Diseño, fabricación e instalación de rejas de seguridad adaptadas a ventanas, bajos, patios y accesos."
-      },
-      {
-        titulo: "Cerramientos metálicos",
-        descripcion: "Cerramientos para terrazas, patios, parcelas o espacios exteriores con estructura resistente y acabado profesional."
-      },
-      {
-        titulo: "Barandillas",
-        descripcion: "Barandillas metálicas para escaleras, terrazas y balcones, fabricadas a medida y con montaje profesional."
-      },
-      {
-        titulo: "Ventanas de aluminio",
-        descripcion: "Instalación de ventanas de aluminio para mejorar aislamiento, seguridad y estética en viviendas y locales."
-      },
-      {
-        titulo: "Estructuras metálicas",
-        descripcion: "Trabajos de estructura metálica para proyectos a medida, refuerzos, soportes y soluciones personalizadas."
-      }
+      { titulo: "Puertas metálicas", descripcion: "Fabricación e instalación de puertas metálicas a medida para viviendas, parcelas, cocheras y negocios." },
+      { titulo: "Rejas a medida", descripcion: "Diseño, fabricación e instalación de rejas de seguridad adaptadas a ventanas, bajos, patios y accesos." },
+      { titulo: "Cerramientos metálicos", descripcion: "Cerramientos para terrazas, patios, parcelas o espacios exteriores con estructura resistente y acabado profesional." },
+      { titulo: "Barandillas", descripcion: "Barandillas metálicas para escaleras, terrazas y balcones, fabricadas a medida y con montaje profesional." },
+      { titulo: "Ventanas de aluminio", descripcion: "Instalación de ventanas de aluminio para mejorar aislamiento, seguridad y estética en viviendas y locales." },
+      { titulo: "Estructuras metálicas", descripcion: "Trabajos de estructura metálica para proyectos a medida, refuerzos, soportes y soluciones personalizadas." }
     ]
   },
 
@@ -135,30 +63,12 @@ const sectores = {
     keyword: "jardinería en Murcia",
     paleta: "verde",
     servicios: [
-      {
-        titulo: "Mantenimiento de jardines",
-        descripcion: "Cuidado periódico de jardines para mantenerlos limpios, sanos y con buena imagen durante todo el año."
-      },
-      {
-        titulo: "Poda de árboles",
-        descripcion: "Poda controlada de árboles y plantas para mejorar su crecimiento, seguridad y aspecto general."
-      },
-      {
-        titulo: "Limpieza de parcelas",
-        descripcion: "Desbroce y limpieza de parcelas, terrenos y zonas exteriores con retirada de restos vegetales."
-      },
-      {
-        titulo: "Césped artificial",
-        descripcion: "Instalación y mantenimiento de césped artificial para jardines, terrazas y zonas exteriores."
-      },
-      {
-        titulo: "Sistemas de riego",
-        descripcion: "Instalación y revisión de riego para optimizar el consumo de agua y cuidar mejor las plantas."
-      },
-      {
-        titulo: "Mantenimiento de piscinas",
-        descripcion: "Limpieza, revisión y mantenimiento básico de piscinas para conservar el agua en buen estado."
-      }
+      { titulo: "Mantenimiento de jardines", descripcion: "Cuidado periódico de jardines para mantenerlos limpios, sanos y con buena imagen durante todo el año." },
+      { titulo: "Poda de árboles", descripcion: "Poda controlada de árboles y plantas para mejorar su crecimiento, seguridad y aspecto general." },
+      { titulo: "Limpieza de parcelas", descripcion: "Desbroce y limpieza de parcelas, terrenos y zonas exteriores con retirada de restos vegetales." },
+      { titulo: "Césped artificial", descripcion: "Instalación y mantenimiento de césped artificial para jardines, terrazas y zonas exteriores." },
+      { titulo: "Sistemas de riego", descripcion: "Instalación y revisión de riego para optimizar el consumo de agua y cuidar mejor las plantas." },
+      { titulo: "Mantenimiento de piscinas", descripcion: "Limpieza, revisión y mantenimiento básico de piscinas para conservar el agua en buen estado." }
     ]
   },
 
@@ -167,30 +77,12 @@ const sectores = {
     keyword: "electricista en Murcia",
     paleta: "dorado",
     servicios: [
-      {
-        titulo: "Instalaciones eléctricas",
-        descripcion: "Instalaciones eléctricas en viviendas, locales y negocios con trabajo ordenado y adaptado a cada necesidad."
-      },
-      {
-        titulo: "Reparación de averías",
-        descripcion: "Localización y reparación de fallos eléctricos, cortes de luz, enchufes, interruptores y problemas de instalación."
-      },
-      {
-        titulo: "Cuadros eléctricos",
-        descripcion: "Montaje, revisión y sustitución de cuadros eléctricos para mejorar seguridad y funcionamiento."
-      },
-      {
-        titulo: "Iluminación LED",
-        descripcion: "Instalación de iluminación LED para viviendas, comercios, oficinas y zonas exteriores."
-      },
-      {
-        titulo: "Certificados eléctricos",
-        descripcion: "Gestión y revisión de instalaciones para obtener documentación eléctrica cuando sea necesaria."
-      },
-      {
-        titulo: "Cargadores para coche eléctrico",
-        descripcion: "Instalación de puntos de carga para vehículos eléctricos en viviendas, garajes y comunidades."
-      }
+      { titulo: "Instalaciones eléctricas", descripcion: "Instalaciones eléctricas en viviendas, locales y negocios con trabajo ordenado y adaptado a cada necesidad." },
+      { titulo: "Reparación de averías", descripcion: "Localización y reparación de fallos eléctricos, cortes de luz, enchufes, interruptores y problemas de instalación." },
+      { titulo: "Cuadros eléctricos", descripcion: "Montaje, revisión y sustitución de cuadros eléctricos para mejorar seguridad y funcionamiento." },
+      { titulo: "Iluminación LED", descripcion: "Instalación de iluminación LED para viviendas, comercios, oficinas y zonas exteriores." },
+      { titulo: "Certificados eléctricos", descripcion: "Gestión y revisión de instalaciones para obtener documentación eléctrica cuando sea necesaria." },
+      { titulo: "Cargadores para coche eléctrico", descripcion: "Instalación de puntos de carga para vehículos eléctricos en viviendas, garajes y comunidades." }
     ]
   },
 
@@ -199,30 +91,12 @@ const sectores = {
     keyword: "reformas en Murcia",
     paleta: "dorado",
     servicios: [
-      {
-        titulo: "Reformas integrales",
-        descripcion: "Reformas completas de viviendas y locales, coordinando los trabajos necesarios para renovar el espacio."
-      },
-      {
-        titulo: "Reformas de baños",
-        descripcion: "Renovación de baños con cambios de sanitarios, revestimientos, platos de ducha y distribución."
-      },
-      {
-        titulo: "Reformas de cocinas",
-        descripcion: "Reformas de cocinas para mejorar funcionalidad, estética, almacenamiento y comodidad de uso diario."
-      },
-      {
-        titulo: "Pintura",
-        descripcion: "Trabajos de pintura interior y exterior para renovar viviendas, locales, comunidades y espacios comerciales."
-      },
-      {
-        titulo: "Albañilería",
-        descripcion: "Trabajos de albañilería para reparaciones, modificaciones, tabiques, revestimientos y mejoras del espacio."
-      },
-      {
-        titulo: "Pladur",
-        descripcion: "Instalación de pladur para techos, tabiques, trasdosados, divisiones interiores y soluciones decorativas."
-      }
+      { titulo: "Reformas integrales", descripcion: "Reformas completas de viviendas y locales, coordinando los trabajos necesarios para renovar el espacio." },
+      { titulo: "Reformas de baños", descripcion: "Renovación de baños con cambios de sanitarios, revestimientos, platos de ducha y distribución." },
+      { titulo: "Reformas de cocinas", descripcion: "Reformas de cocinas para mejorar funcionalidad, estética, almacenamiento y comodidad de uso diario." },
+      { titulo: "Pintura", descripcion: "Trabajos de pintura interior y exterior para renovar viviendas, locales, comunidades y espacios comerciales." },
+      { titulo: "Albañilería", descripcion: "Trabajos de albañilería para reparaciones, modificaciones, tabiques, revestimientos y mejoras del espacio." },
+      { titulo: "Pladur", descripcion: "Instalación de pladur para techos, tabiques, trasdosados, divisiones interiores y soluciones decorativas." }
     ]
   },
 
@@ -231,30 +105,12 @@ const sectores = {
     keyword: "restaurante en Murcia",
     paleta: "rojo",
     servicios: [
-      {
-        titulo: "Hamburguesas",
-        descripcion: "Hamburguesas preparadas con sabor, buen producto y opciones para disfrutar en local o para llevar."
-      },
-      {
-        titulo: "Montaditos",
-        descripcion: "Montaditos variados para comidas rápidas, cenas informales o compartir con amigos."
-      },
-      {
-        titulo: "Bocadillos",
-        descripcion: "Bocadillos clásicos y completos para quienes buscan una comida sencilla, rápida y con buen sabor."
-      },
-      {
-        titulo: "Tapas",
-        descripcion: "Tapas para compartir, acompañar una bebida o disfrutar de una comida informal."
-      },
-      {
-        titulo: "Menú diario",
-        descripcion: "Opciones de menú para comer bien entre semana con platos sencillos y precio ajustado."
-      },
-      {
-        titulo: "Reservas",
-        descripcion: "Reserva mesa de forma rápida para evitar esperas y disfrutar de la comida con tranquilidad."
-      }
+      { titulo: "Hamburguesas", descripcion: "Hamburguesas preparadas con sabor, buen producto y opciones para disfrutar en local o para llevar." },
+      { titulo: "Montaditos", descripcion: "Montaditos variados para comidas rápidas, cenas informales o compartir con amigos." },
+      { titulo: "Bocadillos", descripcion: "Bocadillos clásicos y completos para quienes buscan una comida sencilla, rápida y con buen sabor." },
+      { titulo: "Tapas", descripcion: "Tapas para compartir, acompañar una bebida o disfrutar de una comida informal." },
+      { titulo: "Menú diario", descripcion: "Opciones de menú para comer bien entre semana con platos sencillos y precio ajustado." },
+      { titulo: "Reservas", descripcion: "Reserva mesa de forma rápida para evitar esperas y disfrutar de la comida con tranquilidad." }
     ]
   },
 
@@ -263,30 +119,12 @@ const sectores = {
     keyword: "dentista en Murcia",
     paleta: "azul",
     servicios: [
-      {
-        titulo: "Implantes dentales",
-        descripcion: "Tratamientos de implantes para recuperar piezas dentales y mejorar la funcionalidad de la boca."
-      },
-      {
-        titulo: "Ortodoncia",
-        descripcion: "Tratamientos de ortodoncia para corregir la posición dental y mejorar estética y mordida."
-      },
-      {
-        titulo: "Limpieza dental",
-        descripcion: "Limpieza profesional para mantener una buena salud bucodental y prevenir problemas de encías."
-      },
-      {
-        titulo: "Estética dental",
-        descripcion: "Tratamientos estéticos para mejorar la sonrisa de forma natural, cuidada y personalizada."
-      },
-      {
-        titulo: "Blanqueamiento dental",
-        descripcion: "Tratamiento para aclarar el tono de los dientes y conseguir una sonrisa más luminosa."
-      },
-      {
-        titulo: "Revisión dental",
-        descripcion: "Revisión completa para detectar problemas, resolver dudas y planificar el tratamiento adecuado."
-      }
+      { titulo: "Implantes dentales", descripcion: "Tratamientos de implantes para recuperar piezas dentales y mejorar la funcionalidad de la boca." },
+      { titulo: "Ortodoncia", descripcion: "Tratamientos de ortodoncia para corregir la posición dental y mejorar estética y mordida." },
+      { titulo: "Limpieza dental", descripcion: "Limpieza profesional para mantener una buena salud bucodental y prevenir problemas de encías." },
+      { titulo: "Estética dental", descripcion: "Tratamientos estéticos para mejorar la sonrisa de forma natural, cuidada y personalizada." },
+      { titulo: "Blanqueamiento dental", descripcion: "Tratamiento para aclarar el tono de los dientes y conseguir una sonrisa más luminosa." },
+      { titulo: "Revisión dental", descripcion: "Revisión completa para detectar problemas, resolver dudas y planificar el tratamiento adecuado." }
     ]
   },
 
@@ -295,30 +133,12 @@ const sectores = {
     keyword: "empresa de limpieza en Murcia",
     paleta: "azul",
     servicios: [
-      {
-        titulo: "Limpieza de oficinas",
-        descripcion: "Limpieza profesional de oficinas para mantener espacios de trabajo ordenados, higiénicos y cuidados."
-      },
-      {
-        titulo: "Limpieza de comunidades",
-        descripcion: "Mantenimiento de portales, escaleras, zonas comunes y espacios compartidos en comunidades."
-      },
-      {
-        titulo: "Limpieza de viviendas",
-        descripcion: "Limpieza de viviendas habituales, puntuales o por cambio de inquilino con atención al detalle."
-      },
-      {
-        titulo: "Limpieza fin de obra",
-        descripcion: "Limpieza tras reformas u obras para retirar polvo, restos y dejar el espacio listo para usar."
-      },
-      {
-        titulo: "Cristales",
-        descripcion: "Limpieza de cristales, escaparates y superficies acristaladas para mejorar la imagen del espacio."
-      },
-      {
-        titulo: "Mantenimiento de limpieza",
-        descripcion: "Servicio periódico de limpieza adaptado a la frecuencia y necesidades de cada cliente."
-      }
+      { titulo: "Limpieza de oficinas", descripcion: "Limpieza profesional de oficinas para mantener espacios de trabajo ordenados, higiénicos y cuidados." },
+      { titulo: "Limpieza de comunidades", descripcion: "Mantenimiento de portales, escaleras, zonas comunes y espacios compartidos en comunidades." },
+      { titulo: "Limpieza de viviendas", descripcion: "Limpieza de viviendas habituales, puntuales o por cambio de inquilino con atención al detalle." },
+      { titulo: "Limpieza fin de obra", descripcion: "Limpieza tras reformas u obras para retirar polvo, restos y dejar el espacio listo para usar." },
+      { titulo: "Cristales", descripcion: "Limpieza de cristales, escaparates y superficies acristaladas para mejorar la imagen del espacio." },
+      { titulo: "Mantenimiento de limpieza", descripcion: "Servicio periódico de limpieza adaptado a la frecuencia y necesidades de cada cliente." }
     ]
   },
 
@@ -327,30 +147,12 @@ const sectores = {
     keyword: "mantenimiento de piscinas en Murcia",
     paleta: "azul",
     servicios: [
-      {
-        titulo: "Mantenimiento de piscinas",
-        descripcion: "Servicio de mantenimiento para conservar la piscina limpia, segura y lista para el baño."
-      },
-      {
-        titulo: "Limpieza de piscinas",
-        descripcion: "Limpieza del vaso, superficie y elementos visibles para mantener una buena imagen y calidad del agua."
-      },
-      {
-        titulo: "Control de cloro y PH",
-        descripcion: "Revisión y ajuste de los niveles de cloro y PH para mantener el agua en condiciones adecuadas."
-      },
-      {
-        titulo: "Puesta a punto",
-        descripcion: "Preparación de la piscina antes de temporada para dejarla limpia y funcionando correctamente."
-      },
-      {
-        titulo: "Reparaciones básicas",
-        descripcion: "Revisión de pequeños fallos, elementos de depuración y problemas habituales en piscinas."
-      },
-      {
-        titulo: "Limpieza de filtros",
-        descripcion: "Limpieza y revisión de filtros para mejorar la circulación y mantener el agua en buen estado."
-      }
+      { titulo: "Mantenimiento de piscinas", descripcion: "Servicio de mantenimiento para conservar la piscina limpia, segura y lista para el baño." },
+      { titulo: "Limpieza de piscinas", descripcion: "Limpieza del vaso, superficie y elementos visibles para mantener una buena imagen y calidad del agua." },
+      { titulo: "Control de cloro y PH", descripcion: "Revisión y ajuste de los niveles de cloro y PH para mantener el agua en condiciones adecuadas." },
+      { titulo: "Puesta a punto", descripcion: "Preparación de la piscina antes de temporada para dejarla limpia y funcionando correctamente." },
+      { titulo: "Reparaciones básicas", descripcion: "Revisión de pequeños fallos, elementos de depuración y problemas habituales en piscinas." },
+      { titulo: "Limpieza de filtros", descripcion: "Limpieza y revisión de filtros para mejorar la circulación y mantener el agua en buen estado." }
     ]
   },
 
@@ -359,30 +161,12 @@ const sectores = {
     keyword: "abogado en Murcia",
     paleta: "negro",
     servicios: [
-      {
-        titulo: "Derecho civil",
-        descripcion: "Asesoramiento en asuntos civiles, reclamaciones, contratos, conflictos y situaciones personales o patrimoniales."
-      },
-      {
-        titulo: "Derecho laboral",
-        descripcion: "Orientación legal en despidos, contratos, reclamaciones laborales y conflictos entre empresa y trabajador."
-      },
-      {
-        titulo: "Derecho de familia",
-        descripcion: "Asesoramiento en separaciones, divorcios, custodias, pensiones y situaciones familiares delicadas."
-      },
-      {
-        titulo: "Reclamaciones",
-        descripcion: "Estudio y gestión de reclamaciones para defender derechos e intereses del cliente."
-      },
-      {
-        titulo: "Contratos",
-        descripcion: "Revisión y redacción de contratos para evitar problemas y dejar claras las condiciones."
-      },
-      {
-        titulo: "Asesoramiento legal",
-        descripcion: "Consulta legal personalizada para resolver dudas y definir los siguientes pasos con seguridad."
-      }
+      { titulo: "Derecho civil", descripcion: "Asesoramiento en asuntos civiles, reclamaciones, contratos, conflictos y situaciones personales o patrimoniales." },
+      { titulo: "Derecho laboral", descripcion: "Orientación legal en despidos, contratos, reclamaciones laborales y conflictos entre empresa y trabajador." },
+      { titulo: "Derecho de familia", descripcion: "Asesoramiento en separaciones, divorcios, custodias, pensiones y situaciones familiares delicadas." },
+      { titulo: "Reclamaciones", descripcion: "Estudio y gestión de reclamaciones para defender derechos e intereses del cliente." },
+      { titulo: "Contratos", descripcion: "Revisión y redacción de contratos para evitar problemas y dejar claras las condiciones." },
+      { titulo: "Asesoramiento legal", descripcion: "Consulta legal personalizada para resolver dudas y definir los siguientes pasos con seguridad." }
     ]
   }
 };
@@ -418,7 +202,7 @@ function obtenerServiciosFinales(datosSector, ciudad) {
     return serviciosBase;
   }
 
-  const serviciosPersonalizados = serviciosCampo.slice(0, cantidad).map((titulo, index) => {
+  return serviciosCampo.slice(0, cantidad).map((titulo, index) => {
     const servicioBase = datosSector.servicios[index];
 
     return {
@@ -428,8 +212,6 @@ function obtenerServiciosFinales(datosSector, ciudad) {
         : `Servicio de ${titulo.toLowerCase()} en ${ciudad}, con atención directa y presupuesto adaptado.`
     };
   });
-
-  return serviciosPersonalizados;
 }
 
 function generarWeb() {
@@ -448,8 +230,8 @@ function generarWeb() {
   const usuarioGithub = "solucionesintegralesmurcia";
 
   const keyword = datosSector.keyword.replace("Murcia", ciudad);
-const tituloSeo = `${negocio} en ${ciudad} | Presupuesto rápido`;
-const descripcionSeo = `${negocio} en ${ciudad}. ${datosSector.intro} Contacto directo por WhatsApp.`;
+  const tituloSeo = `${negocio} en ${ciudad} | Presupuesto rápido`;
+  const descripcionSeo = `${negocio} en ${ciudad}. ${datosSector.intro} Contacto directo por WhatsApp.`;
 
   const serviciosFinales = obtenerServiciosFinales(datosSector, ciudad);
 
@@ -732,6 +514,11 @@ a { text-decoration: none; }
   text-align: center;
 }
 
+.footer a {
+  color: #22c55e;
+  font-weight: 700;
+}
+
 .floating-whatsapp {
   position: fixed;
   right: 18px;
@@ -1003,12 +790,7 @@ body.template-premium {
 <footer class="footer">
   <div class="container">
     <p>© 2026 ${negocio} · Todos los derechos reservados</p>
-    <p>
-      Diseño web por 
-      <a href="https://solucionesintegralesmurcia.github.io/webmasterpro/#inicio" target="_blank" style="color:#22c55e;font-weight:700;">
-        Webmaster Murcia
-      </a>
-    </p>
+    <p>Diseño web por <a href="https://solucionesintegralesmurcia.github.io/webmasterpro/#inicio" target="_blank">Webmaster Murcia</a></p>
   </div>
 </footer>
 
@@ -1115,7 +897,6 @@ Revísala y dime si quieres cambiar textos, servicios, teléfono, dirección, co
   window.zipName = `${slug}.zip`;
 
   const previewHTML = prepararVistaPrevia(indexHTML);
-
   document.getElementById("frame").srcdoc = previewHTML;
 }
 
@@ -1127,11 +908,7 @@ function prepararVistaPrevia(html) {
 
   htmlPreview = htmlPreview.replaceAll('href="index.html"', 'href="#top"');
   htmlPreview = htmlPreview.replaceAll('href="servicios.html"', 'href="#servicios"');
-
-  htmlPreview = htmlPreview.replace(
-    /href="[^"]+\.html"/g,
-    'href="#servicios"'
-  );
+  htmlPreview = htmlPreview.replace(/href="[^"]+\.html"/g, 'href="#servicios"');
 
   return htmlPreview;
 }
@@ -1143,7 +920,6 @@ function verWebCompleta() {
   }
 
   const htmlCompleto = prepararVistaPrevia(window.indexFile);
-
   const nuevaVentana = window.open("", "_blank");
 
   if (!nuevaVentana) {
@@ -1163,7 +939,7 @@ function descargar() {
   }
 
   if (typeof JSZip === "undefined") {
-    alert("Error: JSZip no está cargado. Revisa el script de JSZip en el head.");
+    alert("Error: JSZip no está cargado.");
     return;
   }
 
@@ -1222,7 +998,6 @@ function rellenarAutomatico() {
   const datosSector = sectores[sector] || sectores.generico;
   const cantidad = parseInt(document.getElementById("cantidadServicios")?.value || "4", 10);
 
-  const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
   const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
 
   const serviciosSeleccionados = datosSector.servicios
@@ -1245,194 +1020,4 @@ function rellenarAutomatico() {
   }
 
   document.getElementById("paleta").value = datosSector.paleta || "verde";
-}
-function descargarImagenRenombrada() {
-  const tipo = document.getElementById("tipoImagen").value;
-  const archivo = document.getElementById("archivoImagen").files[0];
-
-  if (!archivo) {
-    alert("Primero sube una imagen");
-    return;
-  }
-
-  let nombreFinal = "";
-
-  if (tipo === "sector") {
-    const sector = document.getElementById("sectorImagen").value;
-    nombreFinal = `${sector}.jpg`;
-  } else {
-    const nombreServicio = document.getElementById("nombreServicioImagen").value.trim();
-
-    if (!nombreServicio) {
-      alert("Escribe el nombre del servicio");
-      return;
-    }
-
-    nombreFinal = `${limpiarTexto(nombreServicio)}.jpg`;
-  }
-
-  const lector = new FileReader();
-
-  lector.onload = function(e) {
-    const img = new Image();
-
-    img.onload = function() {
-      const canvas = document.createElement("canvas");
-      const maxWidth = 1600;
-      const escala = Math.min(1, maxWidth / img.width);
-
-      canvas.width = img.width * escala;
-      canvas.height = img.height * escala;
-
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      canvas.toBlob(function(blob) {
-        const enlace = document.createElement("a");
-        enlace.href = URL.createObjectURL(blob);
-        enlace.download = nombreFinal;
-        enlace.click();
-      }, "image/jpeg", 0.88);
-    };
-
-    img.src = e.target.result;
-  };
-
-  lector.readAsDataURL(archivo);
-}
-let fotosPreparadas = [];
-
-function generarTablaFotos() {
-  const input = document.getElementById("fotosWeb");
-  const contenedor = document.getElementById("tablaFotos");
-  const sector = document.getElementById("sectorFotos").value;
-
-  if (!input.files.length) {
-    alert("Sube fotos primero");
-    return;
-  }
-
-  contenedor.innerHTML = "";
-  fotosPreparadas = [];
-
-  Array.from(input.files).forEach((file, i) => {
-    const fila = document.createElement("div");
-    fila.className = "fila-foto";
-
-    const nombre = document.createElement("div");
-    nombre.textContent = file.name;
-
-    const tipo = document.createElement("select");
-    tipo.innerHTML = `
-      <option value="sector">Imagen de sector</option>
-      <option value="servicio">Imagen de servicio</option>
-    `;
-
-    const servicio = document.createElement("input");
-    servicio.placeholder = "Nombre del servicio (si aplica)";
-
-    fila.appendChild(nombre);
-    fila.appendChild(tipo);
-    fila.appendChild(servicio);
-
-    contenedor.appendChild(fila);
-
-    fotosPreparadas.push({
-      file,
-      tipo,
-      servicio,
-      sector
-    });
-  });
-}
-
-function limpiarNombre(texto) {
-  return texto
-    .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-function convertirImagen(file) {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-
-    reader.onload = e => {
-      const img = new Image();
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const maxWidth = 1600;
-        const scale = Math.min(1, maxWidth / img.width);
-
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        canvas.toBlob(blob => resolve(blob), "image/jpeg", 0.9);
-      };
-
-      img.src = e.target.result;
-    };
-
-    reader.readAsDataURL(file);
-  });
-}
-
-async function descargarZipFotos() {
-  if (!fotosPreparadas.length) {
-    alert("Primero prepara las fotos");
-    return;
-  }
-
-  const zip = new JSZip();
-  const carpeta = zip.folder("img");
-
-  for (const item of fotosPreparadas) {
-    let nombreFinal = "";
-
-    if (item.tipo.value === "sector") {
-      nombreFinal = `${item.sector}.jpg`;
-    } else {
-      if (!item.servicio.value.trim()) continue;
-      nombreFinal = `${limpiarNombre(item.servicio.value)}.jpg`;
-    }
-
-    const imgBlob = await convertirImagen(item.file);
-    carpeta.file(nombreFinal, imgBlob);
-  }
-
-  zip.generateAsync({ type: "blob" }).then(content => {
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(content);
-    a.download = "img.zip";
-    a.click();
-  });
-}
-const dropZone = document.getElementById("dropFotos");
-const inputFotos = document.getElementById("fotosWeb");
-
-if (dropZone && inputFotos) {
-
-  dropZone.addEventListener("click", () => inputFotos.click());
-
-  dropZone.addEventListener("dragover", e => {
-    e.preventDefault();
-    dropZone.classList.add("dragover");
-  });
-
-  dropZone.addEventListener("dragleave", () => {
-    dropZone.classList.remove("dragover");
-  });
-
-  dropZone.addEventListener("drop", e => {
-    e.preventDefault();
-    dropZone.classList.remove("dragover");
-
-    inputFotos.files = e.dataTransfer.files;
-  });
-
 }
