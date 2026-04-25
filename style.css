@@ -148,3 +148,20 @@ iframe {
     color: white;
   }
 }
+#btnVerWeb {
+  display: block;
+  background: #0ea5e9;
+  color: white;
+}
+
+/* EN MÓVIL OCULTAMOS EL PREVIEW PEQUEÑO */
+@media (max-width: 900px) {
+  .preview {
+    display: none;
+  }
+
+  .panel {
+    max-height: none;
+    min-height: 100vh;
+  }
+}
