@@ -15,7 +15,6 @@ const sectores = {
       { titulo: "Contacto rápido", descripcion: "El cliente puede llamar o escribir por WhatsApp para recibir información sin complicaciones." }
     ]
   },
-
   peluqueria: {
     intro: "Cortes, coloración y tratamientos capilares con atención cercana.",
     keyword: "peluquería en Murcia",
@@ -29,7 +28,6 @@ const sectores = {
       { titulo: "Tratamientos capilares", descripcion: "Tratamientos para hidratar, reparar y mejorar el aspecto del cabello según su estado y necesidad." }
     ]
   },
-
   aire: {
     intro: "Instalación, mantenimiento y reparación de aire acondicionado.",
     keyword: "aire acondicionado en Murcia",
@@ -43,7 +41,6 @@ const sectores = {
       { titulo: "Limpieza de filtros", descripcion: "Limpieza y revisión básica para mejorar la calidad del aire y el funcionamiento del sistema." }
     ]
   },
-
   cerrajeria: {
     intro: "Fabricación e instalación de puertas, rejas y trabajos metálicos.",
     keyword: "cerrajería en Murcia",
@@ -57,7 +54,6 @@ const sectores = {
       { titulo: "Estructuras metálicas", descripcion: "Trabajos de estructura metálica para proyectos a medida, refuerzos, soportes y soluciones personalizadas." }
     ]
   },
-
   jardineria: {
     intro: "Mantenimiento de jardines, podas y cuidado de espacios exteriores.",
     keyword: "jardinería en Murcia",
@@ -71,7 +67,6 @@ const sectores = {
       { titulo: "Mantenimiento de piscinas", descripcion: "Limpieza, revisión y mantenimiento básico de piscinas para conservar el agua en buen estado." }
     ]
   },
-
   electricista: {
     intro: "Instalaciones eléctricas, averías y soluciones para viviendas y negocios.",
     keyword: "electricista en Murcia",
@@ -85,7 +80,6 @@ const sectores = {
       { titulo: "Cargadores para coche eléctrico", descripcion: "Instalación de puntos de carga para vehículos eléctricos en viviendas, garajes y comunidades." }
     ]
   },
-
   reformas: {
     intro: "Reformas, mejoras y trabajos profesionales para viviendas y locales.",
     keyword: "reformas en Murcia",
@@ -99,7 +93,6 @@ const sectores = {
       { titulo: "Pladur", descripcion: "Instalación de pladur para techos, tabiques, trasdosados, divisiones interiores y soluciones decorativas." }
     ]
   },
-
   restaurante: {
     intro: "Comida, reservas y atención cercana para disfrutar sin complicaciones.",
     keyword: "restaurante en Murcia",
@@ -113,7 +106,6 @@ const sectores = {
       { titulo: "Reservas", descripcion: "Reserva mesa de forma rápida para evitar esperas y disfrutar de la comida con tranquilidad." }
     ]
   },
-
   dentista: {
     intro: "Tratamientos dentales con atención profesional, cercana y de confianza.",
     keyword: "dentista en Murcia",
@@ -127,7 +119,6 @@ const sectores = {
       { titulo: "Revisión dental", descripcion: "Revisión completa para detectar problemas, resolver dudas y planificar el tratamiento adecuado." }
     ]
   },
-
   limpieza: {
     intro: "Servicios de limpieza profesional para viviendas, oficinas y comunidades.",
     keyword: "empresa de limpieza en Murcia",
@@ -141,7 +132,6 @@ const sectores = {
       { titulo: "Mantenimiento de limpieza", descripcion: "Servicio periódico de limpieza adaptado a la frecuencia y necesidades de cada cliente." }
     ]
   },
-
   piscinas: {
     intro: "Mantenimiento, limpieza y puesta a punto de piscinas.",
     keyword: "mantenimiento de piscinas en Murcia",
@@ -155,7 +145,6 @@ const sectores = {
       { titulo: "Limpieza de filtros", descripcion: "Limpieza y revisión de filtros para mejorar la circulación y mantener el agua en buen estado." }
     ]
   },
-
   abogado: {
     intro: "Asesoramiento legal claro, profesional y adaptado a cada caso.",
     keyword: "abogado en Murcia",
@@ -198,9 +187,7 @@ function obtenerServiciosFinales(datosSector, ciudad) {
 
   const serviciosBase = datosSector.servicios.slice(0, cantidad);
 
-  if (!serviciosCampo.length) {
-    return serviciosBase;
-  }
+  if (!serviciosCampo.length) return serviciosBase;
 
   return serviciosCampo.slice(0, cantidad).map((titulo, index) => {
     const servicioBase = datosSector.servicios[index];
@@ -479,6 +466,7 @@ a { text-decoration: none; }
   background: var(--green);
   color: white;
 }
+
 .trust-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -508,6 +496,7 @@ a { text-decoration: none; }
   padding: 26px;
   border-radius: var(--radius);
   border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
 }
 
 .cta-soft {
@@ -517,6 +506,7 @@ a { text-decoration: none; }
   padding: 42px;
   text-align: center;
 }
+
 .location-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -660,7 +650,10 @@ body.template-premium {
 @media (max-width: 800px) {
   .hero-grid,
   .grid-3,
-  .location-grid {
+  .location-grid,
+  .trust-strip,
+  .steps-grid,
+  .faq-grid {
     grid-template-columns: 1fr;
   }
 
@@ -843,7 +836,189 @@ body.template-premium {
 </html>
 `;
 
-  const indexHTML = layoutBase(
+  const layoutProfesional = (titulo, descripcion, h1, intro, contenidoServicios) => `
+<!DOCTYPE html>
+<html lang="es" id="top">
+<head>
+  <meta charset="UTF-8">
+  <title>${titulo}</title>
+  <meta name="description" content="${descripcion}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="${keyword}">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="${plantillaClase}">
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">${negocio}</div>
+    <nav class="nav">
+      <a href="#top">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="tel:${telefono}">Llamar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">${negocio} · ${ciudad}</span>
+      <h1>${h1}</h1>
+      <p>${intro} Atención directa, presupuesto claro y contacto rápido por WhatsApp.</p>
+
+      <div class="btn-row">
+        <a class="btn btn-whatsapp" href="${linkWhats}">Pedir presupuesto por WhatsApp</a>
+        <a class="btn btn-call" href="${linkFotos}">Enviar fotos por WhatsApp</a>
+        <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
+      </div>
+
+      <div class="trust-strip">
+        <div class="trust-item">Presupuesto sin compromiso</div>
+        <div class="trust-item">Atención directa</div>
+        <div class="trust-item">Servicio en ${ciudad}</div>
+        <div class="trust-item">Respuesta rápida</div>
+      </div>
+    </div>
+
+    <div class="hero-box">
+      <h2>Cuéntanos qué necesitas</h2>
+      <p>Envía fotos o explica tu caso por WhatsApp y te orientamos de forma clara antes de empezar.</p>
+      <ul>
+        <li>Valoración inicial rápida</li>
+        <li>Trato cercano y profesional</li>
+        <li>Soluciones adaptadas a cada cliente</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="servicios">
+  <div class="container">
+    <div class="section-title">
+      <h2>Servicios principales</h2>
+      <p>Trabajos pensados para clientes que buscan una solución clara, rápida y bien explicada.</p>
+    </div>
+
+    <div class="grid-3">
+      ${contenidoServicios}
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="proceso">
+  <div class="container">
+    <div class="section-title">
+      <h2>Cómo trabajamos</h2>
+      <p>Un proceso sencillo para que sepas qué esperar desde el primer contacto.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <h3>1. Contacto inicial</h3>
+        <p>Nos escribes por WhatsApp o llamas para explicar qué necesitas.</p>
+      </div>
+      <div class="step-card">
+        <h3>2. Valoración</h3>
+        <p>Revisamos el caso, las fotos o los datos necesarios para orientarte.</p>
+      </div>
+      <div class="step-card">
+        <h3>3. Presupuesto</h3>
+        <p>Te damos una propuesta clara para que puedas decidir sin compromiso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-soft">
+      <h2>¿Quieres una respuesta rápida?</h2>
+      <p>Envíanos fotos por WhatsApp y te damos una primera orientación.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a class="btn btn-whatsapp" href="${linkFotos}">Enviar fotos ahora</a>
+        <a class="btn btn-light" href="tel:${telefono}">Llamar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ubicacion">
+  <div class="container location-grid">
+    <div class="location-box">
+      <h2>Ubicación</h2>
+      <p><strong>Dirección:</strong><br>${direccion}</p>
+      <p>Atendemos en ${ciudad} y alrededores.</p>
+
+      <div class="btn-row">
+        <a class="btn btn-whatsapp" href="${linkWhats}">WhatsApp</a>
+        <a class="btn btn-call" href="tel:${telefono}">Llamar</a>
+      </div>
+    </div>
+
+    <iframe class="map" src="https://www.google.com/maps?q=${direccionMapa}&output=embed" loading="lazy"></iframe>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-title">
+      <h2>Preguntas frecuentes</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>¿Dais presupuesto sin compromiso?</h3>
+        <p>Sí, puedes contactarnos y te orientamos antes de tomar una decisión.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Puedo enviar fotos?</h3>
+        <p>Sí, puedes enviar fotos por WhatsApp para recibir una valoración más rápida.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Trabajáis en ${ciudad}?</h3>
+        <p>Sí, atendemos en ${ciudad} y zonas cercanas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>¿Necesitas ${negocio.toLowerCase()} en ${ciudad}?</h2>
+    <p>Escríbenos ahora y te atendemos de forma directa.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a class="btn btn-whatsapp" href="${linkWhats}">Pedir presupuesto</a>
+      <a class="btn btn-call" href="${linkFotos}">Enviar fotos</a>
+      <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 ${negocio} · Todos los derechos reservados</p>
+    <p>Diseño web por <a href="https://solucionesintegralesmurcia.github.io/webmasterpro/#inicio" target="_blank">Webmaster Murcia</a></p>
+  </div>
+</footer>
+
+<a class="floating-whatsapp" href="${linkWhats}" aria-label="WhatsApp">WA</a>
+<a class="back-top" href="#top" aria-label="Subir arriba">↑</a>
+
+<div class="mobile-bar">
+  <a class="mobile-whatsapp" href="${linkWhats}">WhatsApp</a>
+  <a class="mobile-call" href="tel:${telefono}">Llamar</a>
+</div>
+
+</body>
+</html>
+`;
+
+  const layoutElegido = plantilla === "profesional" ? layoutProfesional : layoutBase;
+
+  const indexHTML = layoutElegido(
     tituloSeo,
     descripcionSeo,
     `${negocio} en ${ciudad}`,
@@ -851,7 +1026,7 @@ body.template-premium {
     serviciosCards
   );
 
-  const serviciosHTML = layoutBase(
+  const serviciosHTML = layoutElegido(
     `Servicios de ${negocio} en ${ciudad}`,
     `Servicios de ${negocio} en ${ciudad}: ${serviciosFinales.map(s => s.titulo).join(", ")}.`,
     `Servicios de ${negocio} en ${ciudad}`,
@@ -864,7 +1039,7 @@ body.template-premium {
     const mensajeServicio = encodeURIComponent(`Hola, quiero presupuesto para ${servicio.titulo} en ${ciudad}`);
     const linkServicio = `https://wa.me/34${whatsapp}?text=${mensajeServicio}`;
 
-    const htmlServicio = layoutBase(
+    const htmlServicio = layoutElegido(
       `${servicio.titulo} en ${ciudad} | ${negocio}`,
       `${servicio.titulo} en ${ciudad}. Contacta con ${negocio} para pedir información o presupuesto.`,
       `${servicio.titulo} en ${ciudad}`,
