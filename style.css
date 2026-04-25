@@ -1,12 +1,9 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #0f172a;
-  color: #111;
 }
 
 .app {
@@ -15,124 +12,43 @@ body {
 }
 
 .panel {
-  width: 370px;
+  width: 320px;
   background: #111827;
-  color: #fff;
+  color: white;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-}
-
-.panel h2 {
-  margin: 0 0 16px;
-  font-size: 22px;
 }
 
 .panel input,
+.panel textarea,
 .panel select {
-  margin: 7px 0;
-  padding: 12px;
-  border: 1px solid #374151;
-  border-radius: 10px;
-  outline: none;
-  font-size: 14px;
-  background: #fff;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
 }
 
 .panel button {
-  margin-top: 10px;
-  padding: 14px;
+  margin-top: 8px;
+  padding: 12px;
   border: none;
-  border-radius: 12px;
-  font-weight: 900;
+  border-radius: 10px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.panel button:nth-of-type(1) {
-  background: #22c55e;
-  color: #fff;
-}
-
-.panel button:nth-of-type(2) {
-  background: #2563eb;
-  color: #fff;
-}
-
-.panel button:nth-of-type(3) {
-  background: #7c3aed;
-  color: #fff;
-}
-
-.panel button:nth-of-type(4) {
-  background: #f59e0b;
-  color: #111827;
-}
-
-.panel button:nth-of-type(5) {
-  background: #e5e7eb;
-  color: #111827;
-}
+.panel button:nth-child(1) { background: #22c55e; }
+.panel button:nth-child(2) { background: #2563eb; color:white;}
+.panel button:nth-child(3) { background: #9333ea; color:white;}
 
 .preview {
   flex: 1;
-  background: #e5e7eb;
+  background: white;
 }
 
 iframe {
   width: 100%;
   height: 100%;
   border: none;
-  background: white;
-}
-
-.panel::-webkit-scrollbar {
-  width: 6px;
-}
-
-.panel::-webkit-scrollbar-thumb {
-  background: #374151;
-  border-radius: 10px;
-}
-
-@media (max-width: 900px) {
-  .app {
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .panel {
-    width: 100%;
-    max-height: 34vh;
-    padding: 14px;
-    overflow-y: auto;
-  }
-
-  .panel h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .panel input,
-  .panel select {
-    padding: 10px;
-    margin: 5px 0;
-    font-size: 13px;
-  }
-
-  .panel button {
-    padding: 11px;
-    margin-top: 7px;
-    border-radius: 10px;
-    font-size: 14px;
-  }
-
-  .preview {
-    height: 66vh;
-    min-height: 66vh;
-  }
-
-  iframe {
-    height: 100%;
-  }
 }
