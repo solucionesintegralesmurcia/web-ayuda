@@ -67,6 +67,35 @@
     <button onclick="descargar()">Descargar ZIP</button>
     <button onclick="nuevoProyecto()">Nuevo proyecto</button>
     <button onclick="copiarMensajeCliente()">Copiar mensaje cliente</button>
+    <hr class="panel-separator">
+
+<h3>Preparar imágenes</h3>
+
+<select id="tipoImagen">
+  <option value="sector">Imagen de sector</option>
+  <option value="servicio">Imagen de servicio</option>
+</select>
+
+<select id="sectorImagen">
+  <option value="generico">generico.jpg</option>
+  <option value="peluqueria">peluqueria.jpg</option>
+  <option value="aire">aire.jpg</option>
+  <option value="cerrajeria">cerrajeria.jpg</option>
+  <option value="jardineria">jardineria.jpg</option>
+  <option value="electricista">electricista.jpg</option>
+  <option value="reformas">reformas.jpg</option>
+  <option value="restaurante">restaurante.jpg</option>
+  <option value="dentista">dentista.jpg</option>
+  <option value="limpieza">limpieza.jpg</option>
+  <option value="piscinas">piscinas.jpg</option>
+  <option value="abogado">abogado.jpg</option>
+</select>
+
+<input id="nombreServicioImagen" placeholder="Nombre del servicio, ej: Mechas balayage">
+
+<input id="archivoImagen" type="file" accept="image/*">
+
+<button onclick="descargarImagenRenombrada()">Descargar imagen renombrada</button>
   </div>
 
   <div class="preview">
