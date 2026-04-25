@@ -198,3 +198,22 @@ iframe {
   border-radius: 6px;
   border: none;
 }
+.drop-zone {
+  border: 2px dashed #6b7280;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #111827;
+  color: #9ca3af;
+}
+
+.drop-zone.dragover {
+  border-color: #22c55e;
+  background: #022c22;
+  color: #22c55e;
+}
+
+.drop-zone input {
+  display: none;
+}
