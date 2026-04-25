@@ -873,3 +873,13 @@ function rellenarAutomatico() {
 
   document.getElementById("paleta").value = datosSector.paleta || "verde";
 }
+function verWebCompleta() {
+  if (!window.indexFile) {
+    alert("Primero genera la web");
+    return;
+  }
+
+  const nuevaVentana = window.open();
+  nuevaVentana.document.write(window.indexFile);
+  nuevaVentana.document.close();
+}
