@@ -1412,3 +1412,27 @@ async function descargarZipFotos() {
     a.click();
   });
 }
+const dropZone = document.getElementById("dropFotos");
+const inputFotos = document.getElementById("fotosWeb");
+
+if (dropZone && inputFotos) {
+
+  dropZone.addEventListener("click", () => inputFotos.click());
+
+  dropZone.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+  });
+
+  dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("dragover");
+  });
+
+  dropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+
+    inputFotos.files = e.dataTransfer.files;
+  });
+
+}
