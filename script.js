@@ -39,17 +39,13 @@ function generarWeb() {
   const direccion = document.getElementById("direccion").value.trim() || ciudad;
   const telefono = document.getElementById("telefono").value.trim() || "600000000";
   const whatsapp = document.getElementById("whatsapp").value.trim() || telefono;
-  const mensajeBase = encodeURIComponent(
-  `Hola, quiero información sobre ${negocio} en ${ciudad}`
-);
-
-const mensajeFotos = encodeURIComponent(
-  `Hola, te envío fotos para que me des presupuesto de ${negocio} en ${ciudad}`
-);
-
-const linkWhats = `${linkWhats}?text=${mensajeBase}`;
-const linkFotos = `${linkWhats}?text=${mensajeFotos}`;
   const usuarioGithub = document.getElementById("usuarioGithub").value.trim() || "tuusuario";
+
+  const mensajeBase = encodeURIComponent(`Hola, quiero información sobre ${negocio} en ${ciudad}`);
+  const mensajeFotos = encodeURIComponent(`Hola, te envío fotos para que me des presupuesto de ${negocio} en ${ciudad}`);
+
+  const linkWhats = `https://wa.me/34${whatsapp}?text=${mensajeBase}`;
+  const linkFotos = `https://wa.me/34${whatsapp}?text=${mensajeFotos}`;
 
   const keyword = document.getElementById("keyword").value.trim() || `${negocio} en ${ciudad}`;
   const tituloSeo = document.getElementById("tituloSeo").value.trim() || `${negocio} en ${ciudad} | Presupuesto rápido`;
@@ -70,22 +66,27 @@ const linkFotos = `${linkWhats}?text=${mensajeFotos}`;
   const urlWeb = `https://${usuarioGithub}.github.io/${slug}/`;
   const direccionMapa = encodeURIComponent(direccion + " " + ciudad);
 
-  const colores = paletas[paleta];
+  const colores = paletas[paleta] || paletas.verde;
   const colorPrincipal = colores[0];
   const colorSecundario = colores[1];
 
+  const plantillaClase = `template-${plantilla}`;
+
   const serviciosCards = serviciosFinales.map(servicio => {
-    const slugServicio = limpiarTexto(servicio);
+    const slugServicio = limpiarTexto(`${servicio}-${ciudad}`);
+    const mensajeServicio = encodeURIComponent(`Hola, quiero presupuesto para ${servicio} en ${ciudad}`);
+    const linkServicio = `https://wa.me/34${whatsapp}?text=${mensajeServicio}`;
+
     return `
       <article class="service-card">
         <h3>${servicio}</h3>
         <p>Servicio de ${servicio.toLowerCase()} en ${ciudad}, con atención directa, explicación clara y presupuesto adaptado.</p>
         <a href="${slugServicio}.html" class="link-card">Ver servicio</a>
+        <br><br>
+        <a href="${linkServicio}" class="link-card">Pedir presupuesto</a>
       </article>
     `;
   }).join("");
-
-  const plantillaClase = `template-${plantilla}`;
 
   cssGenerado = `
 :root {
@@ -355,7 +356,6 @@ a { text-decoration: none; }
   font-size: 17px;
 }
 
-.template-premium body,
 body.template-premium {
   background: #f8fafc;
 }
@@ -471,7 +471,8 @@ body.template-premium {
       <p>${intro}</p>
 
       <div class="btn-row">
-        <a class="btn btn-whatsapp" href="${linkWhats}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(negocio)}%20en%20${encodeURIComponent(ciudad)}">Pedir presupuesto por WhatsApp</a>
+        <a class="btn btn-whatsapp" href="${linkWhats}">Pedir presupuesto por WhatsApp</a>
+        <a class="btn btn-call" href="${linkFotos}">Enviar fotos por WhatsApp</a>
         <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
       </div>
     </div>
@@ -533,17 +534,9 @@ body.template-premium {
       <p>Atendemos en ${ciudad} y alrededores.</p>
 
       <div class="btn-row">
-        <a class="btn btn-whatsapp" href="${linkWhats}">
-Pedir presupuesto por WhatsApp
-</a>
-
-<a class="btn btn-call" href="${linkFotos}">
-Enviar fotos por WhatsApp
-</a>
-
-<a class="btn btn-light" href="tel:${telefono}">
-Llamar ahora
-</a>
+        <a class="btn btn-whatsapp" href="${linkWhats}">Pedir presupuesto por WhatsApp</a>
+        <a class="btn btn-call" href="${linkFotos}">Enviar fotos por WhatsApp</a>
+        <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
       </div>
     </div>
 
@@ -556,7 +549,8 @@ Llamar ahora
     <h2>¿Necesitas ${negocio.toLowerCase()} en ${ciudad}?</h2>
     <p>Escríbenos ahora y te atendemos de forma directa.</p>
     <div class="btn-row" style="justify-content:center;">
-      <a class="btn btn-whatsapp" href="${linkWhats}">WhatsApp</a>
+      <a class="btn btn-whatsapp" href="${linkWhats}">Pedir presupuesto</a>
+      <a class="btn btn-call" href="${linkFotos}">Enviar fotos</a>
       <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
     </div>
   </div>
@@ -584,7 +578,7 @@ Llamar ahora
     tituloSeo,
     descripcionSeo,
     `${negocio} en ${ciudad}`,
-    sectores[sector],
+    sectores[sector] || sectores.generico,
     serviciosCards
   );
 
@@ -597,7 +591,10 @@ Llamar ahora
   );
 
   const paginasServicios = serviciosFinales.map(servicio => {
-    const slugServicio = limpiarTexto(servicio);
+    const slugServicio = limpiarTexto(`${servicio}-${ciudad}`);
+    const mensajeServicio = encodeURIComponent(`Hola, quiero presupuesto para ${servicio} en ${ciudad}`);
+    const linkServicio = `https://wa.me/34${whatsapp}?text=${mensajeServicio}`;
+
     const htmlServicio = layoutBase(
       `${servicio} en ${ciudad} | ${negocio}`,
       `${servicio} en ${ciudad}. Contacta con ${negocio} para pedir información o presupuesto.`,
@@ -607,7 +604,7 @@ Llamar ahora
       <article class="service-card">
         <h3>${servicio}</h3>
         <p>Si necesitas ${servicio.toLowerCase()} en ${ciudad}, contacta por WhatsApp y te orientamos de forma rápida.</p>
-        <a class="link-card" href="${linkWhats}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(servicio)}%20en%20${encodeURIComponent(ciudad)}">Solicitar información</a>
+        <a class="link-card" href="${linkServicio}">Solicitar información</a>
       </article>
       `
     );
@@ -650,7 +647,7 @@ Keyword principal: ${keyword}
 
 ${urlWeb}
 
-Está preparada con estructura clara, botones de WhatsApp y llamada, sección de servicios, ubicación con mapa y páginas individuales para cada servicio.
+Está preparada con estructura clara, botones de WhatsApp y llamada, botón para enviar fotos, sección de servicios, ubicación con mapa y páginas individuales para cada servicio.
 
 Revísala y dime si quieres cambiar textos, servicios, teléfono, dirección, colores o cualquier detalle antes de dejarla definitiva.`;
 
@@ -701,12 +698,15 @@ function descargar() {
 
 function nuevoProyecto() {
   document.querySelectorAll("input").forEach(input => input.value = "");
-  document.getElementById("sector").value = "generico";
-  document.getElementById("plantilla").value = "profesional";
-  document.getElementById("paleta").value = "verde";
+
+  if (document.getElementById("sector")) document.getElementById("sector").value = "generico";
+  if (document.getElementById("plantilla")) document.getElementById("plantilla").value = "profesional";
+  if (document.getElementById("paleta")) document.getElementById("paleta").value = "verde";
+
   document.getElementById("frame").srcdoc = "";
   window.indexFile = null;
   mensajeCliente = "";
+
   alert("Nuevo proyecto listo");
 }
 
@@ -720,158 +720,73 @@ function copiarMensajeCliente() {
     alert("Mensaje copiado");
   });
 }
+
 function rellenarAutomatico() {
   const sector = document.getElementById("sector").value;
 
   const plantillasRapidas = {
     peluqueria: {
       servicios: "Corte de pelo mujer, Corte de pelo hombre, Mechas balayage, Tinte profesional, Peinados para eventos, Tratamientos capilares",
-      colorPrincipal: "#be185d",
-      colorSecundario: "#831843",
       keyword: "peluquería en Murcia"
     },
     aire: {
       servicios: "Instalación de aire acondicionado, Mantenimiento de aire acondicionado, Reparación de aire acondicionado, Conductos de climatización, Carga de gas, Limpieza de filtros",
-      colorPrincipal: "#0284c7",
-      colorSecundario: "#0f172a",
       keyword: "aire acondicionado en Murcia"
     },
     cerrajeria: {
       servicios: "Puertas metálicas, Rejas a medida, Cerramientos metálicos, Barandillas, Ventanas de aluminio, Estructuras metálicas",
-      colorPrincipal: "#374151",
-      colorSecundario: "#111827",
       keyword: "cerrajería en Murcia"
     },
     jardineria: {
       servicios: "Mantenimiento de jardines, Poda de árboles, Limpieza de parcelas, Césped artificial, Sistemas de riego, Mantenimiento de piscinas",
-      colorPrincipal: "#15803d",
-      colorSecundario: "#14532d",
       keyword: "jardinería en Murcia"
     },
     electricista: {
       servicios: "Instalaciones eléctricas, Reparación de averías, Cuadros eléctricos, Iluminación LED, Certificados eléctricos, Cargadores para coche eléctrico",
-      colorPrincipal: "#ca8a04",
-      colorSecundario: "#422006",
       keyword: "electricista en Murcia"
     },
     reformas: {
       servicios: "Reformas integrales, Reformas de baños, Reformas de cocinas, Pintura, Albañilería, Pladur",
-      colorPrincipal: "#b45309",
-      colorSecundario: "#1f2937",
       keyword: "reformas en Murcia"
     },
     restaurante: {
       servicios: "Hamburguesas, Montaditos, Bocadillos, Tapas, Menú diario, Reservas",
-      colorPrincipal: "#dc2626",
-      colorSecundario: "#7f1d1d",
       keyword: "restaurante en Murcia"
     },
     generico: {
       servicios: "Servicio principal, Presupuesto sin compromiso, Atención personalizada",
-      colorPrincipal: "#0f766e",
-      colorSecundario: "#111827",
       keyword: "servicio local en Murcia"
     }
   };
 
   const datos = plantillasRapidas[sector] || plantillasRapidas.generico;
 
-  const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
-  const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
-
-  document.getElementById("servicios").value = datos.servicios;
-  document.getElementById("colorPrincipal").value = datos.colorPrincipal;
-  document.getElementById("colorSecundario").value = datos.colorSecundario;
-  document.getElementById("keyword").value = datos.keyword.replace("Murcia", ciudad);
-
-  document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
-  document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
-}
-function rellenarAutomatico() {
-  const sector = document.getElementById("sector").value;
-
-  const plantillasRapidas = {
-    peluqueria: {
-      servicios: "Corte de pelo mujer, Corte de pelo hombre, Mechas balayage, Tinte profesional, Peinados para eventos, Tratamientos capilares",
-      colorPrincipal: "#be185d",
-      colorSecundario: "#831843",
-      keyword: "peluquería en Murcia"
-    },
-    aire: {
-      servicios: "Instalación de aire acondicionado, Mantenimiento de aire acondicionado, Reparación de aire acondicionado, Conductos de climatización, Carga de gas, Limpieza de filtros",
-      colorPrincipal: "#0284c7",
-      colorSecundario: "#0f172a",
-      keyword: "aire acondicionado en Murcia"
-    },
-    cerrajeria: {
-      servicios: "Puertas metálicas, Rejas a medida, Cerramientos metálicos, Barandillas, Ventanas de aluminio, Estructuras metálicas",
-      colorPrincipal: "#374151",
-      colorSecundario: "#111827",
-      keyword: "cerrajería en Murcia"
-    },
-    jardineria: {
-      servicios: "Mantenimiento de jardines, Poda de árboles, Limpieza de parcelas, Césped artificial, Sistemas de riego, Mantenimiento de piscinas",
-      colorPrincipal: "#15803d",
-      colorSecundario: "#14532d",
-      keyword: "jardinería en Murcia"
-    },
-    electricista: {
-      servicios: "Instalaciones eléctricas, Reparación de averías, Cuadros eléctricos, Iluminación LED, Certificados eléctricos, Cargadores para coche eléctrico",
-      colorPrincipal: "#ca8a04",
-      colorSecundario: "#422006",
-      keyword: "electricista en Murcia"
-    },
-    reformas: {
-      servicios: "Reformas integrales, Reformas de baños, Reformas de cocinas, Pintura, Albañilería, Pladur",
-      colorPrincipal: "#b45309",
-      colorSecundario: "#1f2937",
-      keyword: "reformas en Murcia"
-    },
-    restaurante: {
-      servicios: "Hamburguesas, Montaditos, Bocadillos, Tapas, Menú diario, Reservas",
-      colorPrincipal: "#dc2626",
-      colorSecundario: "#7f1d1d",
-      keyword: "restaurante en Murcia"
-    },
-    generico: {
-      servicios: "Servicio principal, Presupuesto sin compromiso, Atención personalizada",
-      colorPrincipal: "#0f766e",
-      colorSecundario: "#111827",
-      keyword: "servicio local en Murcia"
-    }
-  };
-
-  const datos = plantillasRapidas[sector] || plantillasRapidas.generico;
-
-  const negocio = document.getElementById("negocio")?.value || "Negocio";
+  const negocio = document.getElementById("negocio")?.value || "Negocio local";
   const ciudad = document.getElementById("ciudad")?.value || "Murcia";
 
-  // SIEMPRE EXISTE
   document.getElementById("servicios").value = datos.servicios;
 
-  // SOLO SI EXISTEN LOS INPUTS
-  if (document.getElementById("colorPrincipal"))
-    document.getElementById("colorPrincipal").value = datos.colorPrincipal;
-
-  if (document.getElementById("colorSecundario"))
-    document.getElementById("colorSecundario").value = datos.colorSecundario;
-
-  if (document.getElementById("keyword"))
+  if (document.getElementById("keyword")) {
     document.getElementById("keyword").value = datos.keyword.replace("Murcia", ciudad);
+  }
 
-  if (document.getElementById("tituloSeo"))
+  if (document.getElementById("tituloSeo")) {
     document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
+  }
 
-  if (document.getElementById("descripcionSeo"))
+  if (document.getElementById("descripcionSeo")) {
     document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
+  }
 
-  // EXTRA PRO (esto no lo tenías)
-  if (document.getElementById("direccion"))
+  if (document.getElementById("direccion")) {
     document.getElementById("direccion").value = `Calle principal, ${ciudad}`;
+  }
 
-  if (document.getElementById("telefono"))
+  if (document.getElementById("telefono")) {
     document.getElementById("telefono").value = "600123456";
+  }
 
-  if (document.getElementById("whatsapp"))
+  if (document.getElementById("whatsapp")) {
     document.getElementById("whatsapp").value = "600123456";
+  }
 }
