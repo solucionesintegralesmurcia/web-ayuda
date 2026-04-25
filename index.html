@@ -9,20 +9,20 @@
 </head>
 
 <body>
+
 <div class="app">
 
   <div class="panel">
-    <h2>Generador PRO de Webs</h2>
+    <h2>Generador PRO</h2>
 
     <select id="sector">
-      <option value="generico">Sector genérico</option>
       <option value="peluqueria">Peluquería</option>
       <option value="aire">Aire acondicionado</option>
-      <option value="cerrajeria">Cerrajería / Metalistería</option>
+      <option value="cerrajeria">Cerrajería</option>
       <option value="jardineria">Jardinería</option>
       <option value="electricista">Electricista</option>
       <option value="reformas">Reformas</option>
-      <option value="restaurante">Restaurante / Bar</option>
+      <option value="restaurante">Restaurante</option>
       <option value="dentista">Clínica dental</option>
       <option value="limpieza">Limpieza</option>
       <option value="piscinas">Piscinas</option>
@@ -30,39 +30,22 @@
     </select>
 
     <select id="plantilla">
-      <option value="profesional">Profesional</option>
       <option value="impacto">Impacto</option>
       <option value="premium">Premium</option>
       <option value="simple">Simple</option>
-      <option value="local">Local directo</option>
     </select>
 
-    <select id="paleta">
-      <option value="verde">Verde profesional</option>
-      <option value="azul">Azul confianza</option>
-      <option value="negro">Negro premium</option>
-      <option value="rojo">Rojo comercial</option>
-      <option value="rosa">Rosa belleza</option>
-      <option value="dorado">Dorado elegante</option>
-    </select>
-
-    <input id="usuarioGithub" placeholder="Usuario GitHub">
     <input id="negocio" placeholder="Nombre del negocio">
     <input id="ciudad" placeholder="Ciudad">
-    <input id="direccion" placeholder="Dirección">
     <input id="telefono" placeholder="Teléfono">
     <input id="whatsapp" placeholder="WhatsApp">
-    <input id="servicios" placeholder="Servicios separados por coma">
 
-    <input id="tituloSeo" placeholder="Título SEO">
-    <input id="descripcionSeo" placeholder="Descripción SEO">
-    <input id="keyword" placeholder="Palabra clave principal">
+    <textarea id="servicios" placeholder="Servicios"></textarea>
 
-    <button onclick="rellenarAutomatico()">Rellenar automático</button>
+    <button onclick="rellenarAutomatico()">Auto completar</button>
     <button onclick="generarWeb()">Generar web</button>
     <button onclick="descargar()">Descargar ZIP</button>
-    <button onclick="nuevoProyecto()">Nuevo proyecto</button>
-    <button onclick="copiarMensajeCliente()">Copiar mensaje cliente</button>
+
   </div>
 
   <div class="preview">
@@ -73,4 +56,5 @@
 
 <script src="script.js"></script>
 </body>
+</html>
 </html>
