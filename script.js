@@ -780,13 +780,15 @@ Revísala y dime si quieres cambiar textos, servicios, teléfono, dirección, co
   window.readmeFile = readme;
   window.zipName = `${slug}.zip`;
 
-  const previewHTML = indexHTML.replace(
-    '<link rel="stylesheet" href="style.css">',
-    `<style>${cssGenerado}</style>`
-  );
+  let previewHTML = indexHTML.replace(
+  '<link rel="stylesheet" href="style.css">',
+  `<style>${cssGenerado}</style>`
+);
 
-  document.getElementById("frame").srcdoc = previewHTML;
-}
+previewHTML = previewHTML.replaceAll('href="index.html"', 'href="#top"');
+previewHTML = previewHTML.replaceAll('href="servicios.html"', 'href="#servicios"');
+
+document.getElementById("frame").srcdoc = previewHTML;
 
 function descargar() {
   if (!window.indexFile) {
