@@ -165,3 +165,20 @@ iframe {
     min-height: 100vh;
   }
 }
+.panel-separator {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #374151;
+  margin: 18px 0 12px;
+}
+
+.panel h3 {
+  margin: 6px 0 8px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.panel input[type="file"] {
+  background: #fff;
+  color: #111827;
+}
