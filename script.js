@@ -780,13 +780,10 @@ Revísala y dime si quieres cambiar textos, servicios, teléfono, dirección, co
   window.readmeFile = readme;
   window.zipName = `${slug}.zip`;
 
-  let previewHTML = indexHTML.replace(
+const previewHTML = indexHTML.replace(
   '<link rel="stylesheet" href="style.css">',
   `<style>${cssGenerado}</style>`
 );
-
-previewHTML = previewHTML.replaceAll('href="index.html"', 'href="#top"');
-previewHTML = previewHTML.replaceAll('href="servicios.html"', 'href="#servicios"');
 
 document.getElementById("frame").srcdoc = previewHTML;
 
