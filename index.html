@@ -96,7 +96,19 @@
 <input id="archivoImagen" type="file" accept="image/*">
 
 <button onclick="descargarImagenRenombrada()">Descargar imagen renombrada</button>
-  </div>
+
+<hr class="panel-separator">
+
+<h3>Crear carpeta img.zip</h3>
+
+<input id="imagenesLote" type="file" accept="image/*" multiple>
+
+<div id="listaImagenes"></div>
+
+<button onclick="prepararImagenesLote()">Preparar imágenes</button>
+<button onclick="descargarZipImagenes()">Descargar img.zip</button>
+
+</div>
 
   <div class="preview">
     <iframe id="frame"></iframe>
