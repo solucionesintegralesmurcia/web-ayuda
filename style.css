@@ -182,3 +182,19 @@ iframe {
   background: #fff;
   color: #111827;
 }
+.fila-foto {
+  background: #1f2937;
+  border: 1px solid #374151;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fila-foto select {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
