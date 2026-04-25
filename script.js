@@ -39,6 +39,16 @@ function generarWeb() {
   const direccion = document.getElementById("direccion").value.trim() || ciudad;
   const telefono = document.getElementById("telefono").value.trim() || "600000000";
   const whatsapp = document.getElementById("whatsapp").value.trim() || telefono;
+  const mensajeBase = encodeURIComponent(
+  `Hola, quiero información sobre ${negocio} en ${ciudad}`
+);
+
+const mensajeFotos = encodeURIComponent(
+  `Hola, te envío fotos para que me des presupuesto de ${negocio} en ${ciudad}`
+);
+
+const linkWhats = `${linkWhats}?text=${mensajeBase}`;
+const linkFotos = `${linkWhats}?text=${mensajeFotos}`;
   const usuarioGithub = document.getElementById("usuarioGithub").value.trim() || "tuusuario";
 
   const keyword = document.getElementById("keyword").value.trim() || `${negocio} en ${ciudad}`;
@@ -461,7 +471,7 @@ body.template-premium {
       <p>${intro}</p>
 
       <div class="btn-row">
-        <a class="btn btn-whatsapp" href="https://wa.me/34${whatsapp}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(negocio)}%20en%20${encodeURIComponent(ciudad)}">Pedir presupuesto por WhatsApp</a>
+        <a class="btn btn-whatsapp" href="${linkWhats}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(negocio)}%20en%20${encodeURIComponent(ciudad)}">Pedir presupuesto por WhatsApp</a>
         <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
       </div>
     </div>
@@ -523,7 +533,7 @@ body.template-premium {
       <p>Atendemos en ${ciudad} y alrededores.</p>
 
       <div class="btn-row">
-        <a class="btn btn-whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
+        <a class="btn btn-whatsapp" href="${linkWhats}">WhatsApp</a>
         <a class="btn btn-call" href="tel:${telefono}">Llamar</a>
       </div>
     </div>
@@ -537,7 +547,7 @@ body.template-premium {
     <h2>¿Necesitas ${negocio.toLowerCase()} en ${ciudad}?</h2>
     <p>Escríbenos ahora y te atendemos de forma directa.</p>
     <div class="btn-row" style="justify-content:center;">
-      <a class="btn btn-whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
+      <a class="btn btn-whatsapp" href="${linkWhats}">WhatsApp</a>
       <a class="btn btn-light" href="tel:${telefono}">Llamar ahora</a>
     </div>
   </div>
@@ -549,11 +559,11 @@ body.template-premium {
   </div>
 </footer>
 
-<a class="floating-whatsapp" href="https://wa.me/34${whatsapp}" aria-label="WhatsApp">WA</a>
+<a class="floating-whatsapp" href="${linkWhats}" aria-label="WhatsApp">WA</a>
 <a class="back-top" href="#top" aria-label="Subir arriba">↑</a>
 
 <div class="mobile-bar">
-  <a class="mobile-whatsapp" href="https://wa.me/34${whatsapp}">WhatsApp</a>
+  <a class="mobile-whatsapp" href="${linkWhats}">WhatsApp</a>
   <a class="mobile-call" href="tel:${telefono}">Llamar</a>
 </div>
 
@@ -588,7 +598,7 @@ body.template-premium {
       <article class="service-card">
         <h3>${servicio}</h3>
         <p>Si necesitas ${servicio.toLowerCase()} en ${ciudad}, contacta por WhatsApp y te orientamos de forma rápida.</p>
-        <a class="link-card" href="https://wa.me/34${whatsapp}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(servicio)}%20en%20${encodeURIComponent(ciudad)}">Solicitar información</a>
+        <a class="link-card" href="${linkWhats}?text=Hola,%20quiero%20información%20sobre%20${encodeURIComponent(servicio)}%20en%20${encodeURIComponent(ciudad)}">Solicitar información</a>
       </article>
       `
     );
