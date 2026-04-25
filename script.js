@@ -105,8 +105,7 @@ function generarWeb() {
   const direccion = document.getElementById("direccion").value.trim() || `Calle principal, ${ciudad}`;
   const telefono = document.getElementById("telefono").value.trim() || "600123456";
   const whatsapp = document.getElementById("whatsapp").value.trim() || telefono;
-  const usuarioGithub = document.getElementById("usuarioGithub").value.trim() || "tuusuario";
-
+const usuarioGithub = "solucionesintegralesmurcia";
   const keyword = document.getElementById("keyword").value.trim() || datosSector.keyword.replace("Murcia", ciudad);
   const tituloSeo = document.getElementById("tituloSeo").value.trim() || `${negocio} en ${ciudad} | Presupuesto rápido`;
   const descripcionSeo = document.getElementById("descripcionSeo").value.trim() || `${negocio} en ${ciudad}. Atención directa, presupuesto rápido y contacto por WhatsApp.`;
