@@ -136,3 +136,15 @@ iframe {
     height: 100%;
   }
 }
+/* BOTÓN SOLO MÓVIL */
+#btnVerWeb {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  #btnVerWeb {
+    display: block;
+    background: #0ea5e9;
+    color: white;
+  }
+}
