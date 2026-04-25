@@ -479,7 +479,44 @@ a { text-decoration: none; }
   background: var(--green);
   color: white;
 }
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 30px;
+}
 
+.trust-item {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 16px;
+  border-radius: 18px;
+  color: white;
+  font-weight: 800;
+}
+
+.steps-grid,
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.step-card,
+.faq-item {
+  background: white;
+  padding: 26px;
+  border-radius: var(--radius);
+  border: 1px solid #e5e7eb;
+}
+
+.cta-soft {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+  border-radius: 28px;
+  padding: 42px;
+  text-align: center;
+}
 .location-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
