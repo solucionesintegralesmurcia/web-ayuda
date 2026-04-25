@@ -883,3 +883,25 @@ function verWebCompleta() {
   nuevaVentana.document.write(window.indexFile);
   nuevaVentana.document.close();
 }
+function verWebCompleta() {
+  if (!window.indexFile) {
+    alert("Primero genera la web");
+    return;
+  }
+
+  const htmlCompleto = window.indexFile.replace(
+    '<link rel="stylesheet" href="style.css">',
+    `<style>${window.cssFile || cssGenerado}</style>`
+  );
+
+  const nuevaVentana = window.open("", "_blank");
+
+  if (!nuevaVentana) {
+    alert("El navegador ha bloqueado la nueva pestaña");
+    return;
+  }
+
+  nuevaVentana.document.open();
+  nuevaVentana.document.write(htmlCompleto);
+  nuevaVentana.document.close();
+}
