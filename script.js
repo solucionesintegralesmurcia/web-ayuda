@@ -768,3 +768,70 @@ function rellenarAutomatico() {
   document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
   document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
 }
+function rellenarAutomatico() {
+  const sector = document.getElementById("sector").value;
+
+  const plantillasRapidas = {
+    peluqueria: {
+      servicios: "Corte de pelo mujer, Corte de pelo hombre, Mechas balayage, Tinte profesional, Peinados para eventos, Tratamientos capilares",
+      colorPrincipal: "#be185d",
+      colorSecundario: "#831843",
+      keyword: "peluquería en Murcia"
+    },
+    aire: {
+      servicios: "Instalación de aire acondicionado, Mantenimiento de aire acondicionado, Reparación de aire acondicionado, Conductos de climatización, Carga de gas, Limpieza de filtros",
+      colorPrincipal: "#0284c7",
+      colorSecundario: "#0f172a",
+      keyword: "aire acondicionado en Murcia"
+    },
+    cerrajeria: {
+      servicios: "Puertas metálicas, Rejas a medida, Cerramientos metálicos, Barandillas, Ventanas de aluminio, Estructuras metálicas",
+      colorPrincipal: "#374151",
+      colorSecundario: "#111827",
+      keyword: "cerrajería en Murcia"
+    },
+    jardineria: {
+      servicios: "Mantenimiento de jardines, Poda de árboles, Limpieza de parcelas, Césped artificial, Sistemas de riego, Mantenimiento de piscinas",
+      colorPrincipal: "#15803d",
+      colorSecundario: "#14532d",
+      keyword: "jardinería en Murcia"
+    },
+    electricista: {
+      servicios: "Instalaciones eléctricas, Reparación de averías, Cuadros eléctricos, Iluminación LED, Certificados eléctricos, Cargadores para coche eléctrico",
+      colorPrincipal: "#ca8a04",
+      colorSecundario: "#422006",
+      keyword: "electricista en Murcia"
+    },
+    reformas: {
+      servicios: "Reformas integrales, Reformas de baños, Reformas de cocinas, Pintura, Albañilería, Pladur",
+      colorPrincipal: "#b45309",
+      colorSecundario: "#1f2937",
+      keyword: "reformas en Murcia"
+    },
+    restaurante: {
+      servicios: "Hamburguesas, Montaditos, Bocadillos, Tapas, Menú diario, Reservas",
+      colorPrincipal: "#dc2626",
+      colorSecundario: "#7f1d1d",
+      keyword: "restaurante en Murcia"
+    },
+    generico: {
+      servicios: "Servicio principal, Presupuesto sin compromiso, Atención personalizada",
+      colorPrincipal: "#0f766e",
+      colorSecundario: "#111827",
+      keyword: "servicio local en Murcia"
+    }
+  };
+
+  const datos = plantillasRapidas[sector] || plantillasRapidas.generico;
+
+  const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
+  const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
+
+  document.getElementById("servicios").value = datos.servicios;
+  document.getElementById("colorPrincipal").value = datos.colorPrincipal;
+  document.getElementById("colorSecundario").value = datos.colorSecundario;
+  document.getElementById("keyword").value = datos.keyword.replace("Murcia", ciudad);
+
+  document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
+  document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
+}
