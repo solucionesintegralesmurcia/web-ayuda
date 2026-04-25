@@ -1002,7 +1002,13 @@ body.template-premium {
 
 <footer class="footer">
   <div class="container">
-    <p>${negocio} en ${ciudad} · Tel. ${telefono}</p>
+    <p>© 2026 ${negocio} · Todos los derechos reservados</p>
+    <p>
+      Diseño web por 
+      <a href="https://solucionesintegralesmurcia.github.io/webmasterpro/#inicio" target="_blank" style="color:#22c55e;font-weight:700;">
+        Webmaster Murcia
+      </a>
+    </p>
   </div>
 </footer>
 
