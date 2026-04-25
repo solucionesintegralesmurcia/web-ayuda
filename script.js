@@ -824,14 +824,35 @@ function rellenarAutomatico() {
 
   const datos = plantillasRapidas[sector] || plantillasRapidas.generico;
 
-  const negocio = document.getElementById("negocio").value.trim() || "Negocio local";
-  const ciudad = document.getElementById("ciudad").value.trim() || "Murcia";
+  const negocio = document.getElementById("negocio")?.value || "Negocio";
+  const ciudad = document.getElementById("ciudad")?.value || "Murcia";
 
+  // SIEMPRE EXISTE
   document.getElementById("servicios").value = datos.servicios;
-  document.getElementById("colorPrincipal").value = datos.colorPrincipal;
-  document.getElementById("colorSecundario").value = datos.colorSecundario;
-  document.getElementById("keyword").value = datos.keyword.replace("Murcia", ciudad);
 
-  document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
-  document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
+  // SOLO SI EXISTEN LOS INPUTS
+  if (document.getElementById("colorPrincipal"))
+    document.getElementById("colorPrincipal").value = datos.colorPrincipal;
+
+  if (document.getElementById("colorSecundario"))
+    document.getElementById("colorSecundario").value = datos.colorSecundario;
+
+  if (document.getElementById("keyword"))
+    document.getElementById("keyword").value = datos.keyword.replace("Murcia", ciudad);
+
+  if (document.getElementById("tituloSeo"))
+    document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
+
+  if (document.getElementById("descripcionSeo"))
+    document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. Atención directa, presupuesto sin compromiso y contacto rápido por WhatsApp.`;
+
+  // EXTRA PRO (esto no lo tenías)
+  if (document.getElementById("direccion"))
+    document.getElementById("direccion").value = `Calle principal, ${ciudad}`;
+
+  if (document.getElementById("telefono"))
+    document.getElementById("telefono").value = "600123456";
+
+  if (document.getElementById("whatsapp"))
+    document.getElementById("whatsapp").value = "600123456";
 }
