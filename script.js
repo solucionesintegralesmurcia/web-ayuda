@@ -779,12 +779,9 @@ Revísala y dime si quieres cambiar textos, servicios, teléfono, dirección, co
   window.readmeFile = readme;
   window.zipName = `${slug}.zip`;
 
-  const previewHTML = indexHTML.replace(
-    '<link rel="stylesheet" href="style.css">',
-    `<style>${cssGenerado}</style>`
-  );
+const previewHTML = prepararVistaPrevia(indexHTML);
 
-  document.getElementById("frame").srcdoc = previewHTML;
+document.getElementById("frame").srcdoc = previewHTML;
 }
 
 function descargar() {
@@ -889,10 +886,7 @@ function verWebCompleta() {
     return;
   }
 
-  const htmlCompleto = window.indexFile.replace(
-    '<link rel="stylesheet" href="style.css">',
-    `<style>${window.cssFile || cssGenerado}</style>`
-  );
+  const htmlCompleto = prepararVistaPrevia(window.indexFile);
 
   const nuevaVentana = window.open("", "_blank");
 
@@ -904,4 +898,20 @@ function verWebCompleta() {
   nuevaVentana.document.open();
   nuevaVentana.document.write(htmlCompleto);
   nuevaVentana.document.close();
+}
+function prepararVistaPrevia(html) {
+  let htmlPreview = html.replace(
+    '<link rel="stylesheet" href="style.css">',
+    `<style>${window.cssFile || cssGenerado}</style>`
+  );
+
+  htmlPreview = htmlPreview.replaceAll('href="index.html"', 'href="#top"');
+  htmlPreview = htmlPreview.replaceAll('href="servicios.html"', 'href="#servicios"');
+
+  htmlPreview = htmlPreview.replace(
+    /href="[^"]+\.html"/g,
+    'href="#servicios"'
+  );
+
+  return htmlPreview;
 }
