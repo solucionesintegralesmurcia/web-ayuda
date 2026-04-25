@@ -1,53 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Generador PRO</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Generador PRO de Webs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 </head>
 
 <body>
 
 <div class="app">
 
-<div class="panel">
+  <div class="panel">
+    <h2>Generador PRO de Webs</h2>
 
-<h2>Generador PRO</h2>
+    <select id="sector">
+      <option value="generico">Sector genérico</option>
+      <option value="peluqueria">Peluquería</option>
+      <option value="aire">Aire acondicionado</option>
+      <option value="cerrajeria">Cerrajería / Metalistería</option>
+      <option value="jardineria">Jardinería</option>
+      <option value="electricista">Electricista</option>
+      <option value="reformas">Reformas</option>
+      <option value="restaurante">Restaurante / Bar</option>
+      <option value="dentista">Clínica dental</option>
+      <option value="limpieza">Limpieza</option>
+      <option value="piscinas">Piscinas</option>
+      <option value="abogado">Abogado</option>
+    </select>
 
-<select id="sector">
-<option value="peluqueria">Peluquería</option>
-<option value="aire">Aire acondicionado</option>
-<option value="cerrajeria">Cerrajería</option>
-<option value="jardineria">Jardinería</option>
-<option value="electricista">Electricista</option>
-<option value="reformas">Reformas</option>
-<option value="restaurante">Restaurante</option>
-</select>
+    <select id="plantilla">
+      <option value="profesional">Profesional</option>
+      <option value="impacto">Impacto</option>
+      <option value="premium">Premium</option>
+      <option value="simple">Simple</option>
+      <option value="local">Local directo</option>
+    </select>
 
-<select id="plantilla">
-<option value="impacto">Impacto</option>
-<option value="premium">Premium</option>
-<option value="simple">Simple</option>
-</select>
+    <select id="paleta">
+      <option value="verde">Verde profesional</option>
+      <option value="azul">Azul confianza</option>
+      <option value="negro">Negro premium</option>
+      <option value="rojo">Rojo comercial</option>
+      <option value="rosa">Rosa belleza</option>
+      <option value="dorado">Dorado elegante</option>
+    </select>
 
-<input id="negocio" placeholder="Nombre negocio">
-<input id="ciudad" placeholder="Ciudad">
-<input id="telefono" placeholder="Teléfono">
-<input id="whatsapp" placeholder="WhatsApp">
+    <input id="usuarioGithub" placeholder="Usuario GitHub">
+    <input id="negocio" placeholder="Nombre del negocio">
+    <input id="ciudad" placeholder="Ciudad">
+    <input id="direccion" placeholder="Dirección">
+    <input id="telefono" placeholder="Teléfono">
+    <input id="whatsapp" placeholder="WhatsApp">
+    <input id="servicios" placeholder="Servicios separados por coma">
 
-<textarea id="servicios" placeholder="Servicios"></textarea>
+    <input id="tituloSeo" placeholder="Título SEO">
+    <input id="descripcionSeo" placeholder="Descripción SEO">
+    <input id="keyword" placeholder="Palabra clave principal">
 
-<button onclick="rellenarAutomatico()">Auto completar</button>
-<button onclick="generarWeb()">Generar web</button>
-<button onclick="descargar()">Descargar ZIP</button>
+    <button onclick="rellenarAutomatico()">Rellenar automático</button>
+    <button onclick="generarWeb()">Generar web</button>
+    <button onclick="descargar()">Descargar ZIP</button>
+    <button onclick="nuevoProyecto()">Nuevo proyecto</button>
+    <button onclick="copiarMensajeCliente()">Copiar mensaje cliente</button>
+  </div>
 
-</div>
-
-<div class="preview">
-<iframe id="frame"></iframe>
-</div>
+  <div class="preview">
+    <iframe id="frame"></iframe>
+  </div>
 
 </div>
 
