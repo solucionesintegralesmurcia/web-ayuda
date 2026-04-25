@@ -1300,3 +1300,115 @@ function descargarImagenRenombrada() {
 
   lector.readAsDataURL(archivo);
 }
+let fotosPreparadas = [];
+
+function generarTablaFotos() {
+  const input = document.getElementById("fotosWeb");
+  const contenedor = document.getElementById("tablaFotos");
+  const sector = document.getElementById("sectorFotos").value;
+
+  if (!input.files.length) {
+    alert("Sube fotos primero");
+    return;
+  }
+
+  contenedor.innerHTML = "";
+  fotosPreparadas = [];
+
+  Array.from(input.files).forEach((file, i) => {
+    const fila = document.createElement("div");
+    fila.className = "fila-foto";
+
+    const nombre = document.createElement("div");
+    nombre.textContent = file.name;
+
+    const tipo = document.createElement("select");
+    tipo.innerHTML = `
+      <option value="sector">Imagen de sector</option>
+      <option value="servicio">Imagen de servicio</option>
+    `;
+
+    const servicio = document.createElement("input");
+    servicio.placeholder = "Nombre del servicio (si aplica)";
+
+    fila.appendChild(nombre);
+    fila.appendChild(tipo);
+    fila.appendChild(servicio);
+
+    contenedor.appendChild(fila);
+
+    fotosPreparadas.push({
+      file,
+      tipo,
+      servicio,
+      sector
+    });
+  });
+}
+
+function limpiarNombre(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function convertirImagen(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+
+    reader.onload = e => {
+      const img = new Image();
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const maxWidth = 1600;
+        const scale = Math.min(1, maxWidth / img.width);
+
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob(blob => resolve(blob), "image/jpeg", 0.9);
+      };
+
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+async function descargarZipFotos() {
+  if (!fotosPreparadas.length) {
+    alert("Primero prepara las fotos");
+    return;
+  }
+
+  const zip = new JSZip();
+  const carpeta = zip.folder("img");
+
+  for (const item of fotosPreparadas) {
+    let nombreFinal = "";
+
+    if (item.tipo.value === "sector") {
+      nombreFinal = `${item.sector}.jpg`;
+    } else {
+      if (!item.servicio.value.trim()) continue;
+      nombreFinal = `${limpiarNombre(item.servicio.value)}.jpg`;
+    }
+
+    const imgBlob = await convertirImagen(item.file);
+    carpeta.file(nombreFinal, imgBlob);
+  }
+
+  zip.generateAsync({ type: "blob" }).then(content => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(content);
+    a.download = "img.zip";
+    a.click();
+  });
+}
