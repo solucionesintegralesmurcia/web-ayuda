@@ -447,9 +447,9 @@ function generarWeb() {
 
   const usuarioGithub = "solucionesintegralesmurcia";
 
-  const keyword = document.getElementById("keyword").value.trim() || datosSector.keyword.replace("Murcia", ciudad);
-  const tituloSeo = document.getElementById("tituloSeo").value.trim() || `${negocio} en ${ciudad} | Presupuesto rápido`;
-  const descripcionSeo = document.getElementById("descripcionSeo").value.trim() || `${negocio} en ${ciudad}. ${datosSector.intro} Contacto directo por WhatsApp.`;
+  const keyword = datosSector.keyword.replace("Murcia", ciudad);
+const tituloSeo = `${negocio} en ${ciudad} | Presupuesto rápido`;
+const descripcionSeo = `${negocio} en ${ciudad}. ${datosSector.intro} Contacto directo por WhatsApp.`;
 
   const serviciosFinales = obtenerServiciosFinales(datosSector, ciudad);
 
@@ -1225,9 +1225,6 @@ function rellenarAutomatico() {
     .join(", ");
 
   document.getElementById("servicios").value = serviciosSeleccionados;
-  document.getElementById("keyword").value = datosSector.keyword.replace("Murcia", ciudad);
-  document.getElementById("tituloSeo").value = `${negocio} en ${ciudad} | Presupuesto rápido`;
-  document.getElementById("descripcionSeo").value = `${negocio} en ${ciudad}. ${datosSector.intro} Contacto directo por WhatsApp.`;
 
   if (!document.getElementById("direccion").value.trim()) {
     document.getElementById("direccion").value = `Calle principal, ${ciudad}`;
