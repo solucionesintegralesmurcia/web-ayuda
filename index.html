@@ -67,77 +67,7 @@
     <button onclick="descargar()">Descargar ZIP</button>
     <button onclick="nuevoProyecto()">Nuevo proyecto</button>
     <button onclick="copiarMensajeCliente()">Copiar mensaje cliente</button>
-    <hr class="panel-separator">
-    <hr class="panel-separator">
-
-<h3>Preparar fotos de esta web</h3>
-
-<select id="sectorFotos">
-  <option value="generico">Genérico</option>
-  <option value="peluqueria">Peluquería</option>
-  <option value="aire">Aire acondicionado</option>
-  <option value="cerrajeria">Cerrajería</option>
-  <option value="jardineria">Jardinería</option>
-  <option value="electricista">Electricista</option>
-  <option value="reformas">Reformas</option>
-  <option value="restaurante">Restaurante</option>
-  <option value="dentista">Dentista</option>
-  <option value="limpieza">Limpieza</option>
-  <option value="piscinas">Piscinas</option>
-  <option value="abogado">Abogado</option>
-</select>
-
-<div id="dropFotos" class="drop-zone">
-  <p>Arrastra aquí tus fotos</p>
-  <span>o haz clic para seleccionarlas</span>
-  <input id="fotosWeb" type="file" multiple accept="image/*">
-</div>
-
-<div id="tablaFotos"></div>
-
-<button onclick="generarTablaFotos()">Preparar fotos</button>
-<button onclick="descargarZipFotos()">Descargar img.zip</button>
-
-<h3>Preparar imágenes</h3>
-
-<select id="tipoImagen">
-  <option value="sector">Imagen de sector</option>
-  <option value="servicio">Imagen de servicio</option>
-</select>
-
-<select id="sectorImagen">
-  <option value="generico">generico.jpg</option>
-  <option value="peluqueria">peluqueria.jpg</option>
-  <option value="aire">aire.jpg</option>
-  <option value="cerrajeria">cerrajeria.jpg</option>
-  <option value="jardineria">jardineria.jpg</option>
-  <option value="electricista">electricista.jpg</option>
-  <option value="reformas">reformas.jpg</option>
-  <option value="restaurante">restaurante.jpg</option>
-  <option value="dentista">dentista.jpg</option>
-  <option value="limpieza">limpieza.jpg</option>
-  <option value="piscinas">piscinas.jpg</option>
-  <option value="abogado">abogado.jpg</option>
-</select>
-
-<input id="nombreServicioImagen" placeholder="Nombre del servicio, ej: Mechas balayage">
-
-<input id="archivoImagen" type="file" accept="image/*">
-
-<button onclick="descargarImagenRenombrada()">Descargar imagen renombrada</button>
-
-<hr class="panel-separator">
-
-<h3>Crear carpeta img.zip</h3>
-
-<input id="imagenesLote" type="file" accept="image/*" multiple>
-
-<div id="listaImagenes"></div>
-
-<button onclick="prepararImagenesLote()">Preparar imágenes</button>
-<button onclick="descargarZipImagenes()">Descargar img.zip</button>
-
-</div>
+  </div>
 
   <div class="preview">
     <iframe id="frame"></iframe>
